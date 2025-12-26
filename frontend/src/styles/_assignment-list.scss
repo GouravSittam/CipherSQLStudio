@@ -1,0 +1,171 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+// Assignment List
+.assignment-list {
+  @include container;
+  max-width: 1200px;
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+
+    @include tablet {
+      margin-bottom: $spacing-2xl;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin-bottom: $spacing-sm;
+
+    @include tablet {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__subtitle {
+    color: $color-text-light;
+    font-size: $font-size-base;
+
+    @include tablet {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__filters {
+    display: flex;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @include tablet {
+      gap: $spacing-md;
+    }
+  }
+
+  &__loading,
+  &__error,
+  &__empty {
+    @include flex-center;
+    @include flex-column;
+    padding: $spacing-2xl;
+    text-align: center;
+    color: $color-text-light;
+    gap: $spacing-md;
+  }
+
+  &__error {
+    color: $color-error;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include desktop {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+// Assignment Card
+.assignment-card {
+  @include card;
+  cursor: pointer;
+  transition: all $transition-base;
+  @include flex-column;
+  gap: $spacing-md;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+    border-color: $color-primary;
+  }
+
+  &__header {
+    @include flex-between;
+    align-items: flex-start;
+    gap: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    flex: 1;
+
+    @include tablet {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__difficulty {
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-md;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    white-space: nowrap;
+
+    &--easy {
+      background: rgba($color-easy, 0.1);
+      color: $color-easy;
+    }
+
+    &--medium {
+      background: rgba($color-medium, 0.1);
+      color: $color-medium;
+    }
+
+    &--hard {
+      background: rgba($color-hard, 0.1);
+      color: $color-hard;
+    }
+  }
+
+  &__question {
+    color: $color-text-light;
+    font-size: $font-size-sm;
+    line-height: 1.6;
+    flex: 1;
+
+    @include tablet {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    gap: $spacing-xs;
+    flex-wrap: wrap;
+  }
+
+  &__tag {
+    padding: $spacing-xs $spacing-sm;
+    background: $color-bg-secondary;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    color: $color-text-light;
+  }
+
+  &__btn {
+    @include button-base;
+    background: $color-primary;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+
+    &:hover {
+      background: $color-primary-dark;
+    }
+  }
+}

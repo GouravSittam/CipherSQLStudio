@@ -1,0 +1,289 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+// Assignment Attempt Layout
+.assignment-attempt {
+  @include container;
+  max-width: 1600px;
+
+  &__loading,
+  &__error {
+    @include flex-center;
+    @include flex-column;
+    padding: $spacing-2xl;
+    gap: $spacing-md;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+
+    @include tablet {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+
+    @include desktop {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-xl;
+    }
+  }
+
+  &__left,
+  &__right {
+    @include flex-column;
+    gap: $spacing-lg;
+  }
+}
+
+// Question Panel
+.question-panel {
+  @include card;
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-md;
+    color: $color-text;
+
+    @include tablet {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__text {
+    color: $color-text;
+    line-height: 1.8;
+    font-size: $font-size-base;
+
+    @include tablet {
+      font-size: $font-size-lg;
+    }
+  }
+}
+
+// Sample Data
+.sample-data {
+  @include card;
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__table {
+    &:not(:last-child) {
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__table-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+    margin-bottom: $spacing-md;
+    font-family: $font-family-mono;
+  }
+
+  &__table-wrapper {
+    overflow-x: auto;
+    @include custom-scrollbar;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+  }
+}
+
+// Editor Panel
+.editor-panel {
+  @include card;
+  padding: 0;
+  overflow: hidden;
+
+  &__header {
+    @include flex-between;
+    padding: $spacing-md;
+    border-bottom: 1px solid $color-border;
+    background: $color-bg-secondary;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+
+    @include tablet {
+      padding: $spacing-lg;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+
+    @include tablet {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+
+    @include tablet {
+      gap: $spacing-md;
+    }
+  }
+}
+
+.sql-editor {
+  min-height: 250px;
+
+  @include tablet {
+    min-height: 300px;
+  }
+}
+
+// Results Panel
+.results-panel {
+  @include card;
+
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+  }
+
+  &__badge {
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-md;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+
+    &--success {
+      background: rgba($color-success, 0.1);
+      color: $color-success;
+    }
+  }
+
+  &__meta-text {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
+
+  &__table-wrapper {
+    overflow-x: auto;
+    @include custom-scrollbar;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+    margin-bottom: $spacing-md;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $spacing-2xl;
+    color: $color-text-light;
+  }
+
+  &__error {
+    background: rgba($color-error, 0.05);
+    border: 1px solid rgba($color-error, 0.2);
+    border-radius: $radius-md;
+    padding: $spacing-lg;
+  }
+
+  &__error-title {
+    color: $color-error;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__error-message {
+    font-family: $font-family-mono;
+    font-size: $font-size-sm;
+    color: $color-error;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  &__warning {
+    background: rgba($color-warning, 0.1);
+    border: 1px solid rgba($color-warning, 0.3);
+    color: $color-warning;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+  }
+}
+
+// Hints Panel
+.hints-panel {
+  @include card;
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__list {
+    @include flex-column;
+    gap: $spacing-md;
+  }
+}
+
+.hint-item {
+  background: rgba($color-secondary, 0.05);
+  border-left: 4px solid $color-secondary;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+
+  &__number {
+    font-weight: $font-weight-semibold;
+    color: $color-secondary;
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-size: $font-size-sm;
+  }
+
+  &__text {
+    color: $color-text;
+    line-height: 1.6;
+    font-size: $font-size-sm;
+
+    @include tablet {
+      font-size: $font-size-base;
+    }
+  }
+}
