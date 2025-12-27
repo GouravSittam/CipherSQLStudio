@@ -1,0 +1,29 @@
+{
+  "name": "ciphersqlstudio",
+  "version": "1.0.0",
+  "description": "SQL Learning Platform with AI-powered hints",
+  "author": "Gourav Chaudhary",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "cd client && npm run build",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "seed": "cd server && npm run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "mongoose": "^8.0.0",
+    "pg": "^8.11.3",
+    "uuid": "^4.0.0",
+    "openai": "^4.20.0",
+    "@google/generative-ai": "^0.24.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

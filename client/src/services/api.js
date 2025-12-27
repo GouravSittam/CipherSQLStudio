@@ -9,8 +9,8 @@
 
 import axios from "axios";
 
-// Base URL - falls back to localhost for dev
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+// Base URL - In production (Vercel), API is at /api, in dev it's proxied
+const API_URL = import.meta.env.VITE_API_URL || "/api";
 
 // Create axios instance with defaults
 const api = axios.create({
