@@ -1,4 +1,11 @@
+// ============================================
 // Main SCSS Entry Point
+// Author: Gourav Chaudhary
+//
+// Everything comes together here. Order matters!
+// Variables -> Mixins -> Base -> Components
+// ============================================
+
 @use "./variables";
 @use "./mixins";
 @use "./base";

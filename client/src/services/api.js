@@ -1,7 +1,18 @@
+/**
+ * API Service
+ *
+ * All the backend API calls are handled here.
+ * Using axios because fetch is annoying to work with for POST requests.
+ *
+ * Author: Gourav Chaudhary
+ */
+
 import axios from "axios";
 
+// Base URL - falls back to localhost for dev
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
+// Create axios instance with defaults
 const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -9,18 +20,23 @@ const api = axios.create({
   },
 });
 
-// Assignment APIs
+// ============ Assignment APIs ============
+
+// Get all assignments (with optional filters)
 export const getAssignments = async (filters = {}) => {
   const response = await api.get("/assignments", { params: filters });
   return response.data;
 };
 
+// Get single assignment by ID
 export const getAssignment = async (id) => {
   const response = await api.get(`/assignments/${id}`);
   return response.data;
 };
 
-// Query Execution APIs
+// ============ Query Execution ============
+
+// Execute SQL query in sandbox
 export const executeQuery = async (assignmentId, query, sessionId) => {
   const response = await api.post("/execute/query", {
     assignmentId,
@@ -30,12 +46,15 @@ export const executeQuery = async (assignmentId, query, sessionId) => {
   return response.data;
 };
 
+// Cleanup sandbox session (not used much but good to have)
 export const cleanupSession = async (sessionId) => {
   const response = await api.post("/execute/cleanup", { sessionId });
   return response.data;
 };
 
-// Hint APIs
+// ============ Hints ============
+
+// Get hint from LLM
 export const getHint = async (assignmentId, currentQuery, previousHints) => {
   const response = await api.post("/hints", {
     assignmentId,
@@ -45,7 +64,9 @@ export const getHint = async (assignmentId, currentQuery, previousHints) => {
   return response.data;
 };
 
-// Progress APIs
+// ============ Progress Tracking ============
+// NOTE: not fully implemented on frontend yet, but API is ready
+
 export const saveProgress = async (
   userId,
   assignmentId,

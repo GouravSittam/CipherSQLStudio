@@ -1,7 +1,35 @@
+/**
+ * =================================================
+ * SEED ASSIGNMENTS SCRIPT
+ * =================================================
+ *
+ * Author: Gourav Chaudhary
+ *
+ * This script populates our MongoDB database with SQL challenges.
+ * Run this once when setting up, or whenever you want to reset
+ * the challenges back to defaults.
+ *
+ * Usage:
+ *   node scripts/seedAssignments.js
+ *
+ * I spent WAY too much time coming up with these challenges lol
+ * Some are inspired by real interview questions, others I just
+ * made up based on common SQL patterns students struggle with.
+ *
+ * Difficulty breakdown:
+ *   - Easy: Basic SELECT, WHERE, simple filtering
+ *   - Medium: JOINs, GROUP BY, subqueries
+ *   - Hard: Window functions, CTEs, complex analytics
+ *
+ * Feel free to add more challenges! Just follow the same format.
+ * =================================================
+ */
+
 require("dotenv").config();
 const mongoose = require("mongoose");
 const Assignment = require("../models/Assignment");
 
+// All our SQL challenges - organized by difficulty
 const sampleAssignments = [
   // ==================== EASY CHALLENGES ====================
   {
@@ -954,9 +982,14 @@ const sampleAssignments = [
   },
 ];
 
+// =================================================
+// DATABASE SEEDING FUNCTION
+// This is the main entry point - clears everything and starts fresh
+// =================================================
+
 async function seedDatabase() {
   try {
-    // Connect to MongoDB
+    // Step 1: Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -964,26 +997,28 @@ async function seedDatabase() {
 
     console.log("✅ Connected to MongoDB");
 
-    // Clear existing assignments
+    // Step 2: Wipe existing data (fresh start every time)
     await Assignment.deleteMany({});
     console.log("🗑️  Cleared existing assignments");
 
-    // Insert sample assignments
+    // Step 3: Insert all our challenges
     await Assignment.insertMany(sampleAssignments);
     console.log(`✅ Inserted ${sampleAssignments.length} sample assignments`);
 
+    // Step 4: Show what we seeded (nice for debugging)
     console.log("\n📊 Sample Assignments:");
-    sampleAssignments.forEach((assignment, index) => {
-      console.log(
-        `${index + 1}. ${assignment.title} (${assignment.difficulty})`
-      );
+    sampleAssignments.forEach((assignment, idx) => {
+      console.log(`${idx + 1}. ${assignment.title} (${assignment.difficulty})`);
     });
 
+    // Done! Exit cleanly
     process.exit(0);
   } catch (error) {
+    // Something went wrong - log it and bail
     console.error("❌ Error seeding database:", error);
     process.exit(1);
   }
 }
 
+// Kick off the seeding
 seedDatabase();

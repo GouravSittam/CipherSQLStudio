@@ -2,8 +2,11 @@
 @use "./mixins" as *;
 
 // ============================================
-// BRUTALIST GAMING THEME - Assignment Attempt
-// Bold, Playful, Modern, Energetic, Educational
+// PURE BRUTALIST THEME - Assignment Attempt
+// Refined, Bold, Sophisticated Monochrome
+// Author: Gourav Chaudhary
+//
+// The main challenge screen - split-panel layout.
 // ============================================
 
 // Assignment Attempt Layout
@@ -18,8 +21,9 @@
     padding: $spacing-3xl;
     gap: $spacing-lg;
     background: $color-bg-card;
-    border: $border-brutal;
-    box-shadow: $shadow-brutal;
+    border: 1px solid rgba($color-text, 0.15);
+    border-radius: $radius-sm;
+    box-shadow: $shadow-md;
     text-align: center;
   }
 
@@ -28,7 +32,7 @@
       content: "INITIALIZING CHALLENGE...";
       font-family: $font-family-mono;
       font-size: $font-size-lg;
-      color: $color-primary;
+      color: $color-text-muted;
       text-transform: uppercase;
       letter-spacing: 0.2em;
       animation: blink 1s step-end infinite;
@@ -36,13 +40,13 @@
   }
 
   &__error {
-    border-color: $color-error;
+    border-color: rgba($color-text, 0.3);
 
     &::before {
       content: "⚠ SYSTEM ERROR";
       font-size: $font-size-2xl;
       font-weight: $font-weight-black;
-      color: $color-error;
+      color: $color-text;
     }
   }
 
@@ -53,22 +57,24 @@
     margin-bottom: $spacing-xl;
     flex-wrap: wrap;
     padding-bottom: $spacing-lg;
-    border-bottom: $border-brutal;
+    border-bottom: 1px solid rgba($color-text, 0.2);
     position: relative;
 
-    // Gaming progress bar decoration
+    // Subtle gradient line
     &::after {
       content: "";
       position: absolute;
-      bottom: -4px;
+      bottom: 0;
       left: 0;
       width: 100%;
-      height: 4px;
+      height: 1px;
       background: linear-gradient(
         90deg,
-        $color-primary 0%,
-        $color-secondary 50%,
-        $color-neon-cyan 100%
+        transparent 0%,
+        rgba($color-text, 0.4) 20%,
+        rgba($color-text, 0.6) 50%,
+        rgba($color-text, 0.4) 80%,
+        transparent 100%
       );
     }
   }
@@ -88,9 +94,10 @@
     letter-spacing: 0.02em;
     color: $color-text;
 
-    // Gaming title style
+    // Code icon
     &::before {
-      content: "🎮 ";
+      content: "⟩ ";
+      color: $color-text-muted;
     }
 
     @include tablet {
@@ -122,20 +129,20 @@
   }
 }
 
-// Question Panel - Mission Briefing Style
+// Question Panel - Refined Style
 .question-panel {
   @include card;
   position: relative;
   overflow: hidden;
 
-  // Mission label
+  // Mission label - refined
   &::before {
     content: "MISSION BRIEFING";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    background: $color-primary;
+    background: rgba($color-text, 0.95);
     color: $color-bg;
     font-size: $font-size-xs;
     font-weight: $font-weight-bold;
@@ -151,12 +158,13 @@
     font-size: $font-size-lg;
     font-weight: $font-weight-bold;
     margin-bottom: $spacing-md;
-    color: $color-primary;
+    color: $color-text;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 
     &::before {
       content: "▸ ";
+      color: $color-text-muted;
     }
 
     @include tablet {
@@ -165,12 +173,13 @@
   }
 
   &__text {
-    color: $color-text;
+    color: $color-text-light;
     line-height: 1.8;
     font-size: $font-size-base;
     padding: $spacing-md;
-    background: rgba($color-bg, 0.5);
-    border-left: 4px solid $color-secondary;
+    background: rgba($color-bg, 0.3);
+    border-left: 2px solid rgba($color-text, 0.3);
+    border-radius: 0 $radius-sm $radius-sm 0;
 
     @include tablet {
       font-size: $font-size-lg;
@@ -183,14 +192,14 @@
   @include card;
   position: relative;
 
-  // Terminal header
+  // Terminal header - refined
   &::before {
     content: "DATABASE TERMINAL";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    background: $color-neon-cyan;
+    background: rgba($color-text, 0.9);
     color: $color-bg;
     font-size: $font-size-xs;
     font-weight: $font-weight-bold;
@@ -213,7 +222,8 @@
     gap: $spacing-sm;
 
     &::before {
-      content: "📊";
+      content: "◈";
+      color: $color-text-muted;
     }
   }
 
@@ -221,14 +231,14 @@
     &:not(:last-child) {
       margin-bottom: $spacing-xl;
       padding-bottom: $spacing-lg;
-      border-bottom: 2px dashed $color-border;
+      border-bottom: 1px dashed rgba($color-text, 0.2);
     }
   }
 
   &__table-name {
     font-size: $font-size-base;
     font-weight: $font-weight-bold;
-    color: $color-neon-cyan;
+    color: $color-text;
     margin-bottom: $spacing-md;
     font-family: $font-family-mono;
     display: flex;
@@ -245,7 +255,8 @@
   &__table-wrapper {
     overflow-x: auto;
     @include custom-scrollbar;
-    border: $border-brutal-thin;
+    border: 1px solid rgba($color-text, 0.15);
+    border-radius: $radius-sm;
     background: rgba($color-bg, 0.3);
   }
 }
@@ -261,7 +272,7 @@
     @include flex-between;
     padding: $spacing-md;
     background: $color-bg-secondary;
-    border-bottom: $border-brutal;
+    border-bottom: 1px solid rgba($color-text, 0.2);
     flex-wrap: wrap;
     gap: $spacing-md;
 
@@ -269,10 +280,10 @@
       padding: $spacing-lg;
     }
 
-    // Terminal dots
+    // Terminal dots - refined
     &::before {
-      content: "● ● ●";
-      color: $color-primary;
+      content: "○ ○ ○";
+      color: rgba($color-text, 0.4);
       font-size: $font-size-sm;
       letter-spacing: 0.3em;
     }
@@ -317,15 +328,15 @@
   @include card;
   position: relative;
 
-  // Console header
+  // Console header - refined
   &::before {
     content: "OUTPUT CONSOLE";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    background: $color-secondary;
-    color: $color-text;
+    background: rgba($color-text, 0.85);
+    color: $color-bg;
     font-size: $font-size-xs;
     font-weight: $font-weight-bold;
     text-transform: uppercase;
@@ -342,7 +353,7 @@
     flex-wrap: wrap;
     gap: $spacing-md;
     padding-bottom: $spacing-md;
-    border-bottom: 1px solid $color-border;
+    border-bottom: 1px solid rgba($color-text, 0.15);
   }
 
   &__title {
@@ -352,8 +363,8 @@
     letter-spacing: 0.05em;
 
     &::before {
-      content: "> ";
-      color: $color-primary;
+      content: "⟩ ";
+      color: $color-text-muted;
     }
   }
 
@@ -370,12 +381,13 @@
     font-weight: $font-weight-bold;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    border: 2px solid;
+    border: 1px solid;
+    border-radius: $radius-sm;
 
     &--success {
-      background: rgba($color-success, 0.2);
-      color: $color-success;
-      border-color: $color-success;
+      background: rgba($color-text, 0.1);
+      color: $color-text;
+      border-color: rgba($color-text, 0.4);
 
       &::before {
         content: "✓ ";
@@ -392,7 +404,8 @@
   &__table-wrapper {
     overflow-x: auto;
     @include custom-scrollbar;
-    border: $border-brutal-thin;
+    border: 1px solid rgba($color-text, 0.15);
+    border-radius: $radius-sm;
     margin-bottom: $spacing-md;
     background: rgba($color-bg, 0.3);
   }
@@ -403,20 +416,22 @@
     color: $color-text-muted;
     font-family: $font-family-mono;
     background: rgba($color-bg, 0.3);
-    border: 2px dashed $color-border;
+    border: 1px dashed rgba($color-text, 0.2);
+    border-radius: $radius-sm;
 
     &::before {
-      content: "🎯 ";
+      content: "◎";
       font-size: $font-size-2xl;
       display: block;
       margin-bottom: $spacing-sm;
+      color: rgba($color-text, 0.3);
     }
   }
 
   &__error {
-    background: rgba($color-error, 0.1);
-    border: $border-brutal-thin;
-    border-color: $color-error;
+    background: rgba($color-text, 0.03);
+    border: 1px solid rgba($color-text, 0.3);
+    border-radius: $radius-sm;
     padding: $spacing-lg;
     position: relative;
 
@@ -425,14 +440,15 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 4px;
+      width: 3px;
       height: 100%;
-      background: $color-error;
+      background: $color-text;
+      border-radius: $radius-sm 0 0 $radius-sm;
     }
   }
 
   &__error-title {
-    color: $color-error;
+    color: $color-text;
     font-weight: $font-weight-bold;
     margin-bottom: $spacing-sm;
     text-transform: uppercase;
@@ -446,17 +462,19 @@
   &__error-message {
     font-family: $font-family-mono;
     font-size: $font-size-sm;
-    color: $color-error;
+    color: $color-text-light;
     white-space: pre-wrap;
     word-break: break-word;
     padding: $spacing-sm;
     background: rgba($color-bg, 0.5);
+    border-radius: $radius-sm;
   }
 
   &__warning {
-    background: rgba($color-warning, 0.1);
-    border: 2px solid $color-warning;
-    color: $color-warning;
+    background: rgba($color-text, 0.05);
+    border: 1px solid rgba($color-text, 0.3);
+    border-radius: $radius-sm;
+    color: $color-text;
     padding: $spacing-md;
     font-size: $font-size-sm;
     font-weight: $font-weight-bold;
@@ -464,24 +482,25 @@
     letter-spacing: 0.05em;
 
     &::before {
-      content: "⚡ ";
+      content: "◆ ";
+      color: $color-text-muted;
     }
   }
 }
 
-// Hints Panel - Power-Up Style
+// Hints Panel - Refined Style
 .hints-panel {
   @include card;
   position: relative;
 
-  // Power-up header
+  // Header - refined
   &::before {
-    content: "💡 POWER-UPS";
+    content: "HINTS";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    background: $color-neon-yellow;
+    background: rgba($color-text, 0.9);
     color: $color-bg;
     font-size: $font-size-xs;
     font-weight: $font-weight-bold;
@@ -502,7 +521,8 @@
     color: $color-text;
 
     &::before {
-      content: "🎮 ";
+      content: "◈ ";
+      color: $color-text-muted;
     }
   }
 
@@ -513,35 +533,38 @@
 }
 
 .hint-item {
-  background: rgba($color-secondary, 0.1);
-  border: 2px solid $color-secondary;
+  background: rgba($color-text, 0.03);
+  border: 1px solid rgba($color-text, 0.2);
+  border-radius: $radius-sm;
   padding: $spacing-md;
   position: relative;
   transition: all $transition-fast;
 
-  // Level indicator
+  // Level indicator - refined
   &::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
-    width: 4px;
-    background: $color-secondary;
+    width: 3px;
+    background: rgba($color-text, 0.3);
+    border-radius: $radius-sm 0 0 $radius-sm;
   }
 
   &:hover {
     transform: translateX(4px);
-    border-color: $color-primary;
+    border-color: rgba($color-text, 0.4);
+    background: rgba($color-text, 0.05);
 
     &::before {
-      background: $color-primary;
+      background: $color-text;
     }
   }
 
   &__number {
     font-weight: $font-weight-black;
-    color: $color-secondary;
+    color: $color-text-muted;
     display: inline-block;
     margin-bottom: $spacing-xs;
     font-size: $font-size-sm;
@@ -549,12 +572,12 @@
     letter-spacing: 0.1em;
 
     &::before {
-      content: "★ ";
+      content: "▸ ";
     }
   }
 
   &__text {
-    color: $color-text;
+    color: $color-text-light;
     line-height: 1.7;
     font-size: $font-size-sm;
     font-family: $font-family-base;
@@ -581,9 +604,8 @@
   &__title {
     font-size: $font-size-4xl;
     font-weight: $font-weight-black;
-    color: $color-success;
+    color: $color-text;
     text-transform: uppercase;
-    @include text-glow($color-success);
     animation: victory-pulse 0.5s ease-out;
   }
 

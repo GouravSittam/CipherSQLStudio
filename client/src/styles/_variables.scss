@@ -1,53 +1,57 @@
 // ============================================
-// BRUTALIST GAMING THEME - Variables
-// Bold, Playful, Modern, Energetic, Educational
+// PURE BRUTALIST THEME - Variables
+// Raw, Bold, Monochrome, Sophisticated
+// Author: Gourav Chaudhary
+//
+// A refined black & white palette with subtle grays
+// for depth and visual hierarchy. Elegant brutalism.
 // ============================================
 
-// Primary Gaming Palette
-$color-primary: #ff6b35; // Vibrant Orange - Action/CTA
-$color-primary-dark: #e85a24; // Darker Orange
-$color-primary-light: #ff8a5b; // Light Orange
-$color-secondary: #7b2cbf; // Electric Purple - Accents
-$color-secondary-light: #9d4edd; // Light Purple
+// Primary Palette - Refined Monochrome
+$color-primary: #ffffff; // Pure White - Primary action
+$color-primary-dark: #e8e8e8; // Soft gray
+$color-primary-light: #f5f5f5; // Off-white
+$color-secondary: #888888; // Medium gray - Accents
+$color-secondary-light: #b0b0b0; // Light gray
 
-// Neon Accent Colors (Gaming vibes)
-$color-neon-cyan: #00f5d4; // Cyber Cyan
-$color-neon-pink: #ff006e; // Hot Pink
-$color-neon-yellow: #ffe66d; // Bright Yellow
-$color-neon-green: #39ff14; // Matrix Green
+// Accent grays for depth
+$color-neon-cyan: #d0d0d0; // Light gray accent
+$color-neon-pink: #a0a0a0; // Medium gray accent
+$color-neon-yellow: #c8c8c8; // Warm gray
+$color-neon-green: #e0e0e0; // Soft white
 
-// Status Colors
-$color-success: #39ff14; // Neon Green - Victory
-$color-error: #ff006e; // Hot Pink - Error
-$color-warning: #ffe66d; // Yellow - Warning
+// Status Colors - Subtle Monochrome
+$color-success: #e0e0e0; // Light gray - Success
+$color-error: #909090; // Medium gray - Error
+$color-warning: #b8b8b8; // Gray - Warning
 
-// Difficulty Colors (Gaming XP style)
-$color-easy: #39ff14; // Green - Easy Mode
-$color-medium: #ffe66d; // Yellow - Normal Mode
-$color-hard: #ff006e; // Pink - Hard Mode
+// Difficulty Colors - Grayscale hierarchy
+$color-easy: #e8e8e8; // Light - Easy
+$color-medium: #a8a8a8; // Medium - Normal
+$color-hard: #686868; // Dark - Hard
 
-// Neutral Colors - Dark Theme Base
-$color-text: #ffffff;
-$color-text-light: #b8b8b8;
-$color-text-muted: #6b6b6b;
-$color-bg: #0d0d0d; // Near Black
-$color-bg-secondary: #1a1a2e; // Dark Navy
-$color-bg-card: #16213e; // Card Background
-$color-bg-elevated: #1f1f3d; // Elevated surfaces
-$color-border: #2d2d2d; // Subtle borders
-$color-border-accent: #ff6b35; // Accent borders
-$color-shadow: rgba(0, 0, 0, 0.5);
+// Core Colors - Sophisticated Dark Theme
+$color-text: #f0f0f0; // Soft white text (easier on eyes)
+$color-text-light: #b8b8b8; // Light gray text
+$color-text-muted: #707070; // Muted gray
+$color-bg: #0a0a0a; // Deep black
+$color-bg-secondary: #141414; // Slightly lighter black
+$color-bg-card: #1a1a1a; // Card background with subtle lift
+$color-bg-elevated: #222222; // Elevated surfaces
+$color-border: #3a3a3a; // Visible but subtle borders
+$color-border-accent: #f0f0f0; // White accent borders
+$color-shadow: rgba(0, 0, 0, 0.6);
 
-// Brutalist Border (thick, bold)
-$border-brutal: 4px solid $color-text;
-$border-brutal-accent: 4px solid $color-primary;
-$border-brutal-thin: 2px solid $color-text;
+// Brutalist Border (thick, bold, refined)
+$border-brutal: 3px solid $color-text;
+$border-brutal-accent: 3px solid $color-text;
+$border-brutal-thin: 2px solid rgba($color-text, 0.5);
 
-// Dark Theme (consistent with base)
-$color-dark-bg: #0d0d0d;
-$color-dark-bg-secondary: #1a1a2e;
-$color-dark-text: #ffffff;
-$color-dark-border: #2d2d2d;
+// Dark Theme (refined)
+$color-dark-bg: #0a0a0a;
+$color-dark-bg-secondary: #141414;
+$color-dark-text: #f0f0f0;
+$color-dark-border: #3a3a3a;
 
 // Spacing (slightly larger for bold feel)
 $spacing-xs: 0.25rem; // 4px
@@ -95,20 +99,20 @@ $breakpoint-tablet: 641px;
 $breakpoint-desktop: 1024px;
 $breakpoint-large: 1281px;
 
-// Shadows - Bold, offset (Brutalist style)
-$shadow-brutal: 4px 4px 0px $color-text;
-$shadow-brutal-sm: 2px 2px 0px $color-text;
-$shadow-brutal-lg: 6px 6px 0px $color-text;
-$shadow-brutal-accent: 4px 4px 0px $color-primary;
-$shadow-brutal-hover: 6px 6px 0px $color-primary;
-$shadow-glow-primary: 0 0 20px rgba($color-primary, 0.5);
-$shadow-glow-cyan: 0 0 20px rgba($color-neon-cyan, 0.5);
-$shadow-glow-pink: 0 0 20px rgba($color-neon-pink, 0.5);
+// Shadows - Refined brutalist shadows with depth
+$shadow-brutal: 4px 4px 0px rgba($color-text, 0.3);
+$shadow-brutal-sm: 2px 2px 0px rgba($color-text, 0.3);
+$shadow-brutal-lg: 6px 6px 0px rgba($color-text, 0.4);
+$shadow-brutal-accent: 4px 4px 0px rgba($color-text, 0.5);
+$shadow-brutal-hover: 8px 8px 0px rgba($color-text, 0.3);
+$shadow-glow-primary: 0 0 30px rgba($color-text, 0.1);
+$shadow-glow-cyan: 0 0 20px rgba($color-text, 0.08);
+$shadow-glow-pink: 0 0 20px rgba($color-text, 0.08);
 
-// Legacy shadows (for compatibility)
-$shadow-sm: 2px 2px 0px rgba(255, 255, 255, 0.1);
-$shadow-md: 4px 4px 0px $color-text;
-$shadow-lg: 6px 6px 0px $color-text;
+// Soft shadows for depth
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
 
 // Transitions - Snappy, game-like
 $transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1);

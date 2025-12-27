@@ -1,6 +1,17 @@
+/**
+ * Assignment Attempt Page
+ *
+ * This is where users actually solve the SQL challenges.
+ * Has the SQL editor, sample data viewer, and results panel.
+ *
+ * Author: Gourav Chaudhary
+ */
+
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAssignment, executeQuery, getHint } from "../services/api";
+
+// Components
 import SQLEditor from "../components/SQLEditor.jsx";
 import SampleDataViewer from "../components/SampleDataViewer.jsx";
 import ResultsPanel from "../components/ResultsPanel.jsx";
@@ -9,6 +20,7 @@ const AssignmentAttempt = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  // State management
   const [assignment, setAssignment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
@@ -18,10 +30,12 @@ const AssignmentAttempt = () => {
   const [hints, setHints] = useState([]);
   const [loadingHint, setLoadingHint] = useState(false);
 
+  // Fetch assignment when component mounts or id changes
   useEffect(() => {
     fetchAssignment();
   }, [id]);
 
+  // Load assignment data from API
   const fetchAssignment = async () => {
     try {
       setLoading(true);
@@ -29,12 +43,15 @@ const AssignmentAttempt = () => {
       setAssignment(response.data);
     } catch (err) {
       console.error("Failed to load assignment:", err);
+      // TODO: maybe show a toast notification here
     } finally {
       setLoading(false);
     }
   };
 
+  // Run the SQL query
   const handleExecuteQuery = async () => {
+    // Basic validation
     if (!query.trim()) {
       alert("Please write a SQL query first");
       return;
@@ -45,8 +62,9 @@ const AssignmentAttempt = () => {
       const response = await executeQuery(id, query, sessionId);
 
       setResults(response);
-      setSessionId(response.sessionId);
+      setSessionId(response.sessionId); // save for future queries in same sandbox
     } catch (err) {
+      // Show error in results panel
       setResults({
         success: false,
         error: err.response?.data?.message || "Failed to execute query",
@@ -56,6 +74,7 @@ const AssignmentAttempt = () => {
     }
   };
 
+  // Get hint from LLM
   const handleGetHint = async () => {
     try {
       setLoadingHint(true);
@@ -72,6 +91,7 @@ const AssignmentAttempt = () => {
     }
   };
 
+  // Loading state
   if (loading) {
     return (
       <div className="assignment-attempt__loading">
@@ -81,6 +101,7 @@ const AssignmentAttempt = () => {
     );
   }
 
+  // Error state - assignment not found
   if (!assignment) {
     return (
       <div className="assignment-attempt__error">
@@ -92,8 +113,10 @@ const AssignmentAttempt = () => {
     );
   }
 
+  // Main render
   return (
     <div className="assignment-attempt">
+      {/* Header with back button and title */}
       <div className="assignment-attempt__header">
         <button onClick={() => navigate("/")} className="btn btn--back">
           ← EXIT
@@ -109,6 +132,7 @@ const AssignmentAttempt = () => {
       </div>
 
       <div className="assignment-attempt__content">
+        {/* Left side - Question & Data */}
         <div className="assignment-attempt__left">
           <section className="question-panel">
             <h2 className="question-panel__title">Objective</h2>
@@ -117,13 +141,14 @@ const AssignmentAttempt = () => {
 
           <SampleDataViewer tables={assignment.sampleTables} />
 
+          {/* Show hints if any have been unlocked */}
           {hints.length > 0 && (
             <section className="hints-panel">
               <h2 className="hints-panel__title">Power-Ups Unlocked</h2>
               <div className="hints-panel__list">
-                {hints.map((hint, index) => (
-                  <div key={index} className="hint-item">
-                    <span className="hint-item__number">HINT {index + 1}:</span>
+                {hints.map((hint, idx) => (
+                  <div key={idx} className="hint-item">
+                    <span className="hint-item__number">HINT {idx + 1}:</span>
                     <p className="hint-item__text">{hint}</p>
                   </div>
                 ))}
@@ -132,6 +157,7 @@ const AssignmentAttempt = () => {
           )}
         </div>
 
+        {/* Right side - Editor & Results */}
         <div className="assignment-attempt__right">
           <section className="editor-panel">
             <div className="editor-panel__header">

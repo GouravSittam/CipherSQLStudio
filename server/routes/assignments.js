@@ -1,28 +1,44 @@
+/**
+ * Assignment Routes
+ *
+ * CRUD operations for SQL challenges.
+ * Right now we're just using GET endpoints on the frontend
+ * but POST is here for when we build an admin panel.
+ *
+ * Author: Gourav Chaudhary
+ */
+
 const express = require("express");
 const router = express.Router();
 const Assignment = require("../models/Assignment");
 
-/**
+/*
  * GET /api/assignments
- * Get all assignments with basic info
+ *
+ * Returns list of all assignments
+ * Can filter by difficulty or search text
  */
 router.get("/", async (req, res) => {
   try {
     const { difficulty, search } = req.query;
 
+    // Build query object based on filters
     let query = {};
 
     if (difficulty) {
       query.difficulty = difficulty;
     }
 
+    // Full-text search if search param provided
     if (search) {
       query.$text = { $search: search };
     }
 
+    // Only return what we need for the list view
+    // Don't send sample data or expected output here
     const assignments = await Assignment.find(query)
       .select("title difficulty question tags createdAt")
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 }); // newest first
 
     res.json({
       success: true,
@@ -38,9 +54,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-/**
+/*
  * GET /api/assignments/:id
- * Get single assignment with full details including sample data
+ *
+ * Get full assignment details including sample tables
+ * This is called when user opens a challenge
  */
 router.get("/:id", async (req, res) => {
   try {
@@ -66,9 +84,11 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-/**
+/*
  * POST /api/assignments
- * Create new assignment (Admin only - in production, add auth middleware)
+ *
+ * Create new assignment
+ * TODO: Add auth middleware - only admins should be able to do this
  */
 router.post("/", async (req, res) => {
   try {

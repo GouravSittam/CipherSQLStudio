@@ -1,20 +1,37 @@
+/**
+ * Query Execution Service
+ *
+ * Handles all the PostgreSQL sandbox stuff:
+ * - Creating isolated schemas per user
+ * - Loading sample data into tables
+ * - Running user queries safely
+ * - Cleaning up when done
+ *
+ * Security is super important here - we don't want users
+ * running DROP statements or anything crazy.
+ *
+ * Author: Gourav Chaudhary
+ */
+
 const pool = require("../config/postgres");
 const { v4: uuidv4 } = require("uuid");
 
 class QueryExecutionService {
   constructor() {
+    // Config values - can override via env vars
     this.maxExecutionTime =
-      parseInt(process.env.MAX_QUERY_EXECUTION_TIME) || 5000;
+      parseInt(process.env.MAX_QUERY_EXECUTION_TIME) || 5000; // 5 seconds
     this.maxResultRows = parseInt(process.env.MAX_RESULT_ROWS) || 1000;
   }
 
   /**
-   * Validates SQL query for security
+   * Security check - block dangerous operations
+   * Only SELECT queries are allowed
    */
   validateQuery(query) {
     const trimmedQuery = query.trim().toUpperCase();
 
-    // Block destructive operations
+    // Nope, not allowing any of these
     const dangerousKeywords = [
       "DROP",
       "DELETE",
@@ -34,7 +51,7 @@ class QueryExecutionService {
       }
     }
 
-    // Must be a SELECT query
+    // Must start with SELECT
     if (!trimmedQuery.startsWith("SELECT")) {
       throw new Error("Only SELECT queries are allowed");
     }
@@ -43,7 +60,8 @@ class QueryExecutionService {
   }
 
   /**
-   * Creates isolated schema for user session
+   * Create a fresh schema for this user's session
+   * Schema name is based on session ID
    */
   async createSandboxSchema(sessionId) {
     const schemaName = `workspace_${sessionId.replace(/-/g, "_")}`;
@@ -58,7 +76,8 @@ class QueryExecutionService {
   }
 
   /**
-   * Loads sample tables into user's schema
+   * Populate the sandbox with sample tables and data
+   * Called before user runs their query
    */
   async loadSampleData(schemaName, sampleTables) {
     const client = await pool.connect();
@@ -68,17 +87,17 @@ class QueryExecutionService {
       await client.query(`SET search_path TO ${schemaName}`);
 
       for (const table of sampleTables) {
-        // Drop table if exists
+        // Start fresh each time
         await client.query(`DROP TABLE IF EXISTS ${table.tableName} CASCADE`);
 
-        // Create table
+        // Build column definitions
         const columns = table.columns
           .map((col) => `${col.columnName} ${col.dataType}`)
           .join(", ");
 
         await client.query(`CREATE TABLE ${table.tableName} (${columns})`);
 
-        // Insert rows
+        // Insert sample rows if we have any
         if (table.rows && table.rows.length > 0) {
           const columnNames = table.columns
             .map((col) => col.columnName)
@@ -102,16 +121,21 @@ class QueryExecutionService {
   }
 
   /**
-   * Executes user's SQL query in sandbox
+   * Run the actual user query
+   * Has timeout protection and result limiting
    */
   async executeQuery(schemaName, query) {
+    // Security check first
     this.validateQuery(query);
 
     const client = await pool.connect();
     const startTime = Date.now();
 
     try {
+      // Use the sandbox schema
       await client.query(`SET search_path TO ${schemaName}`);
+
+      // Don't let queries run forever
       await client.query(`SET statement_timeout = ${this.maxExecutionTime}`);
 
       const result = await client.query(query);
@@ -136,7 +160,8 @@ class QueryExecutionService {
   }
 
   /**
-   * Cleans up sandbox schema
+   * Delete the sandbox schema
+   * Cleans up all tables created for this session
    */
   async cleanupSchema(schemaName) {
     const client = await pool.connect();
@@ -144,6 +169,7 @@ class QueryExecutionService {
     try {
       await client.query(`DROP SCHEMA IF EXISTS ${schemaName} CASCADE`);
     } catch (error) {
+      // Not critical if this fails, just log it
       console.error("Error cleaning up schema:", error);
     } finally {
       client.release();
@@ -151,7 +177,8 @@ class QueryExecutionService {
   }
 
   /**
-   * Gets schema information for display
+   * Get info about tables in a schema
+   * Useful for debugging, not used in UI currently
    */
   async getSchemaInfo(schemaName) {
     const client = await pool.connect();
@@ -172,6 +199,7 @@ class QueryExecutionService {
         [schemaName]
       );
 
+      // Group by table
       const tables = {};
       for (const row of result.rows) {
         if (!tables[row.table_name]) {

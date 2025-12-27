@@ -1,3 +1,12 @@
+/**
+ * Query Execution Routes
+ *
+ * Handles running user SQL queries in isolated PostgreSQL schemas.
+ * Each user gets their own sandbox so they can't interfere with others.
+ *
+ * Author: Gourav Chaudhary
+ */
+
 const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
@@ -5,13 +14,15 @@ const Assignment = require("../models/Assignment");
 const queryExecutionService = require("../services/queryExecutionService");
 const llmService = require("../services/llmService");
 
-/**
+/*
  * POST /api/execute/query
- * Execute SQL query in sandbox environment
+ *
+ * Main endpoint - runs user's SQL in their sandbox
  */
 router.post("/query", async (req, res) => {
   const { assignmentId, query, sessionId } = req.body;
 
+  // Basic validation
   if (!query || !assignmentId) {
     return res.status(400).json({
       success: false,
@@ -19,11 +30,12 @@ router.post("/query", async (req, res) => {
     });
   }
 
-  // Generate or use existing session ID for schema isolation
+  // Use existing session or create new one
+  // This lets users run multiple queries in same sandbox
   const userSessionId = sessionId || uuidv4();
 
   try {
-    // Fetch assignment
+    // Get the assignment to know what tables to create
     const assignment = await Assignment.findById(assignmentId);
     if (!assignment) {
       return res.status(404).json({
@@ -32,21 +44,21 @@ router.post("/query", async (req, res) => {
       });
     }
 
-    // Create sandbox schema
+    // Create isolated schema for this user
     const schemaName = await queryExecutionService.createSandboxSchema(
       userSessionId
     );
 
-    // Load sample data
+    // Set up the tables with sample data
     await queryExecutionService.loadSampleData(
       schemaName,
       assignment.sampleTables
     );
 
-    // Execute query
+    // Actually run their query
     const result = await queryExecutionService.executeQuery(schemaName, query);
 
-    // Check if query matches expected output
+    // Check if they got it right
     let isCorrect = false;
     if (result.success && assignment.expectedOutput) {
       isCorrect = await llmService.validateQuery(
@@ -55,7 +67,7 @@ router.post("/query", async (req, res) => {
       );
     }
 
-    // Optional: Cleanup schema after execution (or keep for session)
+    // Could cleanup here but keeping schema alive for follow-up queries
     // await queryExecutionService.cleanupSchema(schemaName);
 
     res.json({
@@ -79,9 +91,11 @@ router.post("/query", async (req, res) => {
   }
 });
 
-/**
+/*
  * POST /api/execute/cleanup
- * Cleanup user's sandbox schema
+ *
+ * Cleans up a user's sandbox when they're done
+ * Not used much right now but good to have
  */
 router.post("/cleanup", async (req, res) => {
   const { sessionId } = req.body;
@@ -94,6 +108,7 @@ router.post("/cleanup", async (req, res) => {
   }
 
   try {
+    // Convert session ID to schema name (dashes to underscores)
     const schemaName = `workspace_${sessionId.replace(/-/g, "_")}`;
     await queryExecutionService.cleanupSchema(schemaName);
 

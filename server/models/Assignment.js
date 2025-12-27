@@ -1,5 +1,19 @@
+/**
+ * Assignment Model
+ *
+ * Schema for SQL challenges stored in MongoDB.
+ * Each assignment has:
+ * - Basic info (title, difficulty, question)
+ * - Sample tables with data
+ * - Expected output for validation
+ * - Tags for filtering
+ *
+ * Author: Gourav Chaudhary
+ */
+
 const mongoose = require("mongoose");
 
+// Schema for table columns
 const columnSchema = new mongoose.Schema(
   {
     columnName: {
@@ -9,6 +23,7 @@ const columnSchema = new mongoose.Schema(
     dataType: {
       type: String,
       required: true,
+      // These map to PostgreSQL types
       enum: [
         "INTEGER",
         "TEXT",
@@ -21,8 +36,9 @@ const columnSchema = new mongoose.Schema(
     },
   },
   { _id: false }
-);
+); // Don't need _id for sub-docs
 
+// Schema for sample tables
 const sampleTableSchema = new mongoose.Schema(
   {
     tableName: {
@@ -31,6 +47,7 @@ const sampleTableSchema = new mongoose.Schema(
     },
     columns: [columnSchema],
     rows: {
+      // 2D array - each row is an array of values
       type: [[mongoose.Schema.Types.Mixed]],
       default: [],
     },
@@ -38,6 +55,7 @@ const sampleTableSchema = new mongoose.Schema(
   { _id: false }
 );
 
+// Main assignment schema
 const assignmentSchema = new mongoose.Schema(
   {
     title: {
@@ -64,21 +82,23 @@ const assignmentSchema = new mongoose.Schema(
       value: mongoose.Schema.Types.Mixed,
     },
     hints: {
+      // Pre-defined hints (optional, we mostly use LLM now)
       type: [String],
       default: [],
     },
     tags: {
+      // For filtering (e.g., "JOIN", "GROUP BY", "subquery")
       type: [String],
       default: [],
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // adds createdAt and updatedAt
   }
 );
 
-// Index for efficient queries
+// Indexes for faster queries
 assignmentSchema.index({ difficulty: 1, createdAt: -1 });
-assignmentSchema.index({ title: "text", question: "text" });
+assignmentSchema.index({ title: "text", question: "text" }); // for search
 
 module.exports = mongoose.model("Assignment", assignmentSchema);

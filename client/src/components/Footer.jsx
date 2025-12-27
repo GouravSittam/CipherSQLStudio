@@ -1,6 +1,16 @@
+/**
+ * Footer component
+ * Shows credits and copyright info
+ *
+ * Created by Gourav Chaudhary
+ */
+
 import React from "react";
 
 const Footer = () => {
+  // Get current year dynamically so I don't have to update it every January lol
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -16,9 +26,7 @@ const Footer = () => {
             GitHub
           </a>
         </div>
-        <p className="footer__copyright">
-          © {new Date().getFullYear()} CipherSQLStudio
-        </p>
+        <p className="footer__copyright">© {currentYear} CipherSQLStudio</p>
       </div>
     </footer>
   );
