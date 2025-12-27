@@ -1,27 +1,30 @@
 # CipherSQLStudio - Submission Checklist
 
+**🎮 Created by Gourav Chaudhary** | [GitHub](https://github.com/GouravSittam)
+
 ## 📋 Pre-Submission Checklist
 
-### ✅ Core Features (Required - 90%)
+### ✅ Core Features (Required - 100%)
 
-#### 1. Assignment Listing Page
+#### 1. Challenge Listing Page
 
-- [x] Displays all available SQL assignments
-- [x] Shows assignment difficulty (Easy/Medium/Hard)
+- [x] Displays all available SQL challenges
+- [x] Shows challenge difficulty (⭐ Easy / ⭐⭐ Medium / ⭐⭐⭐ Hard)
 - [x] Shows title and brief description
 - [x] Filter by difficulty (All, Easy, Medium, Hard)
-- [x] Click to select and navigate to assignment
+- [x] Click to select and navigate to challenge
 - [x] Responsive design (mobile, tablet, desktop)
+- [x] Brutalist Gaming Theme applied
 
-#### 2. Assignment Attempt Interface
+#### 2. Challenge Attempt Interface
 
-**Question Panel**
+**Mission Briefing Panel**
 
-- [x] Displays selected assignment question
-- [x] Shows assignment requirements clearly
-- [x] Clean, readable formatting
+- [x] Displays selected challenge question
+- [x] Shows requirements clearly
+- [x] Clean, readable formatting with accent borders
 
-**Sample Data Viewer**
+**Database Terminal (Sample Data)**
 
 - [x] Shows pre-loaded table schemas
 - [x] Displays column names with data types
@@ -29,7 +32,7 @@
 - [x] Scrollable for large tables
 - [x] Multiple tables supported
 
-**SQL Editor (Monaco Editor)**
+**SQL Terminal (Monaco Editor)**
 
 - [x] Monaco Editor integrated
 - [x] SQL syntax highlighting
@@ -37,18 +40,18 @@
 - [x] Responsive height
 - [x] Clean interface
 
-**Results Panel**
+**Output Console (Results)**
 
 - [x] Displays query execution results in formatted table
 - [x] Shows execution time
 - [x] Shows row count
 - [x] Error messages for invalid queries
-- [x] Success indicator for correct queries
+- [x] "VICTORY" indicator for correct queries
 - [x] Handles empty results gracefully
 
-**LLM Hint Integration**
+**Power-Up System (LLM Hints)**
 
-- [x] "Get Hint" button functional
+- [x] "💡 POWER-UP" button functional
 - [x] Integrates with LLM API (OpenAI/Gemini)
 - [x] Provides hints, NOT solutions
 - [x] Multiple hints stack properly
@@ -64,9 +67,19 @@
 - [x] Result row limit (1000 rows)
 - [x] Schema isolation per user session
 
+### ✅ UI/UX Features
+
+- [x] Brutalist Gaming Theme with dark base
+- [x] Neon accent colors (Orange, Cyan, Pink, Purple)
+- [x] CipherSchools logo in header and favicon
+- [x] Footer with author credit (Gourav Chaudhary)
+- [x] GitHub link in footer
+- [x] Smooth hover animations
+- [x] Gaming terminology (Challenges, Power-Ups, Victory)
+
 ### ✅ Optional Features (10%)
 
-- [x] User progress tracking (schema ready - not fully implemented in UI)
+- [x] User progress tracking (schema ready)
 - [ ] Login/Signup system (skipped to focus on core features)
 
 ---
@@ -75,11 +88,11 @@
 
 ### 1. GitHub Repository
 
-- [x] All frontend code
-- [x] All backend code
-- [x] Clear folder structure
+- [x] All client code (React + Vite)
+- [x] All server code (Express.js)
+- [x] Clear folder structure (client/, server/)
 - [x] .gitignore file
-- [x] .env.example files (backend & frontend)
+- [x] .env.example files (server & client)
 - [x] No sensitive data committed
 
 ### 2. README.md
@@ -92,7 +105,7 @@
 - [x] Setup instructions (step-by-step)
 - [x] Environment variables documented
 - [x] API endpoints documented
-- [x] Technology choices explained
+- [x] Author information (Gourav Chaudhary)
 - [x] License information
 
 ### 3. Data-Flow Diagram (COMPULSORY)

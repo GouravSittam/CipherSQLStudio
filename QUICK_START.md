@@ -1,5 +1,7 @@
 # CipherSQLStudio - Quick Start Guide
 
+**🎮 Created by Gourav Chaudhary**
+
 ## 🚀 Quick Setup (5 Minutes)
 
 ### Prerequisites Check
@@ -7,7 +9,7 @@
 - [ ] Node.js v16+ installed (`node --version`)
 - [ ] PostgreSQL v13+ installed and running
 - [ ] MongoDB Atlas account (free tier is fine)
-- [ ] OpenAI API key (or Gemini)
+- [ ] OpenAI/Gemini API key
 
 ### Step 1: Clone & Install Dependencies
 
@@ -15,12 +17,12 @@
 # Navigate to project
 cd CipherSQLStudio
 
-# Install backend dependencies
-cd backend
+# Install server dependencies
+cd server
 npm install
 
-# Install frontend dependencies
-cd ../frontend
+# Install client dependencies
+cd ../client
 npm install
 ```
 
@@ -33,10 +35,10 @@ CREATE DATABASE ciphersqlstudio_app;
 \q
 ```
 
-### Step 3: Configure Backend
+### Step 3: Configure Server
 
 ```bash
-cd backend
+cd server
 
 # Copy environment file
 cp .env.example .env
@@ -44,10 +46,10 @@ cp .env.example .env
 # Edit .env and fill in:
 # - MongoDB connection string from Atlas
 # - PostgreSQL credentials
-# - OpenAI API key
+# - OpenAI/Gemini API key
 ```
 
-**backend/.env** (example):
+**server/.env** (example):
 
 ```env
 PORT=5000
@@ -57,15 +59,15 @@ POSTGRES_PORT=5432
 POSTGRES_DB=ciphersqlstudio_app
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=your_password
-OPENAI_API_KEY=sk-your-key-here
-LLM_PROVIDER=openai
+LLM_API_KEY=your-api-key-here
+LLM_PROVIDER=gemini
 ```
 
 ### Step 4: Seed Database
 
 ```bash
-# Still in backend directory
-node scripts/seedAssignments.js
+# Still in server directory
+npm run seed
 ```
 
 Expected output:
@@ -82,7 +84,7 @@ Expected output:
 ...
 ```
 
-### Step 5: Start Backend
+### Step 5: Start Server
 
 ```bash
 npm run dev
@@ -96,11 +98,11 @@ Expected output:
 ✅ PostgreSQL connected successfully
 ```
 
-### Step 6: Configure & Start Frontend
+### Step 6: Configure & Start Client
 
 ```bash
 # Open new terminal
-cd frontend
+cd client
 
 # Copy environment file
 cp .env.example .env
@@ -108,44 +110,48 @@ cp .env.example .env
 # Edit .env
 # VITE_API_URL=http://localhost:5000/api
 
-# Start frontend
+# Start client
 npm run dev
 ```
 
-Browser will open at: http://localhost:3000
+Browser will open at: http://localhost:5173
 
 ### Step 7: Test the Application
 
-1. **View Assignments**: You should see 6 sample assignments
+1. **View Challenges**: You should see 6 sample SQL challenges
 2. **Click on "Select All Employees"**
 3. **Write query**: `SELECT * FROM employees`
-4. **Click "Execute Query"**: See results!
-5. **Try "Get Hint"**: See LLM-generated hint
+4. **Click "▶ EXECUTE"**: See results!
+5. **Try "💡 POWER-UP"**: See AI-generated hint
 
 ## 📁 Project Structure
 
 ```
 CipherSQLStudio/
-├── backend/
-│   ├── config/          # Database configs
-│   ├── models/          # MongoDB schemas
-│   ├── routes/          # API endpoints
-│   ├── services/        # Business logic
-│   ├── scripts/         # Seed scripts
-│   └── server.js        # Entry point
-├── frontend/
-│   ├── public/
+├── server/                    # Express.js API Server
+│   ├── config/               # Database configs
+│   ├── models/               # MongoDB schemas
+│   ├── routes/               # API endpoints
+│   ├── services/             # Business logic
+│   ├── scripts/              # Seed scripts
+│   └── server.js             # Entry point
+│
+├── client/                    # React Frontend (Vite)
+│   ├── public/               # Static files & logo
 │   └── src/
-│       ├── components/  # React components
-│       ├── pages/       # Page components
-│       ├── services/    # API calls
-│       └── styles/      # SCSS files
+│       ├── components/       # Header, Footer, SQLEditor, ResultsPanel, SampleDataViewer
+│       ├── pages/            # AssignmentList, AssignmentAttempt
+│       ├── services/         # API calls
+│       └── styles/           # SCSS (Brutalist Gaming Theme)
+│
 └── README.md
 ```
 
 ## 🎯 Key Features Implemented
 
-### Core Features (90%)
+### Core Features (100%)
+
+- ✅ Assignment listing with difficulty filters
 
 - ✅ Assignment listing with difficulty filters
 - ✅ Assignment attempt interface

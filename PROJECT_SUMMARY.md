@@ -1,8 +1,10 @@
 # 🎓 CipherSQLStudio - Complete Project
 
+**🎮 Created by Gourav Chaudhary** | [GitHub](https://github.com/GouravSittam)
+
 ## Project Overview
 
-**CipherSQLStudio** is a browser-based SQL learning platform where students can practice SQL queries against pre-configured assignments with real-time execution and intelligent AI-powered hints.
+**CipherSQLStudio** is a browser-based SQL learning platform where students can practice SQL queries against pre-configured assignments with real-time execution and intelligent AI-powered hints. The application features a **Brutalist Gaming Theme** with bold, modern, and energetic UI design.
 
 ---
 
@@ -12,7 +14,7 @@
 
 ```
 CipherSQLStudio/
-├── backend/                    # Express.js API Server
+├── server/                     # Express.js API Server
 │   ├── config/                # Database configurations
 │   ├── models/                # MongoDB schemas
 │   ├── routes/                # API endpoints
@@ -20,13 +22,13 @@ CipherSQLStudio/
 │   ├── scripts/               # Database seeding
 │   └── server.js              # Entry point
 │
-├── frontend/                   # React Application
-│   ├── public/                # Static files
+├── client/                     # React Application (Vite)
+│   ├── public/                # Static files & CipherSchools logo
 │   └── src/
-│       ├── components/        # Reusable components
-│       ├── pages/             # Page components
+│       ├── components/        # Header, Footer, SQLEditor, ResultsPanel, SampleDataViewer
+│       ├── pages/             # AssignmentList, AssignmentAttempt
 │       ├── services/          # API integration
-│       └── styles/            # SCSS stylesheets
+│       └── styles/            # SCSS (Brutalist Gaming Theme)
 │
 └── Documentation/              # Comprehensive docs
     ├── README.md              # Main documentation
@@ -41,45 +43,45 @@ CipherSQLStudio/
 
 ## 🎯 Core Features Implemented
 
-### ✅ Assignment Listing (Frontend)
+### ✅ Challenge Listing (Frontend)
 
-- View all SQL assignments
-- Filter by difficulty (Easy, Medium, Hard)
-- Responsive card-based layout
-- Mobile-first design
+- View all SQL challenges with gaming-styled cards
+- Filter by difficulty (⭐ Easy, ⭐⭐ Medium, ⭐⭐⭐ Hard)
+- Responsive grid layout with hover animations
+- Mobile-first Brutalist Gaming Theme
 
-### ✅ Assignment Attempt Interface
+### ✅ Challenge Attempt Interface
 
-**Question Panel**
+**Mission Briefing Panel**
 
-- Clear question display
-- Assignment requirements
+- Clear question display with terminal styling
+- Assignment requirements with accent borders
 
-**Sample Data Viewer**
+**Database Terminal**
 
 - Table schemas with column types
 - Sample data in formatted tables
 - Multiple tables supported
 
-**SQL Editor**
+**SQL Terminal**
 
 - Monaco Editor integration
 - SQL syntax highlighting
-- Professional code editing experience
+- Dark theme code editing
 
-**Results Panel**
+**Output Console**
 
 - Formatted result tables
 - Execution time display
-- Success/error indicators
-- Auto-validation against expected output
+- "VICTORY" badge for correct answers
+- Error messages with brutalist styling
 
-**Hint System**
+**Power-Up System**
 
 - AI-powered hints (no solutions!)
 - OpenAI/Gemini integration
 - Context-aware suggestions
-- Multiple hints supported
+- Multiple hints stack progressively
 
 ### ✅ Backend API
 

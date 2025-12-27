@@ -1,5 +1,7 @@
 # CipherSQLStudio - Data Flow Diagram
 
+**🎮 Created by Gourav Chaudhary** | [GitHub](https://github.com/GouravSittam)
+
 ## User Flow: Execute SQL Query
 
 ```
@@ -8,19 +10,19 @@
 │  (Browser)  │
 └──────┬──────┘
        │
-       │ 1. User writes SQL query in Monaco Editor
+       │ 1. User writes SQL query in Monaco Editor (SQL Terminal)
        │    (e.g., "SELECT * FROM employees")
        ▼
 ┌──────────────────┐
-│  FRONTEND (React)│
+│  CLIENT (React)  │
 │  - SQLEditor     │
 │  - State: query  │
 └──────┬───────────┘
        │
-       │ 2. User clicks "Execute Query" button
+       │ 2. User clicks "▶ EXECUTE" button
        │    onClick={handleExecuteQuery}
        │
-       │ 3. Frontend calls API service
+       │ 3. Client calls API service
        │    executeQuery(assignmentId, query, sessionId)
        ▼
 ┌─────────────────────────────┐
@@ -33,10 +35,10 @@
 │  }                          │
 └──────┬──────────────────────┘
        │
-       │ 4. HTTP Request sent to backend
+       │ 4. HTTP Request sent to server
        ▼
 ┌─────────────────────────────┐
-│  BACKEND (Express)          │
+│  SERVER (Express)           │
 │  Route: /api/execute/query  │
 └──────┬──────────────────────┘
        │
@@ -108,10 +110,10 @@
        │ 12. Check if query is correct
        │     isCorrect = (userResult === expectedOutput)
        │
-       │ 13. Send response to frontend
+       │ 13. Send response to client
        ▼
 ┌─────────────────────────────┐
-│  BACKEND Response           │
+│  SERVER Response            │
 │  {                          │
 │    success: true,           │
 │    data: [...rows],         │
@@ -122,10 +124,10 @@
 │  }                          │
 └──────┬──────────────────────┘
        │
-       │ 14. Response received by frontend
+       │ 14. Response received by client
        ▼
 ┌─────────────────────────────┐
-│  FRONTEND (React)           │
+│  CLIENT (React)             │
 │  - setResults(response)     │
 │  - setSessionId()           │
 └──────┬──────────────────────┘
@@ -134,9 +136,10 @@
        ▼
 ┌─────────────────────────────┐
 │  ResultsPanel Component     │
-│  - Displays table with data │
+│  🎮 OUTPUT CONSOLE          │
+│  - Displays data table      │
 │  - Shows execution time     │
-│  - Shows success badge if   │
+│  - Shows VICTORY badge if   │
 │    isCorrect === true       │
 └──────┬──────────────────────┘
        │
@@ -147,27 +150,27 @@
 │  (Browser)  │
 │  Sees:      │
 │  - Data     │
-│  - ✓ Badge  │
+│  - ✓ VICTORY│
 │  - Time     │
 └─────────────┘
 ```
 
-## User Flow: Get Hint
+## User Flow: Get Hint (Power-Up)
 
 ```
 ┌─────────────┐
 │   USER      │
 └──────┬──────┘
-       │ 1. Clicks "Get Hint" button
+       │ 1. Clicks "💡 POWER-UP" button
        ▼
 ┌──────────────────┐
-│  FRONTEND (React)│
+│  CLIENT (React)  │
 │  handleGetHint() │
 └──────┬───────────┘
        │ 2. API call: getHint(assignmentId, query, previousHints)
        ▼
 ┌─────────────────────────────┐
-│  BACKEND                    │
+│  SERVER                     │
 │  POST /api/hints            │
 └──────┬──────────────────────┘
        │ 3. Fetch assignment from MongoDB
@@ -199,18 +202,18 @@
        │     to filter rows based on a condition"
        ▼
 ┌─────────────────────────────┐
-│  BACKEND Response           │
+│  SERVER Response            │
 │  { success: true,           │
 │    hint: "..." }            │
 └──────┬──────────────────────┘
-       │ 7. Frontend receives hint
+       │ 7. Client receives hint
        ▼
 ┌─────────────────────────────┐
-│  FRONTEND                   │
+│  CLIENT                     │
 │  - setHints([...hints,      │
 │              newHint])      │
 └──────┬──────────────────────┘
-       │ 8. Display in HintsPanel
+       │ 8. Display in Power-Ups Panel
        ▼
 ┌─────────────┐
 │   USER      │
@@ -222,7 +225,7 @@
 
 ### MongoDB (Persistence)
 
-- **assignments**: Pre-configured SQL problems
+- **assignments**: Pre-configured SQL challenges
 - **userProgress**: User's attempt history (optional)
 
 ### PostgreSQL (Sandbox)
@@ -237,3 +240,14 @@
 3. Query timeout (5 seconds)
 4. Result row limit (1000 rows)
 5. LLM prompt engineering (hints only, no solutions)
+
+---
+
+## 🎨 Theme
+
+This project uses the **Brutalist Gaming Theme**:
+
+- **Dark backgrounds** with neon accents
+- **Bold 4px borders** with offset shadows
+- **Gaming terminology** (Challenges, Power-Ups, Victory)
+- **Space Grotesk** + **JetBrains Mono** fonts

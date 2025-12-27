@@ -1,5 +1,7 @@
 # 📁 CipherSQLStudio - Complete File Structure
 
+**🎮 Created by Gourav Chaudhary**
+
 ```
 CipherSQLStudio/
 │
@@ -7,12 +9,13 @@ CipherSQLStudio/
 ├── 📄 PROJECT_SUMMARY.md                 # Complete project overview
 ├── 📄 QUICK_START.md                     # 5-minute setup guide
 ├── 📄 ARCHITECTURE.md                    # System architecture & design
-├── 📄 DATA_FLOW_DIAGRAM.md               # Process flows (to be hand-drawn)
+├── 📄 DATA_FLOW_DIAGRAM.md               # Process flows
 ├── 📄 TESTING_GUIDE.md                   # Comprehensive testing instructions
 ├── 📄 SUBMISSION_CHECKLIST.md            # Pre-submission verification
+├── 📄 COMMANDS_REFERENCE.md              # Quick commands reference
 ├── 📄 .gitignore                         # Git ignore rules
 │
-├── 📂 backend/                           # Express.js API Server
+├── 📂 server/                            # Express.js API Server
 │   ├── 📄 server.js                     # Entry point - Express app setup
 │   ├── 📄 package.json                  # Dependencies & scripts
 │   ├── 📄 .env.example                  # Environment variables template
@@ -38,44 +41,47 @@ CipherSQLStudio/
 │   └── 📂 scripts/                      # Utility Scripts
 │       └── seedAssignments.js          # Database seeding with 6 samples
 │
-└── 📂 frontend/                          # React Application
+└── 📂 client/                            # React Application (Vite)
     ├── 📄 package.json                  # Dependencies
+    ├── 📄 vite.config.js                # Vite configuration
+    ├── 📄 index.html                    # HTML template with favicon
     ├── 📄 .env.example                  # API URL configuration
     │
     ├── 📂 public/                       # Static Files
-    │   └── index.html                  # HTML template
+    │   └── Cipherschools_icon@2x.png   # CipherSchools logo (favicon & navbar)
     │
     └── 📂 src/                          # Source Code
-        ├── 📄 index.js                  # React entry point
-        ├── 📄 App.js                    # Main app component with routing
+        ├── 📄 main.jsx                  # React entry point
+        ├── 📄 App.jsx                   # Main app component with routing
         │
         ├── 📂 components/               # Reusable Components
-        │   ├── Header.js               # Navigation header
-        │   ├── SQLEditor.js            # Monaco editor wrapper
-        │   ├── SampleDataViewer.js     # Display sample tables
-        │   └── ResultsPanel.js         # Display query results
+        │   ├── Header.jsx              # Navigation header with logo
+        │   ├── Footer.jsx              # Footer with author info
+        │   ├── SQLEditor.jsx           # Monaco editor wrapper
+        │   ├── SampleDataViewer.jsx    # Display sample tables
+        │   └── ResultsPanel.jsx        # Display query results
         │
         ├── 📂 pages/                    # Page Components
-        │   ├── AssignmentList.js       # List all assignments
-        │   └── AssignmentAttempt.js    # Assignment attempt interface
+        │   ├── AssignmentList.jsx      # List all challenges
+        │   └── AssignmentAttempt.jsx   # Challenge attempt interface
         │
         ├── 📂 services/                 # API Integration
         │   └── api.js                  # Axios instance & API functions
         │
-        └── 📂 styles/                   # SCSS Stylesheets
+        └── 📂 styles/                   # SCSS Stylesheets (Brutalist Gaming Theme)
             ├── main.scss               # Main entry point (imports all)
-            ├── _variables.scss         # Colors, spacing, breakpoints
-            ├── _mixins.scss            # Reusable SCSS patterns
-            ├── _base.scss              # Reset & global styles
-            ├── _assignment-list.scss   # Assignment list page styles
-            └── _assignment-attempt.scss # Assignment attempt page styles
+            ├── _variables.scss         # Colors, spacing, breakpoints (Gaming palette)
+            ├── _mixins.scss            # Reusable SCSS patterns (brutalist effects)
+            ├── _base.scss              # Reset, header, footer, buttons, badges
+            ├── _assignment-list.scss   # Challenge list page styles
+            └── _assignment-attempt.scss # Challenge attempt page styles
 ```
 
 ---
 
 ## 📊 File Count & Stats
 
-### Backend (10 files)
+### Server (12 files)
 
 - Configuration: 2 files
 - Models: 2 files
@@ -84,15 +90,15 @@ CipherSQLStudio/
 - Scripts: 1 file
 - Entry: 1 file
 
-### Frontend (14 files)
+### Client (15 files)
 
-- Components: 4 files
+- Components: 5 files (Header, Footer, SQLEditor, ResultsPanel, SampleDataViewer)
 - Pages: 2 files
 - Services: 1 file
-- Styles: 6 files
-- Entry/Config: 3 files
+- Styles: 6 files (Brutalist Gaming Theme)
+- Config: 3 files
 
-### Documentation (7 files)
+### Documentation (9 files)
 
 - README & guides
 - Architecture docs

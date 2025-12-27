@@ -1,5 +1,7 @@
 # CipherSQLStudio - Testing Guide
 
+**🎮 Created by Gourav Chaudhary** | [GitHub](https://github.com/GouravSittam)
+
 ## Manual Testing Checklist
 
 ### ✅ Backend API Testing
@@ -56,43 +58,45 @@ curl -X POST http://localhost:5000/api/hints \
 
 Expected: LLM-generated hint (not solution)
 
-### ✅ Frontend Testing
+### ✅ Frontend Testing (Brutalist Gaming Theme)
 
-#### Assignment List Page (/)
+#### Challenge List Page (/)
 
-- [ ] All 6 assignments display
-- [ ] Difficulty badges show correct colors
-  - Easy: Green
-  - Medium: Orange
-  - Hard: Red
-- [ ] Filter buttons work (All, Easy, Medium, Hard)
-- [ ] Cards are clickable and navigate to attempt page
+- [ ] All 6 challenges display with gaming-styled cards
+- [ ] Level badges show correct colors
+  - ⭐ Easy: Neon Green
+  - ⭐⭐ Medium: Yellow
+  - ⭐⭐⭐ Hard: Hot Pink
+- [ ] Filter buttons work (🎮 ALL LEVELS, ⭐ EASY, ⭐⭐ MEDIUM, ⭐⭐⭐ HARD)
+- [ ] Cards have brutalist hover effects (translate + shadow)
+- [ ] CipherSchools logo displays in header
+- [ ] Footer shows "Created by Gourav Chaudhary" with GitHub link
 - [ ] Responsive on mobile (320px), tablet (641px), desktop (1024px)
 
-#### Assignment Attempt Page (/assignment/:id)
+#### Challenge Attempt Page (/assignment/:id)
 
-- [ ] Back button navigates to list
-- [ ] Question displays correctly
-- [ ] Sample data tables show with proper formatting
+- [ ] ← EXIT button navigates to list
+- [ ] Mission Briefing panel shows question
+- [ ] Database Terminal shows sample tables
 - [ ] Column types display under column names
-- [ ] Monaco Editor loads and allows SQL input
+- [ ] Monaco Editor loads (SQL Terminal)
 - [ ] Syntax highlighting works
 
 #### Query Execution
 
-- [ ] Execute button triggers query
+- [ ] ▶ EXECUTE button triggers query
 - [ ] Loading state shows while executing
-- [ ] Results display in formatted table
+- [ ] Output Console displays results
 - [ ] Execution time displays
-- [ ] Correct queries show green ✓ badge
-- [ ] Error messages display for invalid queries
+- [ ] Correct queries show "VICTORY" badge
+- [ ] Error messages display in brutalist style
 
-#### Hint System
+#### Power-Up System (Hints)
 
-- [ ] Get Hint button works
+- [ ] 💡 POWER-UP button works
 - [ ] Loading state shows while fetching
-- [ ] Hints display in hints panel
-- [ ] Multiple hints stack (Hint 1, Hint 2, etc.)
+- [ ] Hints display in Power-Ups panel
+- [ ] Multiple hints stack (HINT 1, HINT 2, etc.)
 - [ ] Hints are helpful but don't give solutions
 
 ### ✅ Mobile Responsiveness Testing

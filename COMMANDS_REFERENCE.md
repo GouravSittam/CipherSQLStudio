@@ -1,5 +1,7 @@
 # 🚀 CipherSQLStudio - Quick Commands Reference
 
+**🎮 Created by Gourav Chaudhary** | [GitHub](https://github.com/GouravSittam)
+
 ## Essential Commands
 
 ### 🎬 First Time Setup
@@ -8,43 +10,43 @@
 # Navigate to project
 cd CipherSQLStudio
 
-# Install backend dependencies
-cd backend
+# Install server dependencies
+cd server
 npm install
 
-# Install frontend dependencies
-cd ../frontend
+# Install client dependencies
+cd ../client
 npm install
 
 # Setup environment files
-cd ../backend
+cd ../server
 cp .env.example .env
 # Edit .env with your credentials
 
-cd ../frontend
+cd ../client
 cp .env.example .env
 # Edit .env if needed
 
-# Seed database (backend directory)
-cd ../backend
+# Seed database (server directory)
+cd ../server
 npm run seed
 
-# Start backend
+# Start server
 npm run dev
 
-# Start frontend (new terminal)
-cd ../frontend
-npm start
+# Start client (new terminal)
+cd ../client
+npm run dev
 ```
 
 ---
 
 ## 📦 Package Management
 
-### Backend
+### Server
 
 ```bash
-cd backend
+cd server
 
 # Install dependencies
 npm install
@@ -59,10 +61,10 @@ npm update
 npm outdated
 ```
 
-### Frontend
+### Client
 
 ```bash
-cd frontend
+cd client
 
 # Install dependencies
 npm install
@@ -70,8 +72,8 @@ npm install
 # Add new package
 npm install package-name
 
-# Update React scripts
-npm update react-scripts
+# Update packages
+npm update
 ```
 
 ---
@@ -81,22 +83,22 @@ npm update react-scripts
 ### Development Mode
 
 ```bash
-# Terminal 1: Backend
-cd backend
+# Terminal 1: Server
+cd server
 npm run dev
 # Server runs on http://localhost:5000
 
-# Terminal 2: Frontend
-cd frontend
+# Terminal 2: Client
+cd client
 npm run dev
-# App opens at http://localhost:3000
+# App opens at http://localhost:5173
 ```
 
 ### Production Mode
 
 ```bash
-# Backend
-cd backend
+# Server
+cd server
 npm start
 
 # Frontend (build first)

@@ -1,116 +1,104 @@
 # CipherSQLStudio
 
-**Created by Gourav Chaudhary**
+**🎮 Created by Gourav Chaudhary**
 
-A browser-based SQL learning platform where students can practice SQL queries against pre-configured assignments with real-time execution and intelligent hints.
+[![GitHub](https://img.shields.io/badge/GitHub-GouravSittam-blue?style=flat&logo=github)](https://github.com/GouravSittam)
 
-## Features
+A browser-based SQL learning platform where students can practice SQL queries against pre-configured assignments with real-time execution and intelligent hints. Features a **Brutalist Gaming Theme** with bold, playful, and modern UI design.
 
-- 📝 View SQL assignments with pre-loaded sample data
-- 💻 Write and execute SQL queries in browser-based Monaco Editor
-- 💡 Get intelligent hints (not solutions) from integrated LLM
-- 📊 See query results in real-time
-- 📱 Mobile-first responsive design
+## ✨ Features
 
-## Tech Stack
+- 🎮 **Gaming-Inspired UI** - Brutalist/Neo-Brutalism design with bold colors and animations
+- 📝 **SQL Challenges** - View assignments with pre-loaded sample data
+- 💻 **Monaco Editor** - Write and execute SQL queries in a professional code editor
+- 💡 **AI-Powered Hints** - Get intelligent hints (not solutions) from LLM integration
+- 📊 **Real-Time Results** - See query execution results instantly
+- 📱 **Mobile-First Design** - Fully responsive across all devices
+- ⚡ **Fast Execution** - PostgreSQL sandbox with schema isolation
+
+## 🎨 Theme
+
+The application uses a **Brutalist Gaming Theme** featuring:
+
+- Dark base with vibrant neon accents (Orange, Cyan, Pink, Purple)
+- Bold offset shadows and thick borders
+- Gaming-inspired terminology (Challenges, Power-Ups, Victory)
+- Space Grotesk & JetBrains Mono fonts
+- Smooth hover animations and glow effects
+
+## 🛠️ Tech Stack
 
 ### Frontend
 
-- React.js with Vite
-- Monaco Editor (SQL code editor)
-- Vanilla SCSS (mobile-first responsive design)
+- **React.js** with Vite
+- **Monaco Editor** (SQL code editor)
+- **SCSS** with Brutalist Gaming Theme
+- **React Router** for navigation
 
 ### Backend
 
-- Node.js & Express.js
-- MongoDB Atlas (assignments & user progress)
-- PostgreSQL (sandbox query execution)
-- LLM Integration (OpenAI/Gemini for hints)
+- **Node.js** & **Express.js**
+- **MongoDB Atlas** (assignments & user progress)
+- **PostgreSQL** (sandbox query execution)
+- **LLM Integration** (OpenAI/Gemini for hints)
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 CipherSQLStudio/
-├── backend/              # Express.js server
-│   ├── config/          # Database configurations
-│   ├── models/          # MongoDB schemas
-│   ├── routes/          # API endpoints
-│   ├── services/        # Business logic
-│   └── server.js        # Entry point
-├── frontend/            # React application
-│   ├── public/
+├── client/                    # React Frontend (Vite)
+│   ├── public/               # Static assets & CipherSchools logo
 │   └── src/
-│       ├── components/  # React components
-│       ├── pages/       # Page components
-│       ├── styles/      # SCSS files
-│       └── services/    # API calls
-└── README.md
+│       ├── components/       # Header, Footer, SQLEditor, ResultsPanel, SampleDataViewer
+│       ├── pages/            # AssignmentList, AssignmentAttempt
+│       ├── services/         # API integration (axios)
+│       └── styles/           # SCSS (Brutalist Gaming Theme)
+│
+├── server/                    # Express.js Backend
+│   ├── config/               # MongoDB & PostgreSQL configs
+│   ├── models/               # MongoDB schemas
+│   ├── routes/               # API endpoints
+│   ├── services/             # Query execution & LLM services
+│   ├── scripts/              # Database seeding
+│   └── server.js             # Entry point
+│
+└── Documentation/
+    ├── README.md             # This file
+    ├── QUICK_START.md        # 5-minute setup guide
+    ├── ARCHITECTURE.md       # System design
+    └── ...                   # Other docs
 ```
 
-## Setup Instructions
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- PostgreSQL (v13 or higher)
+- Node.js v16+
+- PostgreSQL v13+
 - MongoDB Atlas account
+- OpenAI/Gemini API key
 
-### Backend Setup
-
-1. Navigate to backend directory:
+### Installation
 
 ```bash
-cd backend
+# Clone repository
+git clone https://github.com/GouravSittam/CipherSQLStudio.git
+cd CipherSQLStudio
+
+# Install server dependencies
+cd server
+npm install
+
+# Install client dependencies
+cd ../client
 npm install
 ```
 
-2. Create `.env` file from `.env.example`:
+### Configuration
 
-```bash
-cp .env.example .env
-```
+**Server (.env)**
 
-3. Configure environment variables in `.env`:
-
-   - MongoDB connection string
-   - PostgreSQL credentials
-   - LLM API key (OpenAI/Gemini)
-   - Server port
-
-4. Start the server:
-
-```bash
-npm run dev
-```
-
-### Frontend Setup
-
-1. Navigate to frontend directory:
-
-```bash
-cd frontend
-npm install
-```
-
-2. Create `.env` file from `.env.example`:
-
-```bash
-cp .env.example .env
-```
-
-3. Start the development server:
-
-```bash
-npm run dev
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## Environment Variables
-
-### Backend (.env)
-
-```
+```env
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 POSTGRES_HOST=localhost
@@ -118,93 +106,59 @@ POSTGRES_PORT=5432
 POSTGRES_DB=ciphersqlstudio_app
 POSTGRES_USER=your_username
 POSTGRES_PASSWORD=your_password
-LLM_API_KEY=your_llm_api_key
-LLM_PROVIDER=openai # or gemini
+LLM_API_KEY=your_api_key
+LLM_PROVIDER=gemini
 ```
 
-### Frontend (.env)
+**Client (.env)**
 
-```
+```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
-## Data Flow Diagram
+### Run Application
 
-**User Executes Query:**
+```bash
+# Terminal 1: Start server
+cd server
+npm run dev
 
-```
-1. User writes SQL in Monaco Editor
-2. User clicks "Execute Query" button
-3. Frontend sends POST request to /api/execute-query
-4. Backend validates and sanitizes query
-5. Backend creates isolated PostgreSQL schema
-6. Backend loads sample tables for assignment
-7. PostgreSQL executes query in sandbox
-8. Backend formats results
-9. Backend sends response to frontend
-10. Frontend updates Results Panel with table data
+# Terminal 2: Start client
+cd client
+npm run dev
 ```
 
-**User Requests Hint:**
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```
-1. User clicks "Get Hint" button
-2. Frontend sends POST request to /api/get-hint with assignmentId
-3. Backend retrieves assignment question from MongoDB
-4. Backend constructs prompt for LLM (engineered to give hints only)
-5. Backend calls LLM API (OpenAI/Gemini)
-6. LLM returns hint (not solution)
-7. Backend sends hint to frontend
-8. Frontend displays hint in UI
-```
+## 📡 API Endpoints
 
-## API Endpoints
+| Method | Endpoint               | Description            |
+| ------ | ---------------------- | ---------------------- |
+| GET    | `/api/assignments`     | List all assignments   |
+| GET    | `/api/assignments/:id` | Get assignment details |
+| POST   | `/api/execute/query`   | Execute SQL query      |
+| POST   | `/api/hints`           | Get AI-generated hint  |
+| POST   | `/api/progress`        | Save user progress     |
 
-### Assignments
+## 📱 Responsive Breakpoints
 
-- `GET /api/assignments` - List all assignments
-- `GET /api/assignments/:id` - Get single assignment with sample data
+- **Mobile**: 320px - 640px
+- **Tablet**: 641px - 1023px
+- **Desktop**: 1024px - 1280px
+- **Large Desktop**: 1281px+
 
-### Query Execution
-
-- `POST /api/execute-query` - Execute SQL query
-  - Body: `{ assignmentId, query, sessionId }`
-
-### Hints
-
-- `POST /api/get-hint` - Get LLM-generated hint
-  - Body: `{ assignmentId, currentQuery, previousHints }`
-
-### User Progress (Optional)
-
-- `POST /api/progress` - Save user progress
-- `GET /api/progress/:userId` - Get user's progress
-
-## Mobile-First Responsive Breakpoints
-
-- Mobile: 320px - 640px
-- Tablet: 641px - 1023px
-- Desktop: 1024px - 1280px
-- Large Desktop: 1281px+
-
-## Development Guidelines
-
-### SCSS Structure
-
-- Use BEM naming convention
-- Utilize SCSS variables, mixins, and nesting
-- Mobile-first approach (base styles for mobile, media queries for larger screens)
-- Separate partials for variables, mixins, and components
-
-### Security Considerations
+## 🔒 Security Features
 
 - SQL query validation and sanitization
 - Schema isolation per user session
-- Prevent destructive operations (DROP, DELETE, UPDATE)
-- Rate limiting on query execution
+- Blocked destructive operations (DROP, DELETE, UPDATE)
+- Query timeout protection (5 seconds)
+- Result row limit (1000 rows)
 
-## License
+## 📄 License
 
 MIT License © Gourav Chaudhary
 
-#
+---
+
+**Made with ❤️ by [Gourav Chaudhary](https://github.com/GouravSittam)**

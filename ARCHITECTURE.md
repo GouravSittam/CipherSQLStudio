@@ -1,5 +1,7 @@
 # CipherSQLStudio - Architecture Documentation
 
+**🎮 Created by Gourav Chaudhary** | [GitHub](https://github.com/GouravSittam)
+
 ## 🏗️ System Architecture Overview
 
 CipherSQLStudio follows a **three-tier architecture** with clear separation of concerns:
@@ -7,8 +9,8 @@ CipherSQLStudio follows a **three-tier architecture** with clear separation of c
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                    PRESENTATION LAYER                    │
-│                    (React Frontend)                      │
-│  - User Interface Components                            │
+│              (React Frontend with Vite)                  │
+│  - Brutalist Gaming Theme UI                            │
 │  - State Management                                     │
 │  - API Communication                                    │
 └────────────────────┬────────────────────────────────────┘
@@ -39,8 +41,8 @@ CipherSQLStudio follows a **three-tier architecture** with clear separation of c
 
 ### 1. **Separation of Concerns**
 
-- **Frontend**: UI/UX only, no business logic
-- **Backend**: API, validation, orchestration
+- **Client**: UI/UX only, no business logic (Brutalist Gaming Theme)
+- **Server**: API, validation, orchestration
 - **Services**: Isolated business logic (query execution, LLM, etc.)
 
 ### 2. **Security by Design**
@@ -68,36 +70,41 @@ CipherSQLStudio follows a **three-tier architecture** with clear separation of c
 
 ## 📦 Component Architecture
 
-### Frontend Components
+### Frontend Components (React + Vite)
 
 ```
 App
 ├── Header
+│   ├── CipherSchools Logo
 │   └── Navigation Links
 │
+├── Footer
+│   ├── Author: Gourav Chaudhary
+│   └── GitHub Link
+│
 ├── AssignmentList (Page)
-│   ├── Filter Buttons
+│   ├── Filter Buttons (⭐ Easy, ⭐⭐ Medium, ⭐⭐⭐ Hard)
 │   └── AssignmentCard[] (Grid)
 │       ├── Title
-│       ├── Difficulty Badge
+│       ├── Level Badge
 │       ├── Question Preview
-│       └── Tags
+│       └── Tags (#hashtags)
 │
 └── AssignmentAttempt (Page)
-    ├── QuestionPanel
-    │   └── Assignment Question
+    ├── QuestionPanel (Mission Briefing)
+    │   └── Challenge Question
     │
-    ├── SampleDataViewer
+    ├── SampleDataViewer (Database Terminal)
     │   └── DataTable[]
     │       ├── Table Schema
     │       └── Sample Rows
     │
-    ├── EditorPanel
+    ├── EditorPanel (SQL Terminal)
     │   ├── SQLEditor (Monaco)
     │   ├── Execute Button
-    │   └── Get Hint Button
+    │   └── Power-Up Button (Get Hint)
     │
-    ├── ResultsPanel
+    ├── ResultsPanel (Output Console)
     │   ├── Results Table
     │   ├── Execution Metadata
     │   └── Error Display
