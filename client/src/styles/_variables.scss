@@ -4,38 +4,38 @@
 // ============================================
 
 // Primary Gaming Palette
-$color-primary: #FF6B35;        // Vibrant Orange - Action/CTA
-$color-primary-dark: #E85A24;   // Darker Orange
-$color-primary-light: #FF8A5B;  // Light Orange
-$color-secondary: #7B2CBF;      // Electric Purple - Accents
-$color-secondary-light: #9D4EDD; // Light Purple
+$color-primary: #ff6b35; // Vibrant Orange - Action/CTA
+$color-primary-dark: #e85a24; // Darker Orange
+$color-primary-light: #ff8a5b; // Light Orange
+$color-secondary: #7b2cbf; // Electric Purple - Accents
+$color-secondary-light: #9d4edd; // Light Purple
 
 // Neon Accent Colors (Gaming vibes)
-$color-neon-cyan: #00F5D4;      // Cyber Cyan
-$color-neon-pink: #FF006E;      // Hot Pink
-$color-neon-yellow: #FFE66D;    // Bright Yellow
-$color-neon-green: #39FF14;     // Matrix Green
+$color-neon-cyan: #00f5d4; // Cyber Cyan
+$color-neon-pink: #ff006e; // Hot Pink
+$color-neon-yellow: #ffe66d; // Bright Yellow
+$color-neon-green: #39ff14; // Matrix Green
 
 // Status Colors
-$color-success: #39FF14;        // Neon Green - Victory
-$color-error: #FF006E;          // Hot Pink - Error
-$color-warning: #FFE66D;        // Yellow - Warning
+$color-success: #39ff14; // Neon Green - Victory
+$color-error: #ff006e; // Hot Pink - Error
+$color-warning: #ffe66d; // Yellow - Warning
 
 // Difficulty Colors (Gaming XP style)
-$color-easy: #39FF14;           // Green - Easy Mode
-$color-medium: #FFE66D;         // Yellow - Normal Mode
-$color-hard: #FF006E;           // Pink - Hard Mode
+$color-easy: #39ff14; // Green - Easy Mode
+$color-medium: #ffe66d; // Yellow - Normal Mode
+$color-hard: #ff006e; // Pink - Hard Mode
 
 // Neutral Colors - Dark Theme Base
-$color-text: #FFFFFF;
-$color-text-light: #B8B8B8;
-$color-text-muted: #6B6B6B;
-$color-bg: #0D0D0D;             // Near Black
-$color-bg-secondary: #1A1A2E;   // Dark Navy
-$color-bg-card: #16213E;        // Card Background
-$color-bg-elevated: #1F1F3D;    // Elevated surfaces
-$color-border: #2D2D2D;         // Subtle borders
-$color-border-accent: #FF6B35;  // Accent borders
+$color-text: #ffffff;
+$color-text-light: #b8b8b8;
+$color-text-muted: #6b6b6b;
+$color-bg: #0d0d0d; // Near Black
+$color-bg-secondary: #1a1a2e; // Dark Navy
+$color-bg-card: #16213e; // Card Background
+$color-bg-elevated: #1f1f3d; // Elevated surfaces
+$color-border: #2d2d2d; // Subtle borders
+$color-border-accent: #ff6b35; // Accent borders
 $color-shadow: rgba(0, 0, 0, 0.5);
 
 // Brutalist Border (thick, bold)
@@ -44,34 +44,35 @@ $border-brutal-accent: 4px solid $color-primary;
 $border-brutal-thin: 2px solid $color-text;
 
 // Dark Theme (consistent with base)
-$color-dark-bg: #0D0D0D;
-$color-dark-bg-secondary: #1A1A2E;
-$color-dark-text: #FFFFFF;
-$color-dark-border: #2D2D2D;
+$color-dark-bg: #0d0d0d;
+$color-dark-bg-secondary: #1a1a2e;
+$color-dark-text: #ffffff;
+$color-dark-border: #2d2d2d;
 
 // Spacing (slightly larger for bold feel)
-$spacing-xs: 0.25rem;   // 4px
-$spacing-sm: 0.5rem;    // 8px
-$spacing-md: 1rem;      // 16px
-$spacing-lg: 1.5rem;    // 24px
-$spacing-xl: 2rem;      // 32px
-$spacing-2xl: 3rem;     // 48px
-$spacing-3xl: 4rem;     // 64px
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-2xl: 3rem; // 48px
+$spacing-3xl: 4rem; // 64px
 
 // Typography - Bold & Impactful
-$font-family-base: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-family-heading: 'Space Grotesk', 'Inter', sans-serif;
-$font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+$font-family-base: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont,
+  sans-serif;
+$font-family-heading: "Space Grotesk", "Inter", sans-serif;
+$font-family-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
 
-$font-size-xs: 0.75rem;    // 12px
-$font-size-sm: 0.875rem;   // 14px
-$font-size-base: 1rem;     // 16px
-$font-size-lg: 1.125rem;   // 18px
-$font-size-xl: 1.25rem;    // 20px
-$font-size-2xl: 1.75rem;   // 28px
-$font-size-3xl: 2.25rem;   // 36px
-$font-size-4xl: 3rem;      // 48px
-$font-size-display: 4rem;  // 64px
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.75rem; // 28px
+$font-size-3xl: 2.25rem; // 36px
+$font-size-4xl: 3rem; // 48px
+$font-size-display: 4rem; // 64px
 
 $font-weight-normal: 400;
 $font-weight-medium: 500;

@@ -1,5 +1,7 @@
 # CipherSQLStudio
 
+**Created by Gourav Chaudhary**
+
 A browser-based SQL learning platform where students can practice SQL queries against pre-configured assignments with real-time execution and intelligent hints.
 
 ## Features
@@ -203,5 +205,5 @@ VITE_API_URL=http://localhost:5000/api
 
 ## License
 
-MIT
+MIT License © Gourav Chaudhary
 #

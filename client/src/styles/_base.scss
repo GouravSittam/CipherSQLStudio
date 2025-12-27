@@ -7,7 +7,7 @@
 // ============================================
 
 // Import Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 
 // Reset & Base Styles
 * {
@@ -31,19 +31,30 @@ body {
   min-height: 100vh;
   @include pixel-grid;
   position: relative;
-  
+
   // Subtle animated gradient background
   &::before {
-    content: '';
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-      radial-gradient(ellipse at 20% 20%, rgba($color-primary, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba($color-secondary, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba($color-neon-cyan, 0.05) 0%, transparent 70%);
+    background: radial-gradient(
+        ellipse at 20% 20%,
+        rgba($color-primary, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 80%,
+        rgba($color-secondary, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 50% 50%,
+        rgba($color-neon-cyan, 0.05) 0%,
+        transparent 70%
+      );
     pointer-events: none;
     z-index: -1;
   }
@@ -78,15 +89,20 @@ body {
   position: sticky;
   top: 0;
   z-index: $z-header;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -8px;
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, $color-primary, $color-secondary, $color-neon-cyan);
+    background: linear-gradient(
+      90deg,
+      $color-primary,
+      $color-secondary,
+      $color-neon-cyan
+    );
   }
 
   &__container {
@@ -112,7 +128,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     transition: all $transition-fast;
-    
+
     &:hover {
       color: $color-primary;
       @include text-glow($color-primary);
@@ -169,7 +185,7 @@ body {
       border-color: $color-primary;
       background: rgba($color-primary, 0.1);
     }
-    
+
     @include tablet {
       font-size: $font-size-base;
     }
@@ -193,7 +209,7 @@ body {
       transform: translate(-2px, -2px);
       box-shadow: $shadow-brutal-lg;
     }
-    
+
     &:active:not(:disabled) {
       transform: translate(2px, 2px);
       box-shadow: none;
@@ -224,22 +240,22 @@ body {
       background: rgba($color-primary, 0.1);
     }
   }
-  
+
   &--success {
     background: $color-success;
     color: $color-bg;
     border-color: $color-text;
-    
+
     &:hover:not(:disabled) {
       @include glow($color-success);
     }
   }
-  
+
   &--danger {
     background: $color-error;
     color: $color-text;
     border-color: $color-text;
-    
+
     &:hover:not(:disabled) {
       @include glow($color-error);
     }
@@ -267,7 +283,7 @@ body {
     color: $color-bg;
     border-color: $color-text;
     box-shadow: $shadow-brutal;
-    
+
     &:hover {
       color: $color-bg;
     }
@@ -290,9 +306,9 @@ body {
     background: rgba($color-easy, 0.2);
     color: $color-easy;
     border-color: $color-easy;
-    
+
     &::before {
-      content: '★';
+      content: "★";
     }
   }
 
@@ -300,9 +316,9 @@ body {
     background: rgba($color-medium, 0.2);
     color: $color-medium;
     border-color: $color-medium;
-    
+
     &::before {
-      content: '★★';
+      content: "★★";
     }
   }
 
@@ -310,9 +326,9 @@ body {
     background: rgba($color-hard, 0.2);
     color: $color-hard;
     border-color: $color-hard;
-    
+
     &::before {
-      content: '★★★';
+      content: "★★★";
     }
   }
 }
@@ -349,7 +365,7 @@ body {
     padding: $spacing-sm $spacing-md;
     border-bottom: 1px solid $color-border;
     color: $color-text;
-    
+
     &:hover {
       background: rgba($color-primary, 0.05);
     }
@@ -361,7 +377,7 @@ body {
     color: $color-text-light;
     font-style: italic;
   }
-  
+
   // Alternating rows
   tr:nth-child(even) {
     background: rgba($color-bg-secondary, 0.5);
@@ -377,9 +393,9 @@ body {
   border-right-color: $color-secondary;
   animation: spin 0.8s linear infinite;
   position: relative;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 4px;
     left: 4px;
@@ -398,7 +414,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: $shadow-brutal-sm, 0 0 10px rgba($color-primary, 0.3);
   }
   50% {
@@ -407,21 +424,45 @@ body {
 }
 
 @keyframes glitch-anim {
-  0% { clip: rect(31px, 9999px, 94px, 0); }
-  20% { clip: rect(62px, 9999px, 42px, 0); }
-  40% { clip: rect(16px, 9999px, 78px, 0); }
-  60% { clip: rect(87px, 9999px, 55px, 0); }
-  80% { clip: rect(24px, 9999px, 89px, 0); }
-  100% { clip: rect(43px, 9999px, 71px, 0); }
+  0% {
+    clip: rect(31px, 9999px, 94px, 0);
+  }
+  20% {
+    clip: rect(62px, 9999px, 42px, 0);
+  }
+  40% {
+    clip: rect(16px, 9999px, 78px, 0);
+  }
+  60% {
+    clip: rect(87px, 9999px, 55px, 0);
+  }
+  80% {
+    clip: rect(24px, 9999px, 89px, 0);
+  }
+  100% {
+    clip: rect(43px, 9999px, 71px, 0);
+  }
 }
 
 @keyframes glitch-anim2 {
-  0% { clip: rect(65px, 9999px, 12px, 0); }
-  20% { clip: rect(21px, 9999px, 87px, 0); }
-  40% { clip: rect(54px, 9999px, 33px, 0); }
-  60% { clip: rect(11px, 9999px, 92px, 0); }
-  80% { clip: rect(76px, 9999px, 48px, 0); }
-  100% { clip: rect(38px, 9999px, 66px, 0); }
+  0% {
+    clip: rect(65px, 9999px, 12px, 0);
+  }
+  20% {
+    clip: rect(21px, 9999px, 87px, 0);
+  }
+  40% {
+    clip: rect(54px, 9999px, 33px, 0);
+  }
+  60% {
+    clip: rect(11px, 9999px, 92px, 0);
+  }
+  80% {
+    clip: rect(76px, 9999px, 48px, 0);
+  }
+  100% {
+    clip: rect(38px, 9999px, 66px, 0);
+  }
 }
 
 // Utilities
@@ -456,6 +497,86 @@ body {
 // Gaming accent line
 .accent-line {
   height: 4px;
-  background: linear-gradient(90deg, $color-primary, $color-secondary, $color-neon-cyan);
+  background: linear-gradient(
+    90deg,
+    $color-primary,
+    $color-secondary,
+    $color-neon-cyan
+  );
   border: none;
+}
+
+// Footer - Brutalist Gaming Style
+.footer {
+  background: $color-bg;
+  border-top: $border-brutal;
+  padding: $spacing-lg $spacing-md;
+  margin-top: auto;
+  position: relative;
+
+  // Top accent gradient
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      $color-primary,
+      $color-secondary,
+      $color-neon-cyan
+    );
+  }
+
+  &__container {
+    @include container;
+    @include flex-center;
+    @include flex-column;
+    gap: $spacing-sm;
+    text-align: center;
+
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+  }
+
+  &__created {
+    color: $color-text-light;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: $font-size-xs;
+  }
+
+  &__author {
+    color: $color-primary;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: $spacing-xs $spacing-sm;
+    border: 2px solid $color-primary;
+    background: rgba($color-primary, 0.1);
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-primary;
+      color: $color-bg;
+    }
+  }
+
+  &__copyright {
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    font-family: $font-family-mono;
+    letter-spacing: 0.05em;
+  }
 }

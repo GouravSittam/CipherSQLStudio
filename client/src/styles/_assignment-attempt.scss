@@ -22,10 +22,10 @@
     box-shadow: $shadow-brutal;
     text-align: center;
   }
-  
+
   &__loading {
     &::before {
-      content: 'INITIALIZING CHALLENGE...';
+      content: "INITIALIZING CHALLENGE...";
       font-family: $font-family-mono;
       font-size: $font-size-lg;
       color: $color-primary;
@@ -34,12 +34,12 @@
       animation: blink 1s step-end infinite;
     }
   }
-  
+
   &__error {
     border-color: $color-error;
-    
+
     &::before {
-      content: '⚠ SYSTEM ERROR';
+      content: "⚠ SYSTEM ERROR";
       font-size: $font-size-2xl;
       font-weight: $font-weight-black;
       color: $color-error;
@@ -55,16 +55,21 @@
     padding-bottom: $spacing-lg;
     border-bottom: $border-brutal;
     position: relative;
-    
+
     // Gaming progress bar decoration
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -4px;
       left: 0;
       width: 100%;
       height: 4px;
-      background: linear-gradient(90deg, $color-primary 0%, $color-secondary 50%, $color-neon-cyan 100%);
+      background: linear-gradient(
+        90deg,
+        $color-primary 0%,
+        $color-secondary 50%,
+        $color-neon-cyan 100%
+      );
     }
   }
 
@@ -82,10 +87,10 @@
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: $color-text;
-    
+
     // Gaming title style
     &::before {
-      content: '🎮 ';
+      content: "🎮 ";
     }
 
     @include tablet {
@@ -112,7 +117,9 @@
 }
 
 @keyframes blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
 
 // Question Panel - Mission Briefing Style
@@ -120,10 +127,10 @@
   @include card;
   position: relative;
   overflow: hidden;
-  
+
   // Mission label
   &::before {
-    content: 'MISSION BRIEFING';
+    content: "MISSION BRIEFING";
     position: absolute;
     top: 0;
     left: 0;
@@ -137,7 +144,7 @@
     padding: $spacing-xs $spacing-md;
     text-align: center;
   }
-  
+
   padding-top: $spacing-2xl;
 
   &__title {
@@ -147,9 +154,9 @@
     color: $color-primary;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    
+
     &::before {
-      content: '▸ ';
+      content: "▸ ";
     }
 
     @include tablet {
@@ -175,10 +182,10 @@
 .sample-data {
   @include card;
   position: relative;
-  
+
   // Terminal header
   &::before {
-    content: 'DATABASE TERMINAL';
+    content: "DATABASE TERMINAL";
     position: absolute;
     top: 0;
     left: 0;
@@ -192,7 +199,7 @@
     padding: $spacing-xs $spacing-md;
     text-align: center;
   }
-  
+
   padding-top: $spacing-2xl;
 
   &__title {
@@ -204,9 +211,9 @@
     display: flex;
     align-items: center;
     gap: $spacing-sm;
-    
+
     &::before {
-      content: '📊';
+      content: "📊";
     }
   }
 
@@ -227,9 +234,9 @@
     display: flex;
     align-items: center;
     gap: $spacing-sm;
-    
+
     &::before {
-      content: 'TABLE:';
+      content: "TABLE:";
       color: $color-text-muted;
       font-size: $font-size-xs;
     }
@@ -261,10 +268,10 @@
     @include tablet {
       padding: $spacing-lg;
     }
-    
+
     // Terminal dots
     &::before {
-      content: '● ● ●';
+      content: "● ● ●";
       color: $color-primary;
       font-size: $font-size-sm;
       letter-spacing: 0.3em;
@@ -309,10 +316,10 @@
 .results-panel {
   @include card;
   position: relative;
-  
+
   // Console header
   &::before {
-    content: 'OUTPUT CONSOLE';
+    content: "OUTPUT CONSOLE";
     position: absolute;
     top: 0;
     left: 0;
@@ -326,7 +333,7 @@
     padding: $spacing-xs $spacing-md;
     text-align: center;
   }
-  
+
   padding-top: $spacing-2xl;
 
   &__header {
@@ -343,9 +350,9 @@
     font-weight: $font-weight-bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    
+
     &::before {
-      content: '> ';
+      content: "> ";
       color: $color-primary;
     }
   }
@@ -369,9 +376,9 @@
       background: rgba($color-success, 0.2);
       color: $color-success;
       border-color: $color-success;
-      
+
       &::before {
-        content: '✓ ';
+        content: "✓ ";
       }
     }
   }
@@ -397,9 +404,9 @@
     font-family: $font-family-mono;
     background: rgba($color-bg, 0.3);
     border: 2px dashed $color-border;
-    
+
     &::before {
-      content: '🎯 ';
+      content: "🎯 ";
       font-size: $font-size-2xl;
       display: block;
       margin-bottom: $spacing-sm;
@@ -412,9 +419,9 @@
     border-color: $color-error;
     padding: $spacing-lg;
     position: relative;
-    
+
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
@@ -430,9 +437,9 @@
     margin-bottom: $spacing-sm;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    
+
     &::before {
-      content: '⚠ ';
+      content: "⚠ ";
     }
   }
 
@@ -455,9 +462,9 @@
     font-weight: $font-weight-bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    
+
     &::before {
-      content: '⚡ ';
+      content: "⚡ ";
     }
   }
 }
@@ -466,10 +473,10 @@
 .hints-panel {
   @include card;
   position: relative;
-  
+
   // Power-up header
   &::before {
-    content: '💡 POWER-UPS';
+    content: "💡 POWER-UPS";
     position: absolute;
     top: 0;
     left: 0;
@@ -483,7 +490,7 @@
     padding: $spacing-xs $spacing-md;
     text-align: center;
   }
-  
+
   padding-top: $spacing-2xl;
 
   &__title {
@@ -493,9 +500,9 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: $color-text;
-    
+
     &::before {
-      content: '🎮 ';
+      content: "🎮 ";
     }
   }
 
@@ -511,10 +518,10 @@
   padding: $spacing-md;
   position: relative;
   transition: all $transition-fast;
-  
+
   // Level indicator
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
@@ -522,11 +529,11 @@
     width: 4px;
     background: $color-secondary;
   }
-  
+
   &:hover {
     transform: translateX(4px);
     border-color: $color-primary;
-    
+
     &::before {
       background: $color-primary;
     }
@@ -540,9 +547,9 @@
     font-size: $font-size-sm;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    
+
     &::before {
-      content: '★ ';
+      content: "★ ";
     }
   }
 
@@ -570,7 +577,7 @@
   @include flex-center;
   @include flex-column;
   gap: $spacing-lg;
-  
+
   &__title {
     font-size: $font-size-4xl;
     font-weight: $font-weight-black;
@@ -579,7 +586,7 @@
     @include text-glow($color-success);
     animation: victory-pulse 0.5s ease-out;
   }
-  
+
   &__message {
     font-size: $font-size-xl;
     color: $color-text;

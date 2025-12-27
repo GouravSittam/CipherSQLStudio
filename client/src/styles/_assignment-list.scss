@@ -19,10 +19,10 @@
     @include tablet {
       margin-bottom: $spacing-3xl;
     }
-    
+
     // Decorative elements
     &::before {
-      content: '< CHALLENGES />';
+      content: "< CHALLENGES />";
       display: block;
       font-family: $font-family-mono;
       font-size: $font-size-xs;
@@ -42,9 +42,14 @@
     letter-spacing: 0.05em;
     position: relative;
     display: inline-block;
-    
+
     // Gradient text effect
-    background: linear-gradient(135deg, $color-text 0%, $color-primary 50%, $color-neon-cyan 100%);
+    background: linear-gradient(
+      135deg,
+      $color-text 0%,
+      $color-primary 50%,
+      $color-neon-cyan 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -60,12 +65,12 @@
     font-weight: $font-weight-medium;
     max-width: 600px;
     margin: 0 auto;
-    
+
     // Terminal-like styling
     font-family: $font-family-mono;
-    
+
     &::before {
-      content: '> ';
+      content: "> ";
       color: $color-primary;
     }
 
@@ -80,7 +85,7 @@
     margin-bottom: $spacing-xl;
     flex-wrap: wrap;
     justify-content: center;
-    
+
     // Gaming tab bar style
     padding: $spacing-sm;
     background: $color-bg-card;
@@ -101,18 +106,18 @@
     padding: $spacing-3xl;
     text-align: center;
     gap: $spacing-lg;
-    
+
     // Brutalist box
     background: $color-bg-card;
     border: $border-brutal;
     box-shadow: $shadow-brutal;
   }
-  
+
   &__loading {
     color: $color-text-light;
-    
+
     &::before {
-      content: 'LOADING CHALLENGES...';
+      content: "LOADING CHALLENGES...";
       font-family: $font-family-mono;
       font-size: $font-size-sm;
       color: $color-primary;
@@ -123,20 +128,20 @@
   &__error {
     color: $color-error;
     border-color: $color-error;
-    
+
     &::before {
-      content: '⚠ ERROR';
+      content: "⚠ ERROR";
       font-family: $font-family-mono;
       font-size: $font-size-lg;
       font-weight: $font-weight-bold;
     }
   }
-  
+
   &__empty {
     color: $color-text-muted;
-    
+
     &::before {
-      content: '🎮';
+      content: "🎮";
       font-size: $font-size-4xl;
     }
   }
@@ -158,7 +163,9 @@
 }
 
 @keyframes blink {
-  50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
 
 // Assignment Card - Gaming Card Style
@@ -173,7 +180,7 @@
 
   // Top accent bar
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -184,10 +191,10 @@
     transform-origin: left;
     transition: transform $transition-base;
   }
-  
+
   // Corner decoration
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     right: 0;
@@ -203,16 +210,16 @@
     transform: translate(-4px, -4px);
     box-shadow: 8px 8px 0px $color-text;
     border-color: $color-primary;
-    
+
     &::before {
       transform: scaleX(1);
     }
-    
+
     &::after {
       border-color: transparent $color-primary transparent transparent;
     }
   }
-  
+
   &:active {
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0px $color-text;
@@ -246,15 +253,15 @@
     letter-spacing: 0.1em;
     white-space: nowrap;
     border: 2px solid;
-    
+
     // XP badge style
     &--easy {
       background: rgba($color-easy, 0.2);
       color: $color-easy;
       border-color: $color-easy;
-      
+
       &::before {
-        content: 'LV.1 ';
+        content: "LV.1 ";
       }
     }
 
@@ -262,9 +269,9 @@
       background: rgba($color-medium, 0.2);
       color: $color-medium;
       border-color: $color-medium;
-      
+
       &::before {
-        content: 'LV.2 ';
+        content: "LV.2 ";
       }
     }
 
@@ -272,9 +279,9 @@
       background: rgba($color-hard, 0.2);
       color: $color-hard;
       border-color: $color-hard;
-      
+
       &::before {
-        content: 'LV.3 ';
+        content: "LV.3 ";
       }
     }
   }
@@ -284,7 +291,7 @@
     font-size: $font-size-sm;
     line-height: 1.7;
     flex: 1;
-    
+
     // Code-like appearance
     font-family: $font-family-base;
     padding: $spacing-sm;
@@ -310,9 +317,9 @@
     font-family: $font-family-mono;
     text-transform: lowercase;
     border: 1px solid $color-neon-cyan;
-    
+
     &::before {
-      content: '#';
+      content: "#";
     }
   }
 
@@ -326,10 +333,10 @@
     text-align: center;
     margin-top: auto;
     font-size: $font-size-base;
-    
+
     // Play button style
     &::before {
-      content: '▶ ';
+      content: "▶ ";
     }
 
     &:hover {
@@ -337,7 +344,7 @@
       transform: translate(-2px, -2px);
       box-shadow: $shadow-brutal;
     }
-    
+
     &:active {
       transform: translate(1px, 1px);
       box-shadow: none;

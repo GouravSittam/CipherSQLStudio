@@ -14,7 +14,7 @@
     "education",
     "postgresql"
   ],
-  "author": "",
+  "author": "Gourav Chaudhary",
   "license": "MIT",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

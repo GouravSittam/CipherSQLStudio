@@ -33,10 +33,10 @@ const AssignmentList = () => {
   };
 
   const difficultyLabels = {
-    "All": "🎮 ALL LEVELS",
-    "Easy": "⭐ EASY",
-    "Medium": "⭐⭐ MEDIUM", 
-    "Hard": "⭐⭐⭐ HARD"
+    All: "🎮 ALL LEVELS",
+    Easy: "⭐ EASY",
+    Medium: "⭐⭐ MEDIUM",
+    Hard: "⭐⭐⭐ HARD",
   };
 
   return (
