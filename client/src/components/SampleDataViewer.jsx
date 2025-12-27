@@ -7,7 +7,7 @@ const SampleDataViewer = ({ tables }) => {
 
   return (
     <section className="sample-data">
-      <h2 className="sample-data__title">Sample Data</h2>
+      <h2 className="sample-data__title">Available Tables</h2>
 
       {tables.map((table, tableIndex) => (
         <div key={tableIndex} className="sample-data__table">
@@ -46,7 +46,7 @@ const SampleDataViewer = ({ tables }) => {
                       colSpan={table.columns.length}
                       className="data-table__empty"
                     >
-                      No sample data
+                      No sample data available
                     </td>
                   </tr>
                 )}

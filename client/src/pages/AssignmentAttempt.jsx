@@ -48,7 +48,7 @@ const AssignmentAttempt = () => {
       setSessionId(response.sessionId);
 
       if (response.isCorrect) {
-        alert("🎉 Correct! Your query matches the expected output!");
+        alert("� VICTORY! Your query is correct! Challenge completed!");
       }
     } catch (err) {
       setResults({
@@ -80,7 +80,7 @@ const AssignmentAttempt = () => {
     return (
       <div className="assignment-attempt__loading">
         <div className="spinner"></div>
-        <p>Loading assignment...</p>
+        <p>Initializing challenge...</p>
       </div>
     );
   }
@@ -88,9 +88,9 @@ const AssignmentAttempt = () => {
   if (!assignment) {
     return (
       <div className="assignment-attempt__error">
-        <p>Assignment not found</p>
+        <p>Challenge not found</p>
         <button onClick={() => navigate("/")} className="btn btn--primary">
-          Back to Assignments
+          ← BACK TO CHALLENGES
         </button>
       </div>
     );
@@ -100,7 +100,7 @@ const AssignmentAttempt = () => {
     <div className="assignment-attempt">
       <div className="assignment-attempt__header">
         <button onClick={() => navigate("/")} className="btn btn--back">
-          ← Back
+          ← EXIT
         </button>
         <div className="assignment-attempt__info">
           <h1 className="assignment-attempt__title">{assignment.title}</h1>
@@ -115,7 +115,7 @@ const AssignmentAttempt = () => {
       <div className="assignment-attempt__content">
         <div className="assignment-attempt__left">
           <section className="question-panel">
-            <h2 className="question-panel__title">Question</h2>
+            <h2 className="question-panel__title">Objective</h2>
             <p className="question-panel__text">{assignment.question}</p>
           </section>
 
@@ -123,11 +123,11 @@ const AssignmentAttempt = () => {
 
           {hints.length > 0 && (
             <section className="hints-panel">
-              <h2 className="hints-panel__title">💡 Hints</h2>
+              <h2 className="hints-panel__title">Power-Ups Unlocked</h2>
               <div className="hints-panel__list">
                 {hints.map((hint, index) => (
                   <div key={index} className="hint-item">
-                    <span className="hint-item__number">Hint {index + 1}:</span>
+                    <span className="hint-item__number">HINT {index + 1}:</span>
                     <p className="hint-item__text">{hint}</p>
                   </div>
                 ))}
@@ -139,21 +139,21 @@ const AssignmentAttempt = () => {
         <div className="assignment-attempt__right">
           <section className="editor-panel">
             <div className="editor-panel__header">
-              <h2 className="editor-panel__title">SQL Editor</h2>
+              <h2 className="editor-panel__title">SQL TERMINAL</h2>
               <div className="editor-panel__actions">
                 <button
                   onClick={handleGetHint}
                   className="btn btn--secondary"
                   disabled={loadingHint}
                 >
-                  {loadingHint ? "Loading..." : "💡 Get Hint"}
+                  {loadingHint ? "LOADING..." : "💡 POWER-UP"}
                 </button>
                 <button
                   onClick={handleExecuteQuery}
                   className="btn btn--primary"
                   disabled={executing}
                 >
-                  {executing ? "Executing..." : "▶ Execute Query"}
+                  {executing ? "RUNNING..." : "▶ EXECUTE"}
                 </button>
               </div>
             </div>

@@ -4,9 +4,9 @@ const ResultsPanel = ({ results }) => {
   if (!results) {
     return (
       <section className="results-panel">
-        <h2 className="results-panel__title">Results</h2>
+        <h2 className="results-panel__title">Output</h2>
         <div className="results-panel__empty">
-          <p>Execute a query to see results</p>
+          <p>Execute your query to see results</p>
         </div>
       </section>
     );
@@ -15,9 +15,9 @@ const ResultsPanel = ({ results }) => {
   if (!results.success) {
     return (
       <section className="results-panel">
-        <h2 className="results-panel__title">Results</h2>
+        <h2 className="results-panel__title">Output</h2>
         <div className="results-panel__error">
-          <p className="results-panel__error-title">❌ Query Error</p>
+          <p className="results-panel__error-title">QUERY FAILED</p>
           <pre className="results-panel__error-message">{results.error}</pre>
         </div>
       </section>
@@ -30,11 +30,11 @@ const ResultsPanel = ({ results }) => {
   return (
     <section className="results-panel">
       <div className="results-panel__header">
-        <h2 className="results-panel__title">Results</h2>
+        <h2 className="results-panel__title">Output</h2>
         <div className="results-panel__meta">
           {results.isCorrect && (
             <span className="results-panel__badge results-panel__badge--success">
-              ✓ Correct
+              VICTORY
             </span>
           )}
           <span className="results-panel__meta-text">
@@ -74,13 +74,13 @@ const ResultsPanel = ({ results }) => {
 
           {results.truncated && (
             <div className="results-panel__warning">
-              ⚠️ Results truncated. Showing first {results.data.length} rows.
+              Results truncated. Showing first {results.data.length} rows.
             </div>
           )}
         </>
       ) : (
         <div className="results-panel__empty">
-          <p>Query executed successfully but returned no rows</p>
+          <p>Query executed successfully - 0 rows returned</p>
         </div>
       )}
     </section>

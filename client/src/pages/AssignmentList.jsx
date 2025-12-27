@@ -32,12 +32,19 @@ const AssignmentList = () => {
     return `assignment-card__difficulty--${difficulty.toLowerCase()}`;
   };
 
+  const difficultyLabels = {
+    "All": "🎮 ALL LEVELS",
+    "Easy": "⭐ EASY",
+    "Medium": "⭐⭐ MEDIUM", 
+    "Hard": "⭐⭐⭐ HARD"
+  };
+
   return (
     <div className="assignment-list">
       <div className="assignment-list__header">
-        <h1 className="assignment-list__title">SQL Assignments</h1>
+        <h1 className="assignment-list__title">SQL Challenges</h1>
         <p className="assignment-list__subtitle">
-          Practice SQL with real-time feedback
+          Level up your SQL skills with real-time feedback
         </p>
       </div>
 
@@ -50,7 +57,7 @@ const AssignmentList = () => {
             }`}
             onClick={() => setFilter(difficulty)}
           >
-            {difficulty}
+            {difficultyLabels[difficulty]}
           </button>
         ))}
       </div>
@@ -58,7 +65,7 @@ const AssignmentList = () => {
       {loading && (
         <div className="assignment-list__loading">
           <div className="spinner"></div>
-          <p>Loading assignments...</p>
+          <p>Initializing challenges...</p>
         </div>
       )}
 
@@ -66,14 +73,14 @@ const AssignmentList = () => {
         <div className="assignment-list__error">
           <p>{error}</p>
           <button onClick={fetchAssignments} className="btn btn--primary">
-            Retry
+            🔄 RETRY
           </button>
         </div>
       )}
 
       {!loading && !error && assignments.length === 0 && (
         <div className="assignment-list__empty">
-          <p>No assignments found for this filter.</p>
+          <p>No challenges found for this difficulty level.</p>
         </div>
       )}
 
@@ -104,7 +111,7 @@ const AssignmentList = () => {
                 ))}
               </div>
             )}
-            <button className="assignment-card__btn">Start Assignment →</button>
+            <button className="assignment-card__btn">START CHALLENGE</button>
           </div>
         ))}
       </div>

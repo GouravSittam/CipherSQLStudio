@@ -1,62 +1,92 @@
-// Color Variables
-$color-primary: #3b82f6;
-$color-primary-dark: #2563eb;
-$color-secondary: #8b5cf6;
-$color-success: #10b981;
-$color-error: #ef4444;
-$color-warning: #f59e0b;
+// ============================================
+// BRUTALIST GAMING THEME - Variables
+// Bold, Playful, Modern, Energetic, Educational
+// ============================================
 
-// Difficulty Colors
-$color-easy: #10b981;
-$color-medium: #f59e0b;
-$color-hard: #ef4444;
+// Primary Gaming Palette
+$color-primary: #FF6B35;        // Vibrant Orange - Action/CTA
+$color-primary-dark: #E85A24;   // Darker Orange
+$color-primary-light: #FF8A5B;  // Light Orange
+$color-secondary: #7B2CBF;      // Electric Purple - Accents
+$color-secondary-light: #9D4EDD; // Light Purple
 
-// Neutral Colors
-$color-text: #1f2937;
-$color-text-light: #6b7280;
-$color-bg: #ffffff;
-$color-bg-secondary: #f9fafb;
-$color-border: #e5e7eb;
-$color-shadow: rgba(0, 0, 0, 0.1);
+// Neon Accent Colors (Gaming vibes)
+$color-neon-cyan: #00F5D4;      // Cyber Cyan
+$color-neon-pink: #FF006E;      // Hot Pink
+$color-neon-yellow: #FFE66D;    // Bright Yellow
+$color-neon-green: #39FF14;     // Matrix Green
 
-// Dark Theme
-$color-dark-bg: #1e293b;
-$color-dark-bg-secondary: #0f172a;
-$color-dark-text: #f1f5f9;
-$color-dark-border: #334155;
+// Status Colors
+$color-success: #39FF14;        // Neon Green - Victory
+$color-error: #FF006E;          // Hot Pink - Error
+$color-warning: #FFE66D;        // Yellow - Warning
 
-// Spacing
-$spacing-xs: 0.25rem; // 4px
-$spacing-sm: 0.5rem; // 8px
-$spacing-md: 1rem; // 16px
-$spacing-lg: 1.5rem; // 24px
-$spacing-xl: 2rem; // 32px
-$spacing-2xl: 3rem; // 48px
+// Difficulty Colors (Gaming XP style)
+$color-easy: #39FF14;           // Green - Easy Mode
+$color-medium: #FFE66D;         // Yellow - Normal Mode
+$color-hard: #FF006E;           // Pink - Hard Mode
 
-// Typography
-$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-  "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif;
-$font-family-mono: "Courier New", Courier, monospace;
+// Neutral Colors - Dark Theme Base
+$color-text: #FFFFFF;
+$color-text-light: #B8B8B8;
+$color-text-muted: #6B6B6B;
+$color-bg: #0D0D0D;             // Near Black
+$color-bg-secondary: #1A1A2E;   // Dark Navy
+$color-bg-card: #16213E;        // Card Background
+$color-bg-elevated: #1F1F3D;    // Elevated surfaces
+$color-border: #2D2D2D;         // Subtle borders
+$color-border-accent: #FF6B35;  // Accent borders
+$color-shadow: rgba(0, 0, 0, 0.5);
 
-$font-size-xs: 0.75rem; // 12px
-$font-size-sm: 0.875rem; // 14px
-$font-size-base: 1rem; // 16px
-$font-size-lg: 1.125rem; // 18px
-$font-size-xl: 1.25rem; // 20px
-$font-size-2xl: 1.5rem; // 24px
-$font-size-3xl: 1.875rem; // 30px
+// Brutalist Border (thick, bold)
+$border-brutal: 4px solid $color-text;
+$border-brutal-accent: 4px solid $color-primary;
+$border-brutal-thin: 2px solid $color-text;
+
+// Dark Theme (consistent with base)
+$color-dark-bg: #0D0D0D;
+$color-dark-bg-secondary: #1A1A2E;
+$color-dark-text: #FFFFFF;
+$color-dark-border: #2D2D2D;
+
+// Spacing (slightly larger for bold feel)
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+
+// Typography - Bold & Impactful
+$font-family-base: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-family-heading: 'Space Grotesk', 'Inter', sans-serif;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.75rem;   // 28px
+$font-size-3xl: 2.25rem;   // 36px
+$font-size-4xl: 3rem;      // 48px
+$font-size-display: 4rem;  // 64px
 
 $font-weight-normal: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
+$font-weight-black: 900;
 
-// Border Radius
-$radius-sm: 0.25rem; // 4px
-$radius-md: 0.5rem; // 8px
-$radius-lg: 0.75rem; // 12px
-$radius-xl: 1rem; // 16px
+// Border Radius - Brutalist (mostly sharp, some pill shapes)
+$radius-none: 0;
+$radius-sm: 2px;
+$radius-md: 4px;
+$radius-lg: 8px;
+$radius-xl: 12px;
+$radius-pill: 50px;
+$radius-full: 9999px;
 
 // Breakpoints (Mobile-First)
 $breakpoint-mobile: 320px;
@@ -64,16 +94,29 @@ $breakpoint-tablet: 641px;
 $breakpoint-desktop: 1024px;
 $breakpoint-large: 1281px;
 
-// Shadows
-$shadow-sm: 0 1px 2px 0 $color-shadow;
-$shadow-md: 0 4px 6px -1px $color-shadow;
-$shadow-lg: 0 10px 15px -3px $color-shadow;
+// Shadows - Bold, offset (Brutalist style)
+$shadow-brutal: 4px 4px 0px $color-text;
+$shadow-brutal-sm: 2px 2px 0px $color-text;
+$shadow-brutal-lg: 6px 6px 0px $color-text;
+$shadow-brutal-accent: 4px 4px 0px $color-primary;
+$shadow-brutal-hover: 6px 6px 0px $color-primary;
+$shadow-glow-primary: 0 0 20px rgba($color-primary, 0.5);
+$shadow-glow-cyan: 0 0 20px rgba($color-neon-cyan, 0.5);
+$shadow-glow-pink: 0 0 20px rgba($color-neon-pink, 0.5);
 
-// Transitions
-$transition-base: 0.2s ease-in-out;
-$transition-slow: 0.3s ease-in-out;
+// Legacy shadows (for compatibility)
+$shadow-sm: 2px 2px 0px rgba(255, 255, 255, 0.1);
+$shadow-md: 4px 4px 0px $color-text;
+$shadow-lg: 6px 6px 0px $color-text;
+
+// Transitions - Snappy, game-like
+$transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
 // Z-index
 $z-header: 100;
 $z-modal: 1000;
 $z-tooltip: 1100;
+$z-overlay: 900;

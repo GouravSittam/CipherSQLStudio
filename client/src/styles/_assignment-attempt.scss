@@ -1,6 +1,11 @@
 @use "./variables" as *;
 @use "./mixins" as *;
 
+// ============================================
+// BRUTALIST GAMING THEME - Assignment Attempt
+// Bold, Playful, Modern, Energetic, Educational
+// ============================================
+
 // Assignment Attempt Layout
 .assignment-attempt {
   @include container;
@@ -10,8 +15,35 @@
   &__error {
     @include flex-center;
     @include flex-column;
-    padding: $spacing-2xl;
-    gap: $spacing-md;
+    padding: $spacing-3xl;
+    gap: $spacing-lg;
+    background: $color-bg-card;
+    border: $border-brutal;
+    box-shadow: $shadow-brutal;
+    text-align: center;
+  }
+  
+  &__loading {
+    &::before {
+      content: 'INITIALIZING CHALLENGE...';
+      font-family: $font-family-mono;
+      font-size: $font-size-lg;
+      color: $color-primary;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      animation: blink 1s step-end infinite;
+    }
+  }
+  
+  &__error {
+    border-color: $color-error;
+    
+    &::before {
+      content: '⚠ SYSTEM ERROR';
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-black;
+      color: $color-error;
+    }
   }
 
   &__header {
@@ -20,6 +52,20 @@
     gap: $spacing-md;
     margin-bottom: $spacing-xl;
     flex-wrap: wrap;
+    padding-bottom: $spacing-lg;
+    border-bottom: $border-brutal;
+    position: relative;
+    
+    // Gaming progress bar decoration
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, $color-primary 0%, $color-secondary 50%, $color-neon-cyan 100%);
+    }
   }
 
   &__info {
@@ -32,7 +78,15 @@
 
   &__title {
     font-size: $font-size-xl;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-black;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: $color-text;
+    
+    // Gaming title style
+    &::before {
+      content: '🎮 ';
+    }
 
     @include tablet {
       font-size: $font-size-2xl;
@@ -57,15 +111,46 @@
   }
 }
 
-// Question Panel
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+// Question Panel - Mission Briefing Style
 .question-panel {
   @include card;
+  position: relative;
+  overflow: hidden;
+  
+  // Mission label
+  &::before {
+    content: 'MISSION BRIEFING';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $color-primary;
+    color: $color-bg;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: $spacing-xs $spacing-md;
+    text-align: center;
+  }
+  
+  padding-top: $spacing-2xl;
 
   &__title {
     font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
     margin-bottom: $spacing-md;
-    color: $color-text;
+    color: $color-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    
+    &::before {
+      content: '▸ ';
+    }
 
     @include tablet {
       font-size: $font-size-xl;
@@ -76,6 +161,9 @@
     color: $color-text;
     line-height: 1.8;
     font-size: $font-size-base;
+    padding: $spacing-md;
+    background: rgba($color-bg, 0.5);
+    border-left: 4px solid $color-secondary;
 
     @include tablet {
       font-size: $font-size-lg;
@@ -83,60 +171,113 @@
   }
 }
 
-// Sample Data
+// Sample Data - Database Terminal Style
 .sample-data {
   @include card;
+  position: relative;
+  
+  // Terminal header
+  &::before {
+    content: 'DATABASE TERMINAL';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $color-neon-cyan;
+    color: $color-bg;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: $spacing-xs $spacing-md;
+    text-align: center;
+  }
+  
+  padding-top: $spacing-2xl;
 
   &__title {
     font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
     margin-bottom: $spacing-lg;
+    color: $color-text;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    
+    &::before {
+      content: '📊';
+    }
   }
 
   &__table {
     &:not(:last-child) {
       margin-bottom: $spacing-xl;
+      padding-bottom: $spacing-lg;
+      border-bottom: 2px dashed $color-border;
     }
   }
 
   &__table-name {
     font-size: $font-size-base;
-    font-weight: $font-weight-semibold;
-    color: $color-primary;
+    font-weight: $font-weight-bold;
+    color: $color-neon-cyan;
     margin-bottom: $spacing-md;
     font-family: $font-family-mono;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    
+    &::before {
+      content: 'TABLE:';
+      color: $color-text-muted;
+      font-size: $font-size-xs;
+    }
   }
 
   &__table-wrapper {
     overflow-x: auto;
     @include custom-scrollbar;
-    border-radius: $radius-md;
-    border: 1px solid $color-border;
+    border: $border-brutal-thin;
+    background: rgba($color-bg, 0.3);
   }
 }
 
-// Editor Panel
+// Editor Panel - Code Terminal Style
 .editor-panel {
   @include card;
   padding: 0;
   overflow: hidden;
+  position: relative;
 
   &__header {
     @include flex-between;
     padding: $spacing-md;
-    border-bottom: 1px solid $color-border;
     background: $color-bg-secondary;
+    border-bottom: $border-brutal;
     flex-wrap: wrap;
     gap: $spacing-md;
 
     @include tablet {
       padding: $spacing-lg;
     }
+    
+    // Terminal dots
+    &::before {
+      content: '● ● ●';
+      color: $color-primary;
+      font-size: $font-size-sm;
+      letter-spacing: 0.3em;
+    }
   }
 
   &__title {
     font-size: $font-size-base;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $color-text;
+    font-family: $font-family-mono;
 
     @include tablet {
       font-size: $font-size-lg;
@@ -156,26 +297,57 @@
 
 .sql-editor {
   min-height: 250px;
+  background: $color-bg;
+  font-family: $font-family-mono;
 
   @include tablet {
     min-height: 300px;
   }
 }
 
-// Results Panel
+// Results Panel - Output Console Style
 .results-panel {
   @include card;
+  position: relative;
+  
+  // Console header
+  &::before {
+    content: 'OUTPUT CONSOLE';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $color-secondary;
+    color: $color-text;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: $spacing-xs $spacing-md;
+    text-align: center;
+  }
+  
+  padding-top: $spacing-2xl;
 
   &__header {
     @include flex-between;
     margin-bottom: $spacing-lg;
     flex-wrap: wrap;
     gap: $spacing-md;
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid $color-border;
   }
 
   &__title {
     font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    
+    &::before {
+      content: '> ';
+      color: $color-primary;
+    }
   }
 
   &__meta {
@@ -187,46 +359,81 @@
 
   &__badge {
     padding: $spacing-xs $spacing-sm;
-    border-radius: $radius-md;
     font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 2px solid;
 
     &--success {
-      background: rgba($color-success, 0.1);
+      background: rgba($color-success, 0.2);
       color: $color-success;
+      border-color: $color-success;
+      
+      &::before {
+        content: '✓ ';
+      }
     }
   }
 
   &__meta-text {
     font-size: $font-size-sm;
     color: $color-text-light;
+    font-family: $font-family-mono;
   }
 
   &__table-wrapper {
     overflow-x: auto;
     @include custom-scrollbar;
-    border-radius: $radius-md;
-    border: 1px solid $color-border;
+    border: $border-brutal-thin;
     margin-bottom: $spacing-md;
+    background: rgba($color-bg, 0.3);
   }
 
   &__empty {
     text-align: center;
     padding: $spacing-2xl;
-    color: $color-text-light;
+    color: $color-text-muted;
+    font-family: $font-family-mono;
+    background: rgba($color-bg, 0.3);
+    border: 2px dashed $color-border;
+    
+    &::before {
+      content: '🎯 ';
+      font-size: $font-size-2xl;
+      display: block;
+      margin-bottom: $spacing-sm;
+    }
   }
 
   &__error {
-    background: rgba($color-error, 0.05);
-    border: 1px solid rgba($color-error, 0.2);
-    border-radius: $radius-md;
+    background: rgba($color-error, 0.1);
+    border: $border-brutal-thin;
+    border-color: $color-error;
     padding: $spacing-lg;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: $color-error;
+    }
   }
 
   &__error-title {
     color: $color-error;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
     margin-bottom: $spacing-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    
+    &::before {
+      content: '⚠ ';
+    }
   }
 
   &__error-message {
@@ -235,26 +442,61 @@
     color: $color-error;
     white-space: pre-wrap;
     word-break: break-word;
+    padding: $spacing-sm;
+    background: rgba($color-bg, 0.5);
   }
 
   &__warning {
     background: rgba($color-warning, 0.1);
-    border: 1px solid rgba($color-warning, 0.3);
+    border: 2px solid $color-warning;
     color: $color-warning;
     padding: $spacing-md;
-    border-radius: $radius-md;
     font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    
+    &::before {
+      content: '⚡ ';
+    }
   }
 }
 
-// Hints Panel
+// Hints Panel - Power-Up Style
 .hints-panel {
   @include card;
+  position: relative;
+  
+  // Power-up header
+  &::before {
+    content: '💡 POWER-UPS';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $color-neon-yellow;
+    color: $color-bg;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: $spacing-xs $spacing-md;
+    text-align: center;
+  }
+  
+  padding-top: $spacing-2xl;
 
   &__title {
     font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
     margin-bottom: $spacing-lg;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $color-text;
+    
+    &::before {
+      content: '🎮 ';
+    }
   }
 
   &__list {
@@ -264,26 +506,96 @@
 }
 
 .hint-item {
-  background: rgba($color-secondary, 0.05);
-  border-left: 4px solid $color-secondary;
+  background: rgba($color-secondary, 0.1);
+  border: 2px solid $color-secondary;
   padding: $spacing-md;
-  border-radius: $radius-md;
+  position: relative;
+  transition: all $transition-fast;
+  
+  // Level indicator
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: $color-secondary;
+  }
+  
+  &:hover {
+    transform: translateX(4px);
+    border-color: $color-primary;
+    
+    &::before {
+      background: $color-primary;
+    }
+  }
 
   &__number {
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-black;
     color: $color-secondary;
-    display: block;
+    display: inline-block;
     margin-bottom: $spacing-xs;
     font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    
+    &::before {
+      content: '★ ';
+    }
   }
 
   &__text {
     color: $color-text;
-    line-height: 1.6;
+    line-height: 1.7;
     font-size: $font-size-sm;
+    font-family: $font-family-base;
 
     @include tablet {
       font-size: $font-size-base;
     }
+  }
+}
+
+// Success Animation Overlay
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color-bg, 0.9);
+  z-index: $z-modal;
+  @include flex-center;
+  @include flex-column;
+  gap: $spacing-lg;
+  
+  &__title {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-black;
+    color: $color-success;
+    text-transform: uppercase;
+    @include text-glow($color-success);
+    animation: victory-pulse 0.5s ease-out;
+  }
+  
+  &__message {
+    font-size: $font-size-xl;
+    color: $color-text;
+  }
+}
+
+@keyframes victory-pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }

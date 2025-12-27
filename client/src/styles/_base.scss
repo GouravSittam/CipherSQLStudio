@@ -1,6 +1,14 @@
 @use "./variables" as *;
 @use "./mixins" as *;
 
+// ============================================
+// BRUTALIST GAMING THEME - Base Styles
+// Bold, Playful, Modern, Energetic, Educational
+// ============================================
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 // Reset & Base Styles
 * {
   margin: 0;
@@ -12,14 +20,39 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: $font-family-base;
   color: $color-text;
-  background-color: $color-bg-secondary;
+  background-color: $color-bg;
   line-height: 1.6;
   min-height: 100vh;
+  @include pixel-grid;
+  position: relative;
+  
+  // Subtle animated gradient background
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba($color-primary, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba($color-secondary, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba($color-neon-cyan, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+// Selection Styling
+::selection {
+  background: $color-primary;
+  color: $color-bg;
 }
 
 // App Container
@@ -30,6 +63,7 @@ body {
   &__main {
     flex: 1;
     padding: $spacing-lg $spacing-md;
+    position: relative;
 
     @include tablet {
       padding: $spacing-xl;
@@ -37,14 +71,23 @@ body {
   }
 }
 
-// Header
+// Header - Brutalist Gaming Style
 .header {
   background: $color-bg;
-  border-bottom: 1px solid $color-border;
-  box-shadow: $shadow-sm;
+  border-bottom: $border-brutal;
   position: sticky;
   top: 0;
   z-index: $z-header;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $color-primary, $color-secondary, $color-neon-cyan);
+  }
 
   &__container {
     @include container;
@@ -64,20 +107,41 @@ body {
     gap: $spacing-sm;
     text-decoration: none;
     color: $color-text;
-    font-weight: $font-weight-bold;
-    font-size: $font-size-lg;
+    font-weight: $font-weight-black;
+    font-size: $font-size-xl;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all $transition-fast;
+    
+    &:hover {
+      color: $color-primary;
+      @include text-glow($color-primary);
+    }
 
     @include tablet {
-      font-size: $font-size-xl;
+      font-size: $font-size-2xl;
     }
   }
 
   &__logo-icon {
-    font-size: $font-size-2xl;
+    font-size: $font-size-3xl;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: $color-primary;
+    border: $border-brutal;
+    box-shadow: $shadow-brutal-sm;
+    animation: pulse-glow 2s ease-in-out infinite;
   }
 
   &__logo-text {
     display: none;
+    background: linear-gradient(90deg, $color-text, $color-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 
     @include tablet {
       display: inline;
@@ -90,109 +154,186 @@ body {
   }
 
   &__link {
-    color: $color-text-light;
+    color: $color-text;
     text-decoration: none;
-    font-weight: $font-weight-medium;
-    transition: color $transition-base;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: $spacing-sm $spacing-md;
+    border: 2px solid transparent;
+    transition: all $transition-fast;
 
     &:hover {
       color: $color-primary;
+      border-color: $color-primary;
+      background: rgba($color-primary, 0.1);
+    }
+    
+    @include tablet {
+      font-size: $font-size-base;
     }
   }
 }
 
-// Buttons
+// Buttons - Brutalist Style
 .btn {
   @include button-base;
+  background: $color-bg;
+  color: $color-text;
+  box-shadow: $shadow-brutal-sm;
 
   &--primary {
     background: $color-primary;
-    color: white;
+    color: $color-bg;
+    border-color: $color-text;
+    box-shadow: $shadow-brutal;
 
     &:hover:not(:disabled) {
-      background: $color-primary-dark;
-      transform: translateY(-1px);
-      box-shadow: $shadow-md;
+      transform: translate(-2px, -2px);
+      box-shadow: $shadow-brutal-lg;
+    }
+    
+    &:active:not(:disabled) {
+      transform: translate(2px, 2px);
+      box-shadow: none;
     }
   }
 
   &--secondary {
-    background: $color-bg-secondary;
+    background: $color-bg-card;
     color: $color-text;
-    border: 1px solid $color-border;
+    border-color: $color-text;
 
     &:hover:not(:disabled) {
-      background: $color-border;
+      background: $color-secondary;
+      transform: translate(-2px, -2px);
+      box-shadow: $shadow-brutal-lg;
     }
   }
 
   &--back {
     background: transparent;
     color: $color-text-light;
-    padding: $spacing-sm $spacing-md;
+    border-color: $color-text-light;
+    box-shadow: none;
 
     &:hover {
       color: $color-primary;
-      background: $color-bg-secondary;
+      border-color: $color-primary;
+      background: rgba($color-primary, 0.1);
+    }
+  }
+  
+  &--success {
+    background: $color-success;
+    color: $color-bg;
+    border-color: $color-text;
+    
+    &:hover:not(:disabled) {
+      @include glow($color-success);
+    }
+  }
+  
+  &--danger {
+    background: $color-error;
+    color: $color-text;
+    border-color: $color-text;
+    
+    &:hover:not(:disabled) {
+      @include glow($color-error);
     }
   }
 }
 
-// Filter Buttons
+// Filter Buttons - Gaming Tab Style
 .filter-btn {
   @include button-base;
-  background: $color-bg;
+  background: $color-bg-card;
   color: $color-text-light;
-  border: 1px solid $color-border;
+  border: $border-brutal-thin;
+  box-shadow: $shadow-brutal-sm;
+  font-size: $font-size-sm;
+  padding: $spacing-sm $spacing-md;
 
   &:hover {
-    border-color: $color-primary;
     color: $color-primary;
+    border-color: $color-primary;
+    transform: translate(-1px, -1px);
   }
 
   &--active {
     background: $color-primary;
-    color: white;
-    border-color: $color-primary;
+    color: $color-bg;
+    border-color: $color-text;
+    box-shadow: $shadow-brutal;
+    
+    &:hover {
+      color: $color-bg;
+    }
   }
 }
 
-// Badges
+// Badges - XP/Level Style
 .badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
   padding: $spacing-xs $spacing-sm;
-  border-radius: $radius-md;
   font-size: $font-size-xs;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 2px solid currentColor;
 
   &--easy {
-    background: rgba($color-easy, 0.1);
+    background: rgba($color-easy, 0.2);
     color: $color-easy;
+    border-color: $color-easy;
+    
+    &::before {
+      content: '★';
+    }
   }
 
   &--medium {
-    background: rgba($color-medium, 0.1);
+    background: rgba($color-medium, 0.2);
     color: $color-medium;
+    border-color: $color-medium;
+    
+    &::before {
+      content: '★★';
+    }
   }
 
   &--hard {
-    background: rgba($color-hard, 0.1);
+    background: rgba($color-hard, 0.2);
     color: $color-hard;
+    border-color: $color-hard;
+    
+    &::before {
+      content: '★★★';
+    }
   }
 }
 
-// Data Table
+// Data Table - Console/Terminal Style
 .data-table {
   width: 100%;
   border-collapse: collapse;
   font-size: $font-size-sm;
+  font-family: $font-family-mono;
+  border: $border-brutal-thin;
 
   &__header {
     background: $color-bg-secondary;
     text-align: left;
     padding: $spacing-sm $spacing-md;
-    font-weight: $font-weight-semibold;
-    border-bottom: 2px solid $color-border;
+    font-weight: $font-weight-bold;
+    border-bottom: $border-brutal-thin;
+    color: $color-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   &__type {
@@ -201,28 +342,53 @@ body {
     color: $color-text-light;
     font-weight: $font-weight-normal;
     margin-top: $spacing-xs;
+    text-transform: lowercase;
   }
 
   &__cell {
     padding: $spacing-sm $spacing-md;
     border-bottom: 1px solid $color-border;
+    color: $color-text;
+    
+    &:hover {
+      background: rgba($color-primary, 0.05);
+    }
   }
 
   &__empty {
     text-align: center;
     padding: $spacing-xl;
     color: $color-text-light;
+    font-style: italic;
+  }
+  
+  // Alternating rows
+  tr:nth-child(even) {
+    background: rgba($color-bg-secondary, 0.5);
   }
 }
 
-// Spinner
+// Spinner - Gaming Loading
 .spinner {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border: 4px solid $color-border;
   border-top-color: $color-primary;
-  border-radius: 50%;
+  border-right-color: $color-secondary;
   animation: spin 0.8s linear infinite;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 2px solid transparent;
+    border-top-color: $color-neon-cyan;
+    animation: spin 0.5s linear infinite reverse;
+  }
 }
 
 @keyframes spin {
@@ -231,9 +397,40 @@ body {
   }
 }
 
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: $shadow-brutal-sm, 0 0 10px rgba($color-primary, 0.3);
+  }
+  50% {
+    box-shadow: $shadow-brutal-sm, 0 0 20px rgba($color-primary, 0.6);
+  }
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(31px, 9999px, 94px, 0); }
+  20% { clip: rect(62px, 9999px, 42px, 0); }
+  40% { clip: rect(16px, 9999px, 78px, 0); }
+  60% { clip: rect(87px, 9999px, 55px, 0); }
+  80% { clip: rect(24px, 9999px, 89px, 0); }
+  100% { clip: rect(43px, 9999px, 71px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(65px, 9999px, 12px, 0); }
+  20% { clip: rect(21px, 9999px, 87px, 0); }
+  40% { clip: rect(54px, 9999px, 33px, 0); }
+  60% { clip: rect(11px, 9999px, 92px, 0); }
+  80% { clip: rect(76px, 9999px, 48px, 0); }
+  100% { clip: rect(38px, 9999px, 66px, 0); }
+}
+
 // Utilities
 .text-center {
   text-align: center;
+}
+
+.text-glow {
+  @include text-glow;
 }
 
 .mt-sm {
@@ -254,4 +451,11 @@ body {
 }
 .mb-lg {
   margin-bottom: $spacing-lg;
+}
+
+// Gaming accent line
+.accent-line {
+  height: 4px;
+  background: linear-gradient(90deg, $color-primary, $color-secondary, $color-neon-cyan);
+  border: none;
 }
