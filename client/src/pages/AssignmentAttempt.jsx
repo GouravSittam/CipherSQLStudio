@@ -46,7 +46,6 @@ const AssignmentAttempt = () => {
 
       setResults(response);
       setSessionId(response.sessionId);
-
     } catch (err) {
       setResults({
         success: false,
