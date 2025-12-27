@@ -73,7 +73,7 @@ For the hint system to work with AI-generated hints:
    - Framework Preset: `Other`
    - Root Directory: `./`
    - Build Command: `cd client && npm install && npm run build`
-   - Output Directory: `client/build`
+   - Output Directory: `client/dist`
    - Install Command: `npm install && cd client && npm install`
 
 5. **Add Environment Variables** (click "Environment Variables"):
