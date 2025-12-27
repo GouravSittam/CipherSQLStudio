@@ -47,9 +47,6 @@ const AssignmentAttempt = () => {
       setResults(response);
       setSessionId(response.sessionId);
 
-      if (response.isCorrect) {
-        alert("� VICTORY! Your query is correct! Challenge completed!");
-      }
     } catch (err) {
       setResults({
         success: false,
