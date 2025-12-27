@@ -70,6 +70,7 @@ router.post("/query", async (req, res) => {
       schemaName,
     });
   } catch (error) {
+    console.error("❌ Query execution error:", error);
     res.status(500).json({
       success: false,
       message: "Query execution failed",

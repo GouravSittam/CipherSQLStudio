@@ -1,14 +1,31 @@
 const OpenAI = require("openai");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 class LLMService {
   constructor() {
     this.provider = process.env.LLM_PROVIDER || "openai";
+    this.client = null;
 
-    if (this.provider === "openai") {
+    console.log(`LLM Provider: ${this.provider}`);
+
+    if (this.provider === "openai" && process.env.OPENAI_API_KEY) {
       this.client = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY,
       });
+      console.log("✅ OpenAI client initialized");
+    } else if (this.provider === "gemini" && process.env.GEMINI_API_KEY) {
+      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+      this.client = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      console.log("✅ Gemini client initialized");
+    } else {
+      console.warn(
+        "Warning: No LLM API key is set. LLM features will be disabled."
+      );
     }
+  }
+
+  isAvailable() {
+    return this.client !== null;
   }
 
   /**
@@ -16,6 +33,15 @@ class LLMService {
    * Engineered to provide guidance without giving away the solution
    */
   async generateHint(assignment, userQuery, previousHints = []) {
+    // Return fallback hint if LLM is not available
+    if (!this.isAvailable()) {
+      return {
+        success: true,
+        hint: this.getFallbackHint(assignment.difficulty),
+        isGenerated: false,
+      };
+    }
+
     const systemPrompt = `You are a SQL tutor helping students learn SQL. Your role is to provide HINTS, not solutions.
 
 CRITICAL RULES:
@@ -75,10 +101,24 @@ Provide a helpful hint that guides them towards the solution without revealing i
         };
       }
 
-      // Add support for other providers (Gemini, etc.) here
+      if (this.provider === "gemini") {
+        const prompt = `${systemPrompt}\n\n${userPrompt}`;
+        console.log("Calling Gemini API...");
+        const result = await this.client.generateContent(prompt);
+        const response = result.response;
+        const text = response.text();
+        console.log("Gemini response received:", text.substring(0, 100));
+
+        return {
+          success: true,
+          hint: text.trim(),
+        };
+      }
+
+      // Add support for other providers here
       throw new Error(`LLM provider ${this.provider} not implemented yet`);
     } catch (error) {
-      console.error("LLM API Error:", error);
+      console.error("LLM API Error:", error.message || error);
       return {
         success: false,
         error: "Failed to generate hint. Please try again.",
