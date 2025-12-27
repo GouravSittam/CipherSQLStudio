@@ -177,6 +177,7 @@ CipherSQLStudio/
 | `GEMINI_API_KEY`           | ❌       | Google Gemini API key               |
 | `MAX_QUERY_EXECUTION_TIME` | ❌       | Query timeout in ms (default: 5000) |
 | `MAX_RESULT_ROWS`          | ❌       | Max rows returned (default: 1000)   |
+| `VITE_API_URL`             | ❌       | Defaults to `https://cipher-sql-studio-server.vercel.app/api` |
 
 ---
 
