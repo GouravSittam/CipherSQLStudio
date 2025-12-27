@@ -1,46 +1,51 @@
 // ============================================
-// PURE BRUTALIST THEME - Variables
-// Raw, Bold, Monochrome, Sophisticated
+// PREMIUM BRUTALIST THEME - Variables
+// Elegant, Bold, Luxurious Monochrome
 // Author: Gourav Chaudhary
 //
-// A refined black & white palette with subtle grays
-// for depth and visual hierarchy. Elegant brutalism.
+// A stunning black & white palette with glass effects,
+// elegant shadows, and premium visual hierarchy.
 // ============================================
 
-// Primary Palette - Refined Monochrome
+// Primary Palette - Premium Monochrome
 $color-primary: #ffffff; // Pure White - Primary action
 $color-primary-dark: #e8e8e8; // Soft gray
-$color-primary-light: #f5f5f5; // Off-white
-$color-secondary: #888888; // Medium gray - Accents
-$color-secondary-light: #b0b0b0; // Light gray
+$color-primary-light: #f8f8f8; // Off-white
+$color-secondary: #8a8a8a; // Medium gray - Accents
+$color-secondary-light: #b5b5b5; // Light gray
 
-// Accent grays for depth
-$color-neon-cyan: #d0d0d0; // Light gray accent
-$color-neon-pink: #a0a0a0; // Medium gray accent
-$color-neon-yellow: #c8c8c8; // Warm gray
-$color-neon-green: #e0e0e0; // Soft white
+// Accent grays for depth - Premium tones
+$color-neon-cyan: #e0e0e0; // Light silver accent
+$color-neon-pink: #c0c0c0; // Silver accent
+$color-neon-yellow: #d8d8d8; // Warm silver
+$color-neon-green: #f0f0f0; // Soft white
 
-// Status Colors - Subtle Monochrome
-$color-success: #e0e0e0; // Light gray - Success
-$color-error: #909090; // Medium gray - Error
-$color-warning: #b8b8b8; // Gray - Warning
+// Status Colors - Elegant Monochrome
+$color-success: #ffffff; // White - Success
+$color-error: #a0a0a0; // Gray - Error
+$color-warning: #c8c8c8; // Light Gray - Warning
 
-// Difficulty Colors - Grayscale hierarchy
-$color-easy: #e8e8e8; // Light - Easy
-$color-medium: #a8a8a8; // Medium - Normal
-$color-hard: #686868; // Dark - Hard
+// Difficulty Colors - Premium hierarchy
+$color-easy: #f0f0f0; // Light - Easy
+$color-medium: #b0b0b0; // Medium - Normal
+$color-hard: #707070; // Dark - Hard
 
-// Core Colors - Sophisticated Dark Theme
-$color-text: #f0f0f0; // Soft white text (easier on eyes)
-$color-text-light: #b8b8b8; // Light gray text
-$color-text-muted: #707070; // Muted gray
-$color-bg: #0a0a0a; // Deep black
-$color-bg-secondary: #141414; // Slightly lighter black
-$color-bg-card: #1a1a1a; // Card background with subtle lift
-$color-bg-elevated: #222222; // Elevated surfaces
-$color-border: #3a3a3a; // Visible but subtle borders
-$color-border-accent: #f0f0f0; // White accent borders
-$color-shadow: rgba(0, 0, 0, 0.6);
+// Core Colors - Premium Dark Theme
+$color-text: #f5f5f5; // Bright white text
+$color-text-light: #c0c0c0; // Silver text
+$color-text-muted: #808080; // Muted gray
+$color-bg: #050505; // Ultra deep black
+$color-bg-secondary: #0c0c0c; // Slightly lighter
+$color-bg-card: #111111; // Card background with depth
+$color-bg-elevated: #1a1a1a; // Elevated surfaces
+$color-border: #2a2a2a; // Subtle borders
+$color-border-accent: #ffffff; // White accent borders
+$color-shadow: rgba(0, 0, 0, 0.8);
+
+// Glass Effect Colors
+$glass-bg: rgba(255, 255, 255, 0.03);
+$glass-border: rgba(255, 255, 255, 0.08);
+$glass-highlight: rgba(255, 255, 255, 0.12);
 
 // Brutalist Border (thick, bold, refined)
 $border-brutal: 3px solid $color-text;
@@ -99,26 +104,35 @@ $breakpoint-tablet: 641px;
 $breakpoint-desktop: 1024px;
 $breakpoint-large: 1281px;
 
-// Shadows - Refined brutalist shadows with depth
-$shadow-brutal: 4px 4px 0px rgba($color-text, 0.3);
-$shadow-brutal-sm: 2px 2px 0px rgba($color-text, 0.3);
-$shadow-brutal-lg: 6px 6px 0px rgba($color-text, 0.4);
-$shadow-brutal-accent: 4px 4px 0px rgba($color-text, 0.5);
-$shadow-brutal-hover: 8px 8px 0px rgba($color-text, 0.3);
-$shadow-glow-primary: 0 0 30px rgba($color-text, 0.1);
-$shadow-glow-cyan: 0 0 20px rgba($color-text, 0.08);
-$shadow-glow-pink: 0 0 20px rgba($color-text, 0.08);
+// Shadows - Premium layered shadows
+$shadow-brutal: 0 4px 0px rgba(255, 255, 255, 0.15);
+$shadow-brutal-sm: 0 2px 0px rgba(255, 255, 255, 0.1);
+$shadow-brutal-lg: 0 6px 0px rgba(255, 255, 255, 0.2);
+$shadow-brutal-accent: 0 4px 0px rgba(255, 255, 255, 0.25);
+$shadow-brutal-hover: 0 8px 0px rgba(255, 255, 255, 0.2);
+$shadow-glow-primary: 0 0 40px rgba(255, 255, 255, 0.15),
+  0 0 80px rgba(255, 255, 255, 0.05);
+$shadow-glow-cyan: 0 0 30px rgba(255, 255, 255, 0.1);
+$shadow-glow-pink: 0 0 30px rgba(255, 255, 255, 0.1);
 
-// Soft shadows for depth
-$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-$shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+// Premium layered shadows for depth
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.4);
+$shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.6), 0 24px 64px rgba(0, 0, 0, 0.5);
 
-// Transitions - Snappy, game-like
-$transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-$transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-$transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-$transition-bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+// Glass shadow with glow
+$shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.6),
+  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+$shadow-glass-hover: 0 16px 48px rgba(0, 0, 0, 0.7),
+  inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 40px rgba(255, 255, 255, 0.05);
+
+// Transitions - Smooth & Premium
+$transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+$transition-spring: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 // Z-index
 $z-header: 100;

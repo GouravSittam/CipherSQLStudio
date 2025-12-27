@@ -1,11 +1,11 @@
 @use "./variables" as *;
 
 // ============================================
-// PURE BRUTALIST THEME - Mixins
-// Raw, Bold, Monochrome, No-Nonsense
+// PREMIUM BRUTALIST THEME - Mixins
+// Elegant, Bold, Luxurious Effects
 // Author: Gourav Chaudhary
 //
-// Reusable mixins for the brutalist style.
+// Premium mixins for stunning visual effects.
 // ============================================
 
 // Media Query Mixins (Mobile-First)
@@ -46,23 +46,45 @@
   flex-direction: column;
 }
 
-// Brutalist Button Mixin
+// Premium Button Mixin
 @mixin button-base {
   padding: $spacing-sm $spacing-lg;
-  border: $border-brutal-thin;
-  border-radius: $radius-none;
+  border: 1px solid rgba($color-text, 0.3);
+  border-radius: $radius-md;
   font-size: $font-size-base;
   font-weight: $font-weight-bold;
   font-family: $font-family-base;
   cursor: pointer;
-  transition: all $transition-fast;
+  transition: all $transition-base;
   outline: none;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   position: relative;
+  overflow: hidden;
+
+  // Shimmer effect on hover
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
     transform: none !important;
     box-shadow: none !important;
@@ -73,19 +95,25 @@
   }
 }
 
-// Brutalist Card Mixin - Refined with depth
+// Premium Glass Card Mixin
 @mixin card {
-  background: $color-bg-card;
-  border: 2px solid rgba($color-text, 0.2);
-  border-radius: $radius-sm;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-lg;
   padding: $spacing-lg;
-  box-shadow: $shadow-md;
+  box-shadow: $shadow-glass;
   position: relative;
-  transition: all $transition-fast;
+  transition: all $transition-base;
+  overflow: visible;
 
   &:hover {
-    border-color: rgba($color-text, 0.4);
-    box-shadow: $shadow-lg;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: $shadow-glass-hover;
   }
 
   @include tablet {
@@ -93,46 +121,46 @@
   }
 }
 
-// Brutalist Card with accent
+// Premium Card with accent glow
 @mixin card-accent {
   @include card;
-  border-color: rgba($color-text, 0.5);
-  box-shadow: $shadow-brutal;
+  border-color: rgba($color-text, 0.3);
+  box-shadow: $shadow-glass, 0 0 30px rgba(255, 255, 255, 0.05);
 }
 
-// Subtle glow effect for interactive elements
+// Premium glow effect
 @mixin glow($color: $color-text) {
-  box-shadow: 0 0 20px rgba($color, 0.1);
+  box-shadow: 0 0 30px rgba($color, 0.15), 0 0 60px rgba($color, 0.05);
 }
 
-// No text glow in pure brutalism
+// Subtle text glow for headers
 @mixin text-glow($color: $color-text) {
-  // Intentionally empty - pure brutalism has no glows
+  text-shadow: 0 0 20px rgba($color, 0.3), 0 0 40px rgba($color, 0.1);
 }
 
-// Brutalist Hover Effect
+// Premium Hover Effect
 @mixin brutal-hover {
-  transition: all $transition-fast;
+  transition: all $transition-base;
 
   &:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: $shadow-brutal-lg;
+    transform: translateY(-6px);
+    box-shadow: $shadow-xl, 0 0 40px rgba(255, 255, 255, 0.08);
   }
 
   &:active {
-    transform: translate(2px, 2px);
-    box-shadow: none;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
   }
 }
 
-// Pixel Grid Background
+// Premium Pixel Grid Background
 @mixin pixel-grid {
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 0
+  );
+  background-size: 32px 32px;
 }
 
 // Scanline Effect
@@ -156,24 +184,32 @@
   }
 }
 
-// Custom Scrollbar - Gaming Style
+// Premium Custom Scrollbar
 @mixin custom-scrollbar {
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   &::-webkit-scrollbar-track {
-    background: $color-bg;
-    border: 1px solid $color-border;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $color-primary;
-    border: 1px solid $color-text;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    border-radius: 3px;
 
     &:hover {
-      background: $color-primary-light;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.2) 100%
+      );
     }
   }
 }

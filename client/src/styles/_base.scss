@@ -2,15 +2,56 @@
 @use "./mixins" as *;
 
 // ============================================
-// PURE BRUTALIST THEME - Base Styles
-// Raw, Bold, Sophisticated Monochrome
+// PREMIUM BRUTALIST THEME - Base Styles
+// Elegant, Bold, Luxurious Monochrome
 // Author: Gourav Chaudhary
 //
-// Refined black & white with elegant depth.
+// Stunning black & white with premium effects.
 // ============================================
 
 // Import Google Fonts - Space Grotesk gives it that techy vibe
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+// Premium Keyframe Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
 
 // Reset & Base Styles
 * {
@@ -35,7 +76,7 @@ body {
   @include pixel-grid;
   position: relative;
 
-  // Subtle gradient overlay for depth
+  // Stunning ambient gradient overlay
   &::before {
     content: "";
     position: fixed;
@@ -44,15 +85,34 @@ body {
     right: 0;
     bottom: 0;
     background: radial-gradient(
-        ellipse at 20% 20%,
-        rgba(255, 255, 255, 0.02) 0%,
-        transparent 50%
+        circle at 10% 10%,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 40%
       ),
       radial-gradient(
-        ellipse at 80% 80%,
-        rgba(255, 255, 255, 0.015) 0%,
-        transparent 50%
+        circle at 90% 90%,
+        rgba(255, 255, 255, 0.03) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 255, 255, 0.02) 0%,
+        transparent 60%
       );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  // Subtle animated noise texture
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
     pointer-events: none;
     z-index: -1;
   }
@@ -80,29 +140,52 @@ body {
   }
 }
 
-// Header - Refined Brutalist Style
+// Header - Premium Glass Header
 .header {
-  background: $color-bg-secondary;
-  border-bottom: $border-brutal;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.95) 0%,
+    rgba(10, 10, 10, 0.85) 100%
+  );
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: sticky;
   top: 0;
   z-index: $z-header;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
 
+  // Stunning gradient line
   &::after {
     content: "";
     position: absolute;
-    bottom: -4px;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 1px;
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba($color-text, 0.5) 20%,
-      rgba($color-text, 0.8) 50%,
-      rgba($color-text, 0.5) 80%,
+      rgba(255, 255, 255, 0.1) 10%,
+      rgba(255, 255, 255, 0.5) 30%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0.5) 70%,
+      rgba(255, 255, 255, 0.1) 90%,
       transparent 100%
+    );
+  }
+
+  // Top highlight
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
     );
   }
 
@@ -121,17 +204,23 @@ body {
   &__logo {
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
+    gap: $spacing-md;
     text-decoration: none;
     color: $color-text;
     font-weight: $font-weight-black;
     font-size: $font-size-xl;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: all $transition-fast;
+    letter-spacing: 0.08em;
+    transition: all $transition-base;
+    position: relative;
 
     &:hover {
-      opacity: 0.8;
+      @include text-glow;
+
+      .header__logo-img {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
     }
 
     @include tablet {
@@ -147,34 +236,41 @@ body {
     width: 50px;
     height: 50px;
     background: $color-text;
-    border: $border-brutal;
-    box-shadow: $shadow-brutal-sm;
+    border-radius: $radius-md;
   }
 
   &__logo-img {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
-    border: $border-brutal;
-    box-shadow: $shadow-brutal-sm;
-    background: $color-bg;
-    padding: 4px;
-    transition: all $transition-fast;
-
-    &:hover {
-      box-shadow: $shadow-brutal;
-      transform: translate(-2px, -2px);
-    }
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $radius-md;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    padding: 6px;
+    transition: all $transition-base;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 
     @include tablet {
-      width: 50px;
-      height: 50px;
+      width: 52px;
+      height: 52px;
     }
   }
 
   &__logo-text {
     display: none;
     color: $color-text;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.8) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 
     @include tablet {
       display: inline;
@@ -187,19 +283,44 @@ body {
   }
 
   &__link {
-    color: $color-text;
+    color: $color-text-light;
     text-decoration: none;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-semibold;
     font-size: $font-size-sm;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: $spacing-sm $spacing-md;
-    border: 2px solid transparent;
-    transition: all $transition-fast;
+    letter-spacing: 0.12em;
+    padding: $spacing-sm $spacing-lg;
+    border: 1px solid transparent;
+    border-radius: $radius-md;
+    transition: all $transition-base;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+      );
+      transition: all $transition-base;
+      transform: translateX(-50%);
+    }
 
     &:hover {
-      border-color: rgba($color-text, 0.5);
-      background: rgba($color-text, 0.08);
+      color: $color-text;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+
+      &::before {
+        width: 80%;
+      }
     }
 
     @include tablet {
@@ -208,179 +329,235 @@ body {
   }
 }
 
-// Buttons - Refined Brutalist Style
+// Buttons - Premium Glass Style
 .btn {
   @include button-base;
-  background: $color-bg-card;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
   color: $color-text;
-  border: 2px solid rgba($color-text, 0.3);
-  box-shadow: $shadow-sm;
-  border-radius: $radius-sm;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: $shadow-glass;
+  border-radius: $radius-lg;
+  backdrop-filter: blur(10px);
 
   &:hover:not(:disabled) {
-    border-color: rgba($color-text, 0.6);
-    background: $color-bg-elevated;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    transform: translateY(-2px);
+    box-shadow: $shadow-glass-hover;
   }
 
   &--primary {
-    background: $color-text;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.85) 100%
+    );
     color: $color-bg;
-    border-color: $color-text;
-    box-shadow: $shadow-md;
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: $shadow-glass, 0 0 30px rgba(255, 255, 255, 0.15);
+    font-weight: $font-weight-bold;
 
     &:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: $shadow-lg;
-      background: $color-text-light;
+      transform: translateY(-3px);
+      box-shadow: $shadow-xl, 0 0 50px rgba(255, 255, 255, 0.25);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.9) 100%
+      );
     }
 
     &:active:not(:disabled) {
-      transform: translateY(1px);
-      box-shadow: $shadow-sm;
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
     }
   }
 
   &--secondary {
-    background: $color-bg-elevated;
+    background: transparent;
     color: $color-text;
-    border-color: rgba($color-text, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
 
     &:hover:not(:disabled) {
-      background: rgba($color-text, 0.1);
-      border-color: rgba($color-text, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.4);
       transform: translateY(-2px);
+      box-shadow: $shadow-glass;
     }
   }
 
   &--back {
     background: transparent;
     color: $color-text-light;
-    border-color: rgba($color-text-light, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
     box-shadow: none;
 
     &:hover {
       color: $color-text;
-      border-color: $color-text;
-      background: rgba($color-text, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
     }
   }
 
   &--success {
-    background: $color-text;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.8) 100%
+    );
     color: $color-bg;
-    border-color: $color-text;
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
 
     &:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: $shadow-lg;
+      box-shadow: $shadow-lg, 0 0 40px rgba(255, 255, 255, 0.3);
     }
   }
 
   &--danger {
-    background: $color-bg-elevated;
+    background: rgba(255, 255, 255, 0.05);
     color: $color-text;
-    border-color: rgba($color-text, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
 
     &:hover:not(:disabled) {
       transform: translateY(-2px);
-      border-color: $color-text;
-      box-shadow: $shadow-md;
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: $shadow-glass;
     }
   }
 }
 
-// Filter Buttons - Refined Tab Style
+// Filter Buttons - Premium Pill Style
 .filter-btn {
   @include button-base;
-  background: $color-bg-card;
-  color: $color-text-light;
-  border: 2px solid rgba($color-text, 0.2);
+  background: transparent;
+  color: $color-text-muted;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: none;
   font-size: $font-size-sm;
-  padding: $spacing-sm $spacing-md;
-  border-radius: $radius-sm;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-pill;
+  font-weight: $font-weight-medium;
 
   &:hover {
     color: $color-text;
-    border-color: rgba($color-text, 0.5);
-    background: rgba($color-text, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
   }
 
   &--active {
-    background: $color-text;
-    color: $color-bg;
-    border-color: $color-text;
-    box-shadow: $shadow-sm;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    color: $color-text;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 
     &:hover {
-      color: $color-bg;
+      color: $color-text;
     }
   }
 }
 
-// Badges - Refined Difficulty Indicators
+// Badges - Premium Glass Style
 .badge {
   display: inline-flex;
   align-items: center;
   gap: $spacing-xs;
-  padding: $spacing-xs $spacing-sm;
+  padding: $spacing-xs $spacing-md;
   font-size: $font-size-xs;
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-semibold;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border-radius: $radius-sm;
+  letter-spacing: 0.12em;
+  border-radius: $radius-pill;
   border: 1px solid;
+  backdrop-filter: blur(10px);
 
   &--easy {
-    background: rgba($color-text, 0.08);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
     color: $color-text;
-    border-color: rgba($color-text, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
 
     &::before {
-      content: "★";
+      content: "◇";
+      opacity: 0.7;
     }
   }
 
   &--medium {
-    background: rgba($color-text, 0.12);
-    color: $color-text-light;
-    border-color: rgba($color-text-light, 0.4);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    color: $color-text;
+    border-color: rgba(255, 255, 255, 0.25);
 
     &::before {
-      content: "★★";
+      content: "◈";
+      opacity: 0.7;
     }
   }
 
   &--hard {
-    background: rgba($color-text, 0.18);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
     color: $color-text;
-    border-color: rgba($color-text, 0.5);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 
     &::before {
-      content: "★★★";
+      content: "◆";
+      opacity: 0.8;
     }
   }
 }
 
-// Data Table - Refined Terminal Style
+// Data Table - Premium Glass Style
 .data-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: $font-size-sm;
   font-family: $font-family-mono;
-  border: 1px solid rgba($color-text, 0.2);
-  border-radius: $radius-sm;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-lg;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
 
   &__header {
-    background: $color-bg-elevated;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
     text-align: left;
-    padding: $spacing-sm $spacing-md;
-    font-weight: $font-weight-bold;
-    border-bottom: 1px solid rgba($color-text, 0.2);
+    padding: $spacing-md $spacing-lg;
+    font-weight: $font-weight-semibold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: $color-text;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    font-size: $font-size-xs;
   }
 
   &__type {
@@ -390,16 +567,18 @@ body {
     font-weight: $font-weight-normal;
     margin-top: $spacing-xs;
     text-transform: lowercase;
+    opacity: 0.7;
   }
 
   &__cell {
-    padding: $spacing-sm $spacing-md;
-    border-bottom: 1px solid rgba($color-border, 0.5);
-    color: $color-text;
-    transition: background $transition-fast;
+    padding: $spacing-sm $spacing-lg;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: $color-text-light;
+    transition: all $transition-base;
 
     &:hover {
-      background: rgba($color-text, 0.03);
+      background: rgba(255, 255, 255, 0.03);
+      color: $color-text;
     }
   }
 
@@ -524,20 +703,32 @@ body {
 
 // Brutalist accent line
 .accent-line {
-  height: 4px;
-  background: $color-text;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   border: none;
 }
 
-// Footer - Refined Brutalist Style
+// Footer - Premium Glass Style
 .footer {
-  background: $color-bg-secondary;
-  border-top: 1px solid rgba($color-text, 0.2);
-  padding: $spacing-lg $spacing-md;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.8) 0%,
+    rgba(5, 5, 5, 0.95) 100%
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: $spacing-xl $spacing-md;
   margin-top: auto;
   position: relative;
+  backdrop-filter: blur(10px);
 
-  // Top accent line with gradient fade
+  // Premium top accent line
   &::before {
     content: "";
     position: absolute;
@@ -548,9 +739,9 @@ body {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba($color-text, 0.3) 20%,
-      rgba($color-text, 0.5) 50%,
-      rgba($color-text, 0.3) 80%,
+      rgba(255, 255, 255, 0.1) 15%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.1) 85%,
       transparent 100%
     );
   }
@@ -559,7 +750,7 @@ body {
     @include container;
     @include flex-center;
     @include flex-column;
-    gap: $spacing-sm;
+    gap: $spacing-md;
     text-align: center;
 
     @include tablet {
@@ -578,51 +769,65 @@ body {
   &__created {
     color: $color-text-muted;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     font-size: $font-size-xs;
   }
 
   &__author {
     color: $color-text;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-semibold;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: $spacing-xs $spacing-sm;
-    border: 1px solid rgba($color-text, 0.3);
-    border-radius: $radius-sm;
-    background: rgba($color-text, 0.05);
-    transition: all $transition-fast;
+    letter-spacing: 0.1em;
+    padding: $spacing-xs $spacing-md;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: $radius-pill;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    transition: all $transition-base;
 
     &:hover {
-      background: rgba($color-text, 0.1);
-      border-color: rgba($color-text, 0.5);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.05) 100%
+      );
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     }
   }
 
   &__link {
-    color: $color-text;
+    color: $color-text-light;
     text-decoration: none;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-medium;
     font-size: $font-size-xs;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: $spacing-xs $spacing-sm;
-    border: 1px solid rgba($color-text, 0.3);
-    border-radius: $radius-sm;
-    background: rgba($color-text, 0.05);
-    transition: all $transition-fast;
+    letter-spacing: 0.12em;
+    padding: $spacing-xs $spacing-md;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $radius-pill;
+    background: transparent;
+    transition: all $transition-base;
     display: inline-flex;
     align-items: center;
-    gap: $spacing-xs;
+    gap: $spacing-sm;
 
-    &::before {
+    &::after {
       content: "→";
+      transition: transform $transition-base;
     }
 
     &:hover {
-      background: rgba($color-text, 0.1);
-      border-color: rgba($color-text, 0.5);
-      transform: translateX(2px);
+      color: $color-text;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.25);
+
+      &::after {
+        transform: translateX(4px);
+      }
     }
   }
 
