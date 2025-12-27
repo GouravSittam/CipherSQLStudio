@@ -152,6 +152,27 @@ body {
     animation: pulse-glow 2s ease-in-out infinite;
   }
 
+  &__logo-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border: $border-brutal;
+    box-shadow: $shadow-brutal-sm;
+    background: $color-bg;
+    padding: 4px;
+    transition: all $transition-fast;
+
+    &:hover {
+      box-shadow: $shadow-brutal;
+      transform: translate(-2px, -2px);
+    }
+
+    @include tablet {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
   &__logo-text {
     display: none;
     background: linear-gradient(90deg, $color-text, $color-primary);
@@ -570,6 +591,33 @@ body {
     &:hover {
       background: $color-primary;
       color: $color-bg;
+    }
+  }
+
+  &__link {
+    color: $color-neon-cyan;
+    text-decoration: none;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: $spacing-xs $spacing-sm;
+    border: 2px solid $color-neon-cyan;
+    background: rgba($color-neon-cyan, 0.1);
+    transition: all $transition-fast;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &::before {
+      content: "⟶";
+    }
+
+    &:hover {
+      background: $color-neon-cyan;
+      color: $color-bg;
+      transform: translate(-2px, -2px);
+      box-shadow: 2px 2px 0px $color-text;
     }
   }
 
