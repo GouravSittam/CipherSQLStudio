@@ -1,8 +1,5 @@
 node_modules
-server
 client/node_modules
-client/src
-client/public
 *.md
 .git
 .env.local
