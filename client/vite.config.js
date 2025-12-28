@@ -25,8 +25,9 @@ export default defineConfig({
   },
 
   build: {
-    outDir: "dist",
+    outDir: "build",
     sourcemap: false, // Disable in production for smaller bundles
+    emptyOutDir: true,
   },
 
   // Environment variable prefix
