@@ -11,7 +11,7 @@ import axios from "axios";
 
 // Base URL - In development, use proxy (/api -> http://localhost:5000/api)
 // In production (Vercel), API is at /api
-const API_URL = import.meta.env.VITE_API_URL || "/api";
+const API_URL = import.meta.env.VITE_API_URL || "https://cipher-sql-studio-server.vercel.app/api";
 
 // Create axios instance with defaults
 const api = axios.create({
