@@ -4,9 +4,18 @@
  */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
+  const { user, logout, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <header className="header">
       <div className="header__container">
@@ -25,6 +34,24 @@ const Header = () => {
           <Link to="/" className="header__link">
             🎮 Challenges
           </Link>
+
+          {isAuthenticated ? (
+            <div className="header__user-menu">
+              <span className="header__username">👤 {user?.username}</span>
+              <button onClick={handleLogout} className="header__logout-btn">
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="header__auth-links">
+              <Link to="/login" className="header__link">
+                Login
+              </Link>
+              <Link to="/signup" className="header__signup-btn">
+                Sign Up
+              </Link>
+            </div>
+          )}
         </nav>
       </div>
     </header>

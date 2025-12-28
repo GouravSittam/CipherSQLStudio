@@ -23,6 +23,17 @@ const UserProgressSchema = new mongoose.Schema(
     savedQuery: { type: String, default: "" },
     bestExecutionTime: { type: Number },
     hintsUsed: { type: Number, default: 0 },
+    // Keep history of all SQL query attempts
+    queryHistory: [
+      {
+        query: { type: String, required: true },
+        timestamp: { type: Date, default: Date.now },
+        wasSuccessful: { type: Boolean, default: false },
+        executionTime: { type: Number },
+        rowsAffected: { type: Number },
+        errorMessage: { type: String },
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -9,7 +9,13 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getAssignment, executeQuery, getHint } from "../services/api";
+import {
+  getAssignment,
+  executeQuery,
+  getHint,
+  getQueryHistory,
+} from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 // Components
 import SQLEditor from "../components/SQLEditor.jsx";
@@ -19,6 +25,7 @@ import ResultsPanel from "../components/ResultsPanel.jsx";
 const AssignmentAttempt = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   // State management
   const [assignment, setAssignment] = useState(null);
@@ -29,11 +36,16 @@ const AssignmentAttempt = () => {
   const [sessionId, setSessionId] = useState(null);
   const [hints, setHints] = useState([]);
   const [loadingHint, setLoadingHint] = useState(false);
+  const [queryHistory, setQueryHistory] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
 
   // Fetch assignment when component mounts or id changes
   useEffect(() => {
     fetchAssignment();
-  }, [id]);
+    if (isAuthenticated) {
+      fetchQueryHistory();
+    }
+  }, [id, isAuthenticated]);
 
   // Load assignment data from API
   const fetchAssignment = async () => {
@@ -46,6 +58,22 @@ const AssignmentAttempt = () => {
       // TODO: maybe show a toast notification here
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Fetch user's query history for this assignment
+  const fetchQueryHistory = async () => {
+    try {
+      const response = await getQueryHistory(id);
+      if (response.success) {
+        setQueryHistory(response.queryHistory || []);
+        // Load the last saved query if available
+        if (response.savedQuery) {
+          setQuery(response.savedQuery);
+        }
+      }
+    } catch (err) {
+      console.error("Failed to load query history:", err);
     }
   };
 
@@ -63,6 +91,11 @@ const AssignmentAttempt = () => {
 
       setResults(response);
       setSessionId(response.sessionId); // save for future queries in same sandbox
+
+      // Refresh query history if user is authenticated
+      if (isAuthenticated) {
+        fetchQueryHistory();
+      }
     } catch (err) {
       // Show error in results panel
       setResults({
@@ -89,6 +122,12 @@ const AssignmentAttempt = () => {
     } finally {
       setLoadingHint(false);
     }
+  };
+
+  // Load a previous query from history
+  const handleLoadQuery = (historicalQuery) => {
+    setQuery(historicalQuery);
+    setShowHistory(false);
   };
 
   // Loading state
@@ -163,6 +202,14 @@ const AssignmentAttempt = () => {
             <div className="editor-panel__header">
               <h2 className="editor-panel__title">SQL TERMINAL</h2>
               <div className="editor-panel__actions">
+                {isAuthenticated && queryHistory.length > 0 && (
+                  <button
+                    onClick={() => setShowHistory(!showHistory)}
+                    className="btn btn--secondary"
+                  >
+                    📝 HISTORY ({queryHistory.length})
+                  </button>
+                )}
                 <button
                   onClick={handleGetHint}
                   className="btn btn--secondary"
@@ -179,6 +226,59 @@ const AssignmentAttempt = () => {
                 </button>
               </div>
             </div>
+
+            {/* Query History Panel */}
+            {showHistory && isAuthenticated && (
+              <div className="query-history">
+                <h3 className="query-history__title">Your Previous Attempts</h3>
+                <div className="query-history__list">
+                  {queryHistory
+                    .slice()
+                    .reverse()
+                    .map((item, idx) => (
+                      <div
+                        key={idx}
+                        className={`query-history__item ${
+                          item.wasSuccessful
+                            ? "query-history__item--success"
+                            : "query-history__item--error"
+                        }`}
+                      >
+                        <div className="query-history__item-header">
+                          <span className="query-history__item-status">
+                            {item.wasSuccessful ? "✓ Success" : "✗ Failed"}
+                          </span>
+                          <span className="query-history__item-time">
+                            {new Date(item.timestamp).toLocaleString()}
+                          </span>
+                        </div>
+                        <pre className="query-history__item-query">
+                          {item.query}
+                        </pre>
+                        <div className="query-history__item-footer">
+                          {item.executionTime && (
+                            <span className="query-history__item-stat">
+                              ⚡ {item.executionTime}ms
+                            </span>
+                          )}
+                          {item.rowsAffected !== null && (
+                            <span className="query-history__item-stat">
+                              📊 {item.rowsAffected} rows
+                            </span>
+                          )}
+                          <button
+                            onClick={() => handleLoadQuery(item.query)}
+                            className="btn btn--ghost btn--small"
+                          >
+                            Load
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            )}
+
             <SQLEditor value={query} onChange={setQuery} />
           </section>
 

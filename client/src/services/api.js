@@ -9,8 +9,9 @@
 
 import axios from "axios";
 
-// Base URL - In production (Vercel), API is at /api, in dev it's proxied
-const API_URL = import.meta.env.VITE_API_URL || "https://cipher-sql-studio-server.vercel.app/api";
+// Base URL - In development, use proxy (/api -> http://localhost:5000/api)
+// In production (Vercel), API is at /api
+const API_URL = import.meta.env.VITE_API_URL || "/api";
 
 // Create axios instance with defaults
 const api = axios.create({
@@ -19,6 +20,45 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+// Add auth token to requests if available
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// ============ Authentication APIs ============
+
+// Login user
+export const login = async (email, password) => {
+  const response = await api.post("/auth/login", { email, password });
+  return response.data;
+};
+
+// Signup new user
+export const signup = async (username, email, password, fullName) => {
+  const response = await api.post("/auth/signup", {
+    username,
+    email,
+    password,
+    fullName,
+  });
+  return response.data;
+};
+
+// Get current authenticated user
+export const getCurrentUser = async () => {
+  const response = await api.get("/auth/me");
+  return response.data;
+};
 
 // ============ Assignment APIs ============
 
@@ -88,6 +128,14 @@ export const saveProgress = async (
 
 export const getUserProgress = async (userId) => {
   const response = await api.get(`/progress/${userId}`);
+  return response.data;
+};
+
+// Get query history for an assignment
+export const getQueryHistory = async (assignmentId) => {
+  const response = await api.get(`/progress/history`, {
+    params: { assignmentId },
+  });
   return response.data;
 };
 

@@ -51,9 +51,11 @@ const userProgressSchema = new mongoose.Schema(
     queryHistory: [
       {
         query: String,
-        timestamp: Date,
+        timestamp: { type: Date, default: Date.now },
         wasSuccessful: Boolean,
         executionTime: Number,
+        rowsAffected: Number,
+        errorMessage: String,
       },
     ],
   },

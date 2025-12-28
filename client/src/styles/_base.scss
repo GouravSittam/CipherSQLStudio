@@ -280,6 +280,7 @@ body {
   &__nav {
     display: flex;
     gap: $spacing-md;
+    align-items: center;
   }
 
   &__link {
@@ -325,6 +326,78 @@ body {
 
     @include tablet {
       font-size: $font-size-base;
+    }
+  }
+
+  // Auth navigation
+  &__auth-links {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+  }
+
+  &__signup-btn {
+    color: $color-text;
+    text-decoration: none;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: $spacing-sm $spacing-lg;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $radius-md;
+    transition: all $transition-base;
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(255, 255, 255, 0.1) 100%
+      );
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__user-menu {
+    display: flex;
+    gap: $spacing-md;
+    align-items: center;
+  }
+
+  &__username {
+    color: $color-text-light;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: $radius-md;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__logout-btn {
+    color: $color-text-light;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: $spacing-sm $spacing-lg;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-base;
+
+    &:hover {
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
+      border-color: rgba(255, 107, 107, 0.3);
     }
   }
 }

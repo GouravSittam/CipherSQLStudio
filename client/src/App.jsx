@@ -9,6 +9,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+// Context
+import { AuthProvider } from "./context/AuthContext.jsx";
+
 // Layout components
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -16,6 +19,8 @@ import Footer from "./components/Footer.jsx";
 // Page components
 import AssignmentList from "./pages/AssignmentList.jsx";
 import AssignmentAttempt from "./pages/AssignmentAttempt.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 
 function App() {
   // v7 flags to suppress those annoying console warnings
@@ -26,18 +31,22 @@ function App() {
   };
 
   return (
-    <Router future={routerFutureFlags}>
-      <div className="app">
-        <Header />
-        <main className="app__main">
-          <Routes>
-            <Route path="/" element={<AssignmentList />} />
-            <Route path="/assignment/:id" element={<AssignmentAttempt />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router future={routerFutureFlags}>
+        <div className="app">
+          <Header />
+          <main className="app__main">
+            <Routes>
+              <Route path="/" element={<AssignmentList />} />
+              <Route path="/assignment/:id" element={<AssignmentAttempt />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

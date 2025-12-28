@@ -10,7 +10,9 @@
 const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
+const jwt = require("jsonwebtoken");
 const Assignment = require("../models/Assignment");
+const UserProgress = require("../models/UserProgress");
 const queryExecutionService = require("../services/queryExecutionService");
 const llmService = require("../services/llmService");
 
@@ -65,6 +67,45 @@ router.post("/query", async (req, res) => {
         result,
         assignment.expectedOutput
       );
+    }
+
+    // Save query attempt to user progress if user is logged in
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      try {
+        const token = authHeader.substring(7);
+        const decoded = jwt.verify(
+          token,
+          process.env.JWT_SECRET || "your-secret-key-change-in-production"
+        );
+        const userId = decoded.userId;
+
+        const queryAttempt = {
+          query: query,
+          timestamp: new Date(),
+          wasSuccessful: result.success && isCorrect,
+          executionTime: result.executionTime,
+          rowsAffected: result.rowCount,
+          errorMessage: result.error || null,
+        };
+
+        await UserProgress.findOneAndUpdate(
+          { userId, assignmentId },
+          {
+            $inc: { attempts: 1 },
+            $set: {
+              lastAttempt: new Date(),
+              savedQuery: query,
+              ...(isCorrect && { isCompleted: true }),
+            },
+            $push: { queryHistory: queryAttempt },
+          },
+          { upsert: true, new: true }
+        );
+      } catch (progressError) {
+        console.error("Error saving user progress:", progressError);
+        // Don't fail the request if progress saving fails
+      }
     }
 
     // Could cleanup here but keeping schema alive for follow-up queries
