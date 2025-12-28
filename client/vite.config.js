@@ -30,6 +30,15 @@ export default defineConfig({
     emptyOutDir: true,
   },
 
+  // Use modern Sass API to avoid deprecation warning
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+      },
+    },
+  },
+
   // Environment variable prefix
   envPrefix: "VITE_",
 });
