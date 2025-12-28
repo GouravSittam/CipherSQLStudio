@@ -152,6 +152,43 @@ const AssignmentAttempt = () => {
     );
   }
 
+  // Authentication gate - require login/signup to solve challenges
+  if (!isAuthenticated) {
+    return (
+      <div className="assignment-attempt">
+        <div className="auth-gate">
+          <div className="auth-gate__content">
+            <div className="auth-gate__icon">🔐</div>
+            <h2 className="auth-gate__title">Access Required</h2>
+            <p className="auth-gate__message">
+              Please sign up or log in to solve SQL challenges and track your progress.
+            </p>
+            <div className="auth-gate__buttons">
+              <button
+                onClick={() => navigate("/login")}
+                className="btn btn--secondary"
+              >
+                LOGIN
+              </button>
+              <button
+                onClick={() => navigate("/signup")}
+                className="btn btn--primary"
+              >
+                SIGN UP
+              </button>
+            </div>
+            <button
+              onClick={() => navigate("/")}
+              className="auth-gate__back"
+            >
+              ← Back to Challenges
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Main render
   return (
     <div className="assignment-attempt">
@@ -238,11 +275,10 @@ const AssignmentAttempt = () => {
                     .map((item, idx) => (
                       <div
                         key={idx}
-                        className={`query-history__item ${
-                          item.wasSuccessful
+                        className={`query-history__item ${item.wasSuccessful
                             ? "query-history__item--success"
                             : "query-history__item--error"
-                        }`}
+                          }`}
                       >
                         <div className="query-history__item-header">
                           <span className="query-history__item-status">

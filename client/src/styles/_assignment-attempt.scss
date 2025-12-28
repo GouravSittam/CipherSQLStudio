@@ -821,3 +821,117 @@
     font-family: $font-family-mono;
   }
 }
+
+// Authentication Gate - Premium Glass Modal
+.auth-gate {
+  @include flex-center;
+  min-height: 60vh;
+  padding: $spacing-xl;
+
+  &__content {
+    @include card;
+    @include flex-center;
+    @include flex-column;
+    text-align: center;
+    padding: $spacing-3xl $spacing-2xl;
+    max-width: 450px;
+    width: 100%;
+    gap: $spacing-lg;
+    position: relative;
+    overflow: hidden;
+
+    // Premium glow effect
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.05) 0%,
+        transparent 50%
+      );
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+  }
+
+  &__icon {
+    font-size: 4rem;
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-black;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-text;
+    @include text-glow;
+    position: relative;
+    z-index: 1;
+
+    @include tablet {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__message {
+    font-size: $font-size-base;
+    color: $color-text-light;
+    line-height: 1.8;
+    max-width: 350px;
+    position: relative;
+    z-index: 1;
+
+    @include tablet {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: $spacing-md;
+    margin-top: $spacing-md;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .btn {
+      min-width: 140px;
+    }
+  }
+
+  &__back {
+    background: none;
+    border: none;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: all $transition-base;
+    font-family: $font-family-mono;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
+    margin-top: $spacing-md;
+
+    &:hover {
+      color: $color-text;
+      transform: translateX(-4px);
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
