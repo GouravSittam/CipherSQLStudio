@@ -91,11 +91,11 @@ $font-weight-black: 900;
 
 // Border Radius - Brutalist (mostly sharp, some pill shapes)
 $radius-none: 0;
-$radius-sm: 2px;
-$radius-md: 4px;
-$radius-lg: 8px;
-$radius-xl: 12px;
-$radius-pill: 50px;
+$radius-sm: 0;
+$radius-md: 0;
+$radius-lg: 0;
+$radius-xl: 0;
+$radius-pill: 0;
 $radius-full: 9999px;
 
 // Breakpoints (Mobile-First)
@@ -104,28 +104,26 @@ $breakpoint-tablet: 641px;
 $breakpoint-desktop: 1024px;
 $breakpoint-large: 1281px;
 
-// Shadows - Premium layered shadows
-$shadow-brutal: 0 4px 0px rgba(255, 255, 255, 0.15);
-$shadow-brutal-sm: 0 2px 0px rgba(255, 255, 255, 0.1);
-$shadow-brutal-lg: 0 6px 0px rgba(255, 255, 255, 0.2);
-$shadow-brutal-accent: 0 4px 0px rgba(255, 255, 255, 0.25);
-$shadow-brutal-hover: 0 8px 0px rgba(255, 255, 255, 0.2);
-$shadow-glow-primary: 0 0 40px rgba(255, 255, 255, 0.15),
-  0 0 80px rgba(255, 255, 255, 0.05);
-$shadow-glow-cyan: 0 0 30px rgba(255, 255, 255, 0.1);
-$shadow-glow-pink: 0 0 30px rgba(255, 255, 255, 0.1);
+// Shadows - Premium layered shadows (Omitted for Brutalism, replaced by solid borders and offset shadows)
+$shadow-brutal: 4px 4px 0px $color-text;
+$shadow-brutal-sm: 2px 2px 0px $color-text;
+$shadow-brutal-lg: 6px 6px 0px $color-text;
+$shadow-brutal-accent: 4px 4px 0px $color-primary;
+$shadow-brutal-hover: 6px 6px 0px $color-text;
 
-// Premium layered shadows for depth
-$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
-$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
-$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.4);
-$shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.6), 0 24px 64px rgba(0, 0, 0, 0.5);
+$shadow-glow-primary: none;
+$shadow-glow-cyan: none;
+$shadow-glow-pink: none;
 
-// Glass shadow with glow
-$shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.6),
-  inset 0 1px 0 rgba(255, 255, 255, 0.05);
-$shadow-glass-hover: 0 16px 48px rgba(0, 0, 0, 0.7),
-  inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 40px rgba(255, 255, 255, 0.05);
+// Premium layered shadows for depth (Replaced)
+$shadow-sm: 2px 2px 0px $color-border;
+$shadow-md: 4px 4px 0px $color-border;
+$shadow-lg: 6px 6px 0px $color-border;
+$shadow-xl: 8px 8px 0px $color-border;
+
+// Glass shadow with glow (Replaced)
+$shadow-glass: 4px 4px 0px $color-text;
+$shadow-glass-hover: 6px 6px 0px $color-text;
 
 // Transitions - Smooth & Premium
 $transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);

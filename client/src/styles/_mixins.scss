@@ -56,44 +56,37 @@
 // Premium Button Mixin
 @mixin button-base {
   padding: $spacing-sm $spacing-md;
-  border: 1px solid rgba($color-text, 0.3);
-  border-radius: $radius-md;
+  border: 2px solid $color-text;
+  border-radius: 0;
   font-size: $font-size-sm;
   font-weight: $font-weight-bold;
   font-family: $font-family-base;
   cursor: pointer;
-  transition: all $transition-base;
+  transition: all 0.1s ease;
   outline: none;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   position: relative;
   overflow: hidden;
-  // Minimum touch target for mobile
   min-height: 44px;
+  background-color: $color-bg;
+  color: $color-text;
+  @include brutal-shadow($color-text, 4px);
 
   @include tablet {
     padding: $spacing-sm $spacing-lg;
     font-size: $font-size-base;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
   }
 
-  // Shimmer effect on hover
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent);
-    transition: left 0.5s ease;
+  &:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    @include brutal-shadow($color-text, 6px);
   }
 
-  &:hover::before {
-    left: 100%;
+  &:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px $color-text;
   }
 
   &:disabled {
@@ -108,23 +101,20 @@
   }
 }
 
-// Premium Glass Card Mixin
+// Premium Brutalist Box Mixin
 @mixin card {
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.05) 0%,
-      rgba(255, 255, 255, 0.02) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: $radius-lg;
+  background: $color-bg;
+  border: 2px solid $color-text;
+  border-radius: 0;
   padding: $spacing-lg;
-  box-shadow: $shadow-glass;
+  box-shadow: 6px 6px 0px $color-text;
   position: relative;
   transition: all $transition-base;
   overflow: visible;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: $shadow-glass-hover;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px $color-text;
   }
 
   @include tablet {
@@ -135,13 +125,13 @@
 // Premium Card with accent glow
 @mixin card-accent {
   @include card;
-  border-color: rgba($color-text, 0.3);
-  box-shadow: $shadow-glass, 0 0 30px rgba(255, 255, 255, 0.05);
+  border-color: $color-primary;
+  box-shadow: 6px 6px 0px $color-primary;
 }
 
-// Premium glow effect
-@mixin glow($color: $color-text) {
-  box-shadow: 0 0 30px rgba($color, 0.15), 0 0 60px rgba($color, 0.05);
+// Hard brutalist shadow
+@mixin brutal-shadow($color: $color-text, $offset: 4px) {
+  box-shadow: $offset $offset 0px $color;
 }
 
 // Subtle text glow for headers
@@ -154,13 +144,13 @@
   transition: all $transition-base;
 
   &:hover {
-    transform: translateY(-6px);
-    box-shadow: $shadow-xl, 0 0 40px rgba(255, 255, 255, 0.08);
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0px $color-text;
   }
 
   &:active {
-    transform: translateY(-2px);
-    box-shadow: $shadow-md;
+    transform: translate(0, 0);
+    box-shadow: 0px 0px 0px $color-text;
   }
 }
 

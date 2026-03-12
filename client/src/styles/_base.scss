@@ -82,27 +82,6 @@ body {
   @include pixel-grid;
   position: relative;
 
-  // Stunning ambient gradient overlay
-  &::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 10% 10%,
-        rgba(255, 255, 255, 0.04) 0%,
-        transparent 40%),
-      radial-gradient(circle at 90% 90%,
-        rgba(255, 255, 255, 0.03) 0%,
-        transparent 40%),
-      radial-gradient(circle at 50% 50%,
-        rgba(255, 255, 255, 0.02) 0%,
-        transparent 60%);
-    pointer-events: none;
-    z-index: -1;
-  }
-
   // Subtle animated noise texture
   &::after {
     content: "";
@@ -111,8 +90,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.04;
     pointer-events: none;
     z-index: -1;
   }
@@ -140,47 +119,23 @@ body {
   }
 }
 
-// Header - Premium Glass Header
+// Header - Brutalist Header
 .header {
-  background: linear-gradient(180deg,
-      rgba(10, 10, 10, 0.95) 0%,
-      rgba(10, 10, 10, 0.85) 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: $color-bg;
+  border-bottom: 2px solid $color-text;
   position: sticky;
   top: 0;
   z-index: $z-header;
-  backdrop-filter: blur(20px);
 
-  // Stunning gradient line
+  // Bottom shadow
   &::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: -6px;
     left: 0;
     right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.1) 10%,
-        rgba(255, 255, 255, 0.5) 30%,
-        rgba(255, 255, 255, 0.8) 50%,
-        rgba(255, 255, 255, 0.5) 70%,
-        rgba(255, 255, 255, 0.1) 90%,
-        transparent 100%);
-  }
-
-  // Top highlight
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.05),
-        transparent);
+    height: 4px;
+    background: $color-text;
   }
 
   &__container {
@@ -237,14 +192,12 @@ body {
     width: 48px;
     height: 48px;
     object-fit: contain;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: $radius-md;
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.02) 100%);
+    border: 2px solid $color-text;
+    border-radius: 0;
+    background: $color-bg;
     padding: 6px;
-    transition: all $transition-base;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.1s ease;
+    @include brutal-shadow($color-text, 4px);
 
     @include tablet {
       width: 52px;
@@ -274,42 +227,25 @@ body {
   }
 
   &__link {
-    color: $color-text-light;
+    color: $color-text;
     text-decoration: none;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
     font-size: $font-size-sm;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    padding: $spacing-sm $spacing-lg;
-    border: 1px solid transparent;
-    border-radius: $radius-md;
-    transition: all $transition-base;
+    padding: $spacing-sm $spacing-md;
+    border: 2px solid transparent;
+    border-radius: 0;
+    transition: all 0.1s ease;
     position: relative;
     overflow: hidden;
 
-    &::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg,
-          transparent,
-          rgba(255, 255, 255, 0.8),
-          transparent);
-      transition: all $transition-base;
-      transform: translateX(-50%);
-    }
-
     &:hover {
-      color: $color-text;
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
-
-      &::before {
-        width: 80%;
-      }
+      color: $color-bg;
+      background: $color-text;
+      border-color: $color-text;
+      @include brutal-shadow($color-text, 4px);
+      transform: translate(-2px, -2px);
     }
 
     @include tablet {
@@ -402,100 +338,78 @@ body {
   }
 }
 
-// Buttons - Premium Glass Style
+// Buttons - Brutalist Style
 .btn {
   @include button-base;
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.03) 100%);
-  color: $color-text;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: $shadow-glass;
-  border-radius: $radius-lg;
-  backdrop-filter: blur(10px);
-
-  &:hover:not(:disabled) {
-    border-color: rgba(255, 255, 255, 0.3);
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.12) 0%,
-        rgba(255, 255, 255, 0.05) 100%);
-    transform: translateY(-2px);
-    box-shadow: $shadow-glass-hover;
-  }
 
   &--primary {
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 255, 255, 0.85) 100%);
+    background: $color-text;
     color: $color-bg;
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: $shadow-glass, 0 0 30px rgba(255, 255, 255, 0.15);
-    font-weight: $font-weight-bold;
-
+    border-color: $color-text;
+    @include brutal-shadow($color-text, 4px);
+    
     &:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: $shadow-xl, 0 0 50px rgba(255, 255, 255, 0.25);
-      background: linear-gradient(135deg,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 255, 255, 0.9) 100%);
+      background: $color-text;
+      color: $color-bg;
+      @include brutal-shadow($color-text, 6px);
+      transform: translate(-2px, -2px);
     }
 
     &:active:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: $shadow-md;
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px $color-text;
     }
   }
 
   &--secondary {
-    background: transparent;
+    background: $color-bg;
     color: $color-text;
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: none;
+    border-color: $color-text;
+    @include brutal-shadow($color-text, 4px);
 
     &:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.4);
-      transform: translateY(-2px);
-      box-shadow: $shadow-glass;
+      background: $color-text;
+      color: $color-bg;
+      @include brutal-shadow($color-text, 6px);
+      transform: translate(-2px, -2px);
     }
   }
 
   &--back {
-    background: transparent;
-    color: $color-text-light;
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: none;
+    background: $color-bg;
+    color: $color-text;
+    border-color: $color-text;
+    @include brutal-shadow($color-text, 4px);
 
     &:hover {
-      color: $color-text;
-      border-color: rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.05);
+      background: $color-text;
+      color: $color-bg;
+      transform: translate(-2px, -2px);
     }
   }
 
   &--success {
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.9) 0%,
-        rgba(255, 255, 255, 0.8) 100%);
+    background: $color-text;
     color: $color-bg;
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    border-color: $color-text;
+    @include brutal-shadow($color-text, 4px);
 
     &:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: $shadow-lg, 0 0 40px rgba(255, 255, 255, 0.3);
+      transform: translate(-2px, -2px);
+      @include brutal-shadow($color-text, 6px);
     }
   }
 
   &--danger {
-    background: rgba(255, 255, 255, 0.05);
+    background: transparent;
     color: $color-text;
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: $color-text;
+    @include brutal-shadow($color-text, 4px);
 
     &:hover:not(:disabled) {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.5);
-      box-shadow: $shadow-glass;
+      transform: translate(-2px, -2px);
+      background: $color-text;
+      color: $color-bg;
     }
   }
 }
