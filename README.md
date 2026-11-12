@@ -10,135 +10,140 @@ A browser-based SQL learning platform where students can practice SQL queries ag
 
 - 🎮 **Gaming-Inspired UI** - Brutalist/Neo-Brutalism design with bold colors and animations
 - 📝 **SQL Challenges** - View assignments with pre-loaded sample data
-- 💻 **Monaco Editor** - Write and execute SQL queries in a professional code editor
-- 💡 **AI-Powered Hints** - Get intelligent hints (not solutions) from LLM integration
-- 📊 **Real-Time Results** - See query execution results instantly
+- 💻 **Monaco Editor** - Write SQL in a professional code editor (Ctrl/Cmd + Enter to run)
+- 💡 **AI-Powered Hints** - Get hints (not solutions) from OpenAI or Google Gemini
+- 📊 **Real-Time Results** - See query results instantly, with automatic answer checking
+- 📝 **Progress Tracking** - Query history and completion status for logged-in users
 - 📱 **Mobile-First Design** - Fully responsive across all devices
-- ⚡ **Fast Execution** - PostgreSQL sandbox with schema isolation
-
-## 🎨 Theme
-
-The application uses a **Brutalist Gaming Theme** featuring:
-
-- Dark base with vibrant neon accents (Orange, Cyan, Pink, Purple)
-- Bold offset shadows and thick borders
-- Gaming-inspired terminology (Challenges, Power-Ups, Victory)
-- Space Grotesk & JetBrains Mono fonts
-- Smooth hover animations and glow effects
+- ⚡ **Safe Sandbox** - Every query runs in a throwaway PostgreSQL transaction
 
 ## 🛠️ Tech Stack
 
 ### Frontend
 
-- **React.js** with Vite
+- **React 19** + **TypeScript** with **Vite 8**
+- **React Router 8**
 - **Monaco Editor** (SQL code editor)
-- **SCSS** with Brutalist Gaming Theme
-- **React Router** for navigation
+- **SCSS** (Dart Sass, module system) with Brutalist Gaming Theme
 
 ### Backend
 
-- **Node.js** & **Express.js**
-- **MongoDB Atlas** (assignments & user progress)
-- **PostgreSQL** (sandbox query execution)
-- **LLM Integration** (OpenAI/Gemini for hints)
+- **Node.js 22+** & **Express 5** in **TypeScript** (run with `tsx`)
+- **zod** for request and environment validation
+- **MongoDB** via **Mongoose 9** (assignments, users, progress)
+- **PostgreSQL** via `pg` (sandbox query execution)
+- **LLM Integration** - OpenAI (Responses API) or Google Gemini (`@google/genai`)
+- **Vercel** serverless deployment - the same Express app runs locally and on Vercel
 
 ## 📁 Project Structure
 
 ```
 CipherSQLStudio/
-├── client/                    # React Frontend (Vite)
-│   ├── public/               # Static assets & CipherSchools logo
+├── api/
+│   └── index.ts               # Vercel entry point - exports the Express app
+├── server/src/                # Backend (TypeScript)
+│   ├── app.ts                 # Express app: middleware + routes
+│   ├── index.ts               # Local server entry point
+│   ├── config/env.ts          # Validated environment variables
+│   ├── db/                    # MongoDB + PostgreSQL connections
+│   ├── models/                # Mongoose models
+│   ├── middleware/auth.ts     # JWT auth (optional / required / admin)
+│   ├── routes/                # auth, assignments, execute, hints, progress
+│   ├── services/              # sandbox, grading, AI hints
+│   └── scripts/seed.ts        # Database seeding
+├── client/                    # React frontend (Vite + TypeScript)
+│   ├── public/                # Static assets & CipherSchools logo
 │   └── src/
-│       ├── components/       # Header, Footer, SQLEditor, ResultsPanel, SampleDataViewer
-│       ├── pages/            # AssignmentList, AssignmentAttempt
-│       ├── services/         # API integration (axios)
-│       └── styles/           # SCSS (Brutalist Gaming Theme)
-│
-├── server/                    # Express.js Backend
-│   ├── config/               # MongoDB & PostgreSQL configs
-│   ├── models/               # MongoDB schemas
-│   ├── routes/               # API endpoints
-│   ├── services/             # Query execution & LLM services
-│   ├── scripts/              # Database seeding
-│   └── server.js             # Entry point
-│
-└── Documentation/
-    ├── README.md             # This file
-    ├── QUICK_START.md        # 5-minute setup guide
-    ├── ARCHITECTURE.md       # System design
-    └── ...                   # Other docs
+│       ├── components/        # Header, Footer, SQLEditor, ResultsPanel, SampleDataViewer
+│       ├── context/           # Auth context
+│       ├── pages/             # AssignmentList, AssignmentAttempt, Login, Signup
+│       ├── services/api.ts    # Typed API client (axios)
+│       ├── styles/            # SCSS (Brutalist Gaming Theme)
+│       └── types.ts           # Shared API types
+├── package.json               # Backend dependencies + root scripts
+├── tsconfig.json              # Backend TypeScript config
+└── vercel.json                # API deployment config
 ```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js v16+
-- PostgreSQL v13+
-- MongoDB Atlas account
-- OpenAI/Gemini API key
+- Node.js 22+
+- A MongoDB database (e.g. MongoDB Atlas free tier)
+- A PostgreSQL database (e.g. Supabase or Neon free tier, or local)
+- Optional: an OpenAI or Gemini API key for AI hints
 
 ### Installation
 
 ```bash
-# Clone repository
 git clone https://github.com/GouravSittam/CipherSQLStudio.git
 cd CipherSQLStudio
 
-# Install server dependencies
-cd server
-npm install
-
-# Install client dependencies
-cd ../client
-npm install
+# Installs backend (root) and frontend (client/) dependencies
+npm run install:all
 ```
 
 ### Configuration
 
-**Server (.env)**
+Copy `.env.example` to `.env` in the repo root and fill in your values (an existing `server/.env` is still picked up as a fallback):
 
 ```env
-PORT=5000
 MONGODB_URI=your_mongodb_connection_string
-POSTGRES_HOST=localhost
+POSTGRES_HOST=localhost        # or POSTGRES_URL=postgres://...
 POSTGRES_PORT=5432
 POSTGRES_DB=ciphersqlstudio_app
 POSTGRES_USER=your_username
 POSTGRES_PASSWORD=your_password
-LLM_API_KEY=your_api_key
+JWT_SECRET=a-long-random-string
 LLM_PROVIDER=gemini
+GEMINI_API_KEY=your_api_key
 ```
 
-**Client (.env)**
+See `.env.example` for every option. For the client, `client/.env` can set `VITE_API_URL`. Leave it unset in development to use the Vite proxy to `localhost:5000`.
 
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-### Run Application
+### Seed and run
 
 ```bash
-# Terminal 1: Start server
-cd server
-npm run dev
-
-# Terminal 2: Start client
-cd client
-npm run dev
+npm run seed   # load the 18 sample challenges into MongoDB
+npm run dev    # starts the API (port 5000) and the client (port 3000) together
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Other scripts
+
+| Script               | What it does                                 |
+| -------------------- | -------------------------------------------- |
+| `npm run dev:server` | API only, restarts on file changes           |
+| `npm run dev:client` | Frontend only                                |
+| `npm start`          | Run the API without watch mode               |
+| `npm run typecheck`  | Type-check backend and frontend              |
+| `npm run build:client` | Production build of the frontend (`client/build`) |
 
 ## 📡 API Endpoints
 
-| Method | Endpoint               | Description            |
-| ------ | ---------------------- | ---------------------- |
-| GET    | `/api/assignments`     | List all assignments   |
-| GET    | `/api/assignments/:id` | Get assignment details |
-| POST   | `/api/execute/query`   | Execute SQL query      |
-| POST   | `/api/hints`           | Get AI-generated hint  |
-| POST   | `/api/progress`        | Save user progress     |
+| Method | Endpoint                                | Auth     | Description                      |
+| ------ | --------------------------------------- | -------- | -------------------------------- |
+| GET    | `/api/health`                           | -        | Health check                     |
+| POST   | `/api/auth/signup`                      | -        | Create an account                |
+| POST   | `/api/auth/login`                       | -        | Log in, returns a JWT            |
+| GET    | `/api/auth/me`                          | Required | Current user                     |
+| GET    | `/api/assignments`                      | -        | List challenges (`?difficulty=`) |
+| GET    | `/api/assignments/:id`                  | -        | Challenge details + sample data  |
+| POST   | `/api/assignments`                      | Admin    | Create a challenge               |
+| POST   | `/api/execute/query`                    | Optional | Run and check a SQL query        |
+| POST   | `/api/hints`                            | Optional | Get an AI-generated hint         |
+| GET    | `/api/progress/history?assignmentId=`   | Required | Your query history               |
+| GET    | `/api/progress/:userId`                 | Required | Your progress on all challenges  |
+| POST   | `/api/progress`                         | Required | Save progress                    |
+
+## ☁️ Deployment (Vercel)
+
+Two Vercel projects:
+
+- **API** - project root = repo root. `vercel.json` sends every `/api/*` request to `api/index.ts`, which serves the shared Express app. Add the variables from `.env.example` in the Vercel dashboard (`JWT_SECRET` is required in production).
+- **Frontend** - project root = `client/`. `client/vercel.json` builds into `build/` and rewrites all routes to `index.html`. Set `VITE_API_URL` to the API's URL.
 
 ## 📱 Responsive Breakpoints
 
@@ -149,11 +154,12 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## 🔒 Security Features
 
-- SQL query validation and sanitization
-- Schema isolation per user session
-- Blocked destructive operations (DROP, DELETE, UPDATE)
-- Query timeout protection (5 seconds)
-- Result row limit (1000 rows)
+- Only a single `SELECT` / `WITH` statement is allowed; destructive keywords and stacked statements are rejected
+- Each query runs in a fresh schema inside a transaction that is always rolled back, so nothing persists
+- Query timeout (default 5 seconds) and result row limit (default 1000 rows)
+- Expected answers are never sent to the browser
+- Passwords hashed with bcrypt; JWT auth; users can only read their own progress
+- Request bodies and environment variables validated with zod
 
 ## 📄 License
 

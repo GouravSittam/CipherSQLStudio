@@ -1,0 +1,91 @@
+/**
+ * Results Panel - displays query output
+ *
+ * Shows the data table after running a query.
+ * Also handles errors and empty states.
+ */
+
+import type { QueryResult } from "../types.ts";
+import { formatCell } from "./SampleDataViewer.tsx";
+
+export default function ResultsPanel({ results }: { results: QueryResult | null }) {
+  if (!results) {
+    return (
+      <section className="results-panel">
+        <h2 className="results-panel__title">Output</h2>
+        <div className="results-panel__empty">
+          <p>Execute your query to see results</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (!results.success) {
+    return (
+      <section className="results-panel">
+        <h2 className="results-panel__title">Output</h2>
+        <div className="results-panel__error">
+          <p className="results-panel__error-title">QUERY FAILED</p>
+          <pre className="results-panel__error-message">{results.error}</pre>
+        </div>
+      </section>
+    );
+  }
+
+  const columns = results.data[0] ? Object.keys(results.data[0]) : [];
+
+  return (
+    <section className="results-panel">
+      <div className="results-panel__header">
+        <h2 className="results-panel__title">Output</h2>
+        <div className="results-panel__meta">
+          {results.isCorrect && (
+            <span className="results-panel__badge results-panel__badge--success">VICTORY</span>
+          )}
+          <span className="results-panel__meta-text">
+            {results.rowCount} rows • {results.executionTime}ms
+          </span>
+        </div>
+      </div>
+
+      {results.data.length > 0 ? (
+        <>
+          <div className="results-panel__table-wrapper">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  {columns.map((column) => (
+                    <th key={column} className="data-table__header">
+                      {column}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {results.data.map((row, rowIdx) => (
+                  <tr key={rowIdx}>
+                    {columns.map((column) => (
+                      <td key={column} className="data-table__cell">
+                        {formatCell(row[column])}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {results.truncated && (
+            <div className="results-panel__warning">
+              Results truncated. Showing first {results.data.length} rows.
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="results-panel__empty">
+          <p>Query executed successfully - 0 rows returned</p>
+        </div>
+      )}
+    </section>
+  );
+}
